@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="535fce3817bc4e59ae885f8c310148af" Name="Diagram1" ZoomLevel="71">
+        <EntityTypeShape EntityType="VTGModel.AdverseEvent" Width="1.5" PointX="15.75" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.AnalysisLocation" Width="1.5" PointX="18.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.AppParameter" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.AppValueList" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.AppValueListData" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.BodySystem" Width="1.5" PointX="6" PointY="30" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.Correspondence" Width="1.5" PointX="5.25" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.Diagnosis" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.DiagnosesIcd" Width="1.5" PointX="13.5" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.Doctor" Width="1.5" PointX="3.75" PointY="38.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.dtproperty" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.EthicsApplication" Width="1.5" PointX="8.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.EthicsApplicationSubDoc" Width="1.5" PointX="10.5" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.Household" Width="1.5" PointX="0.75" PointY="25.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.InformedConsent" Width="1.5" PointX="8.25" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.LinkDoctorPractice" Width="1.5" PointX="6" PointY="40.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.LinkSubjectDoctorPractice" Width="1.5" PointX="8.25" PointY="25.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.LinkSubjectMedication" Width="1.5" PointX="5.25" PointY="33" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.LinkSubjectsStudy" Width="1.5" PointX="8.25" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.LinkSubjectStudyInformedConsent" Width="1.5" PointX="10.5" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.LinkVtgStaffStudy" Width="1.5" PointX="13.25" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.LinkVtgStaffStudyRole" Width="1.5" PointX="15.5" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.MedicalHistory" Width="1.5" PointX="8.25" PointY="29.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.Medication" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.ParticipantConsent" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.Person" Width="1.5" PointX="3" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.Postcode" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.Practice" Width="1.5" PointX="3.75" PointY="41.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.QuestionnaireResult" Width="1.5" PointX="21" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.QuestionnaireResultsType" Width="1.5" PointX="18.75" PointY="29.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.Questionnaire" Width="1.5" PointX="18.75" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.QuestionnairesByVisit" Width="1.5" PointX="21.75" PointY="24.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.QuestionnaireType" Width="1.5" PointX="16.5" PointY="25.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.Recruitment" Width="1.5" PointX="8.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.RegisteredNurs" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.Sample" Width="1.5" PointX="18.75" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.SamplesByVisit" Width="1.5" PointX="23.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.SampleType" Width="1.5" PointX="16.5" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.Study" Width="1.5" PointX="6" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.StudyRole" Width="1.5" PointX="13.25" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.SubSampleResult" Width="1.5" PointX="23.25" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.SubSampleResultsType" Width="1.5" PointX="21" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.SubSample" Width="1.5" PointX="21" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.sysdiagram" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.TravelReimbursement" Width="1.5" PointX="15.75" PointY="36.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.TravelReimbursementsByVisit" Width="1.5" PointX="13.5" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.Vaccination" Width="1.5" PointX="18.75" PointY="24.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.VaccinationsByVisit" Width="1.5" PointX="23.75" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.VaccinationType" Width="1.5" PointX="16.5" PointY="28.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.Visit" Width="1.5" PointX="13.5" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.VisitSchedule" Width="1.5" PointX="11.25" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.VtgStaff" Width="1.5" PointX="3.75" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.VtgStaffLocation" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.VtgStaffRequirement" Width="1.5" PointX="6" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.VtgStaffRequirementType" Width="1.5" PointX="3.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="VTGModel.DatabaseSetting" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
+        <AssociationConnector Association="VTGModel.FK__AdverseEv__Visit__5CA1C101" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK_AdverseEvents_DiagnosesIcd" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK__SubSample__Analy__625A9A57" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK_MedicalHistory_BodySystems" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK__Correspon__Perso__0B91BA14" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK_Correspondence_Studies" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK_DiagnosesIcd_DiagnosesIcd" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK_MedicalHistory_DiagnosesIcd" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK__DoctorPra__Docto__04E4BC85" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK_EthicsApplications_Studies" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK_EthicsApplicationSubDocs_EthicsApplications" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK__People__Househol__0A9D95DB" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK__EthicsApp__Study__540C7B00" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK_LinkSubjectStudyInformedConsent_InformedConsents" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK__DoctorPra__Pract__05D8E0BE" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK__SubjectDo__Docto__06CD04F7" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK__SubjectDo__Perso__0E6E26BF" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK__SubjectMe__Perso__0C85DE4D" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK__SubjectsS__Study__5224328E" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK__Visits__SubjectS__55009F39" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK_LinkSubjectStudyInformedConsent_LinkSubjectsStudies" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK_SubjectsStudiesLink_People" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK_LinkVtgStaffStudy_Studies" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK_LinkVtgStaffStudy_VtgStaff" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK_LinkVtgStaffStudyRole_LinkVtgStaffStudy" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK_LinkVtgStaffStudyRole_StudyRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK_MedicalHistory_People" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK__People__Nok1Pers__0F624AF8" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK__People__Nok2Pers__10566F31" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK__Questionn__Quest__690797E6" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK__Questionn__Quest__6BE40491" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK__Questionn__TypeQ__681373AD" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK__Questionn__Visit__5D95E53A" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK__Questionn__TypeQ__671F4F74" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK__Questionn__Visit__57DD0BE4" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK_Recruitment_Studies" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK__Samples__TypeSam__6442E2C9" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK__Samples__VisitId__5F7E2DAC" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK__SubSample__Sampl__69FBBC1F" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK_Samples_VtgStaff" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK__SamplesBy__TypeS__634EBE90" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK__SamplesBy__Visit__55F4C372" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK__VisitSche__Study__531856C7" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK_Studies_VtgStaff" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK__SubSample__SubSa__6166761E" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK__SubSample__SubSa__6AEFE058" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK__TravelRei__Visit__5BAD9CC8" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK_TravelReimbursementsByVisit_VisitSchedule" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK__Vaccinati__TypeV__662B2B3B" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK__Vaccinati__Visit__5E8A0973" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK_Vaccinations_VtgStaff" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK__Vaccinati__TypeV__65370702" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK__Vaccinati__Visit__56E8E7AB" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK__Visits__VisitSch__58D1301D" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK_VtgStaffRequirements_VtgStaff" ManuallyRouted="false" />
+        <AssociationConnector Association="VTGModel.FK_VtgStaffRequirements_VtgStaffRequirementTypes" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="VTGModel.GetRecruitmentSource" Width="1.5" PointX="10.375" PointY="6.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

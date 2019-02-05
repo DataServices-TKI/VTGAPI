@@ -1,0 +1,1782 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="VTGModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AdverseEvents">
+    <Key>
+      <PropertyRef Name="AdverseEventId" />
+    </Key>
+    <Property Name="AdverseEventId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VisitId" Type="int" Nullable="false" />
+    <Property Name="DiagnosisId" Type="int" />
+    <Property Name="TypeOfEvent" Type="varchar" MaxLength="20" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="StopDate" Type="datetime" />
+    <Property Name="Ongoing" Type="int" />
+    <Property Name="Intensity" Type="varchar" MaxLength="20" />
+    <Property Name="Causality" Type="varchar" MaxLength="50" />
+    <Property Name="WasMedicalAdviceSought" Type="int" />
+    <Property Name="TypeOfMedicalAdvice" Type="varchar" MaxLength="50" />
+    <Property Name="SaeNocdDateOfDiagnosis" Type="datetime" />
+    <Property Name="SaeNocdDateReportedToVtg" Type="datetime" />
+    <Property Name="SaeNocdDateReportedToSponsor" Type="datetime" />
+    <Property Name="SaeNocdSourceOfInfo" Type="varchar" MaxLength="50" />
+    <Property Name="SaeNocdMethodOfMgmt" Type="varchar" MaxLength="50" />
+    <Property Name="SaeNocdOutcome" Type="varchar" MaxLength="50" />
+    <Property Name="SaeNocdComments" Type="text" />
+    <Property Name="SaeNocdVtgStaffWitnessId" Type="int" />
+    <Property Name="PregDateOfLmp" Type="datetime" />
+    <Property Name="PregMethodOfDiagnosis" Type="varchar" MaxLength="50" />
+    <Property Name="PregExpectedDateOfDelivery" Type="datetime" />
+    <Property Name="PregRiskFactors" Type="text" />
+    <Property Name="PregOutcome" Type="varchar" MaxLength="50" />
+    <Property Name="PregEndDate" Type="datetime" />
+    <Property Name="PregComments" Type="text" />
+  </EntityType>
+  <EntityType Name="AnalysisLocations">
+    <Key>
+      <PropertyRef Name="AnalysisLocationsId" />
+    </Key>
+    <Property Name="AnalysisLocationsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NameOrg" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="AddressStreet" Type="varchar" MaxLength="30" />
+    <Property Name="AddressSuburb" Type="varchar" MaxLength="30" />
+    <Property Name="AddressState" Type="varchar" MaxLength="10" />
+    <Property Name="AddressCountry" Type="varchar" MaxLength="20" />
+    <Property Name="AddressPostcode" Type="varchar" MaxLength="10" />
+    <Property Name="Phone1" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Phone2" Type="varchar" MaxLength="20" />
+    <Property Name="Contact1" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Contact2" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="AppParameters">
+    <Key>
+      <PropertyRef Name="ParamName" />
+    </Key>
+    <Property Name="ParamName" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="ParamValue" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="AppValueList">
+    <Key>
+      <PropertyRef Name="AppValueListId" />
+    </Key>
+    <Property Name="AppValueListId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AppValueListTable" Type="varchar" MaxLength="50" />
+    <Property Name="AppValueListColumn" Type="varchar" MaxLength="50" />
+    <Property Name="AppValueListColumnCount" Type="int" />
+  </EntityType>
+  <EntityType Name="AppValueListData">
+    <Key>
+      <PropertyRef Name="AppValueListId" />
+      <PropertyRef Name="UniqueRowId" />
+    </Key>
+    <Property Name="AppValueListId" Type="int" Nullable="false" />
+    <Property Name="UniqueRowId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="AppValueListData" Type="varchar" MaxLength="50" />
+    <Property Name="AppValueListDescription" Type="varchar" MaxLength="50" />
+    <Property Name="SortOrder" Type="int" />
+  </EntityType>
+  <EntityType Name="BodySystems">
+    <Key>
+      <PropertyRef Name="BodySystemId" />
+    </Key>
+    <Property Name="BodySystemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Correspondence">
+    <Key>
+      <PropertyRef Name="CorrespondenceId" />
+    </Key>
+    <Property Name="CorrespondenceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PersonId" Type="int" Nullable="false" />
+    <Property Name="StudyId" Type="int" />
+    <Property Name="Sender" Type="varchar" MaxLength="50" />
+    <Property Name="Recipient" Type="varchar" MaxLength="50" />
+    <Property Name="RecipientAddress" Type="varchar" MaxLength="200" />
+    <Property Name="Topic" Type="varchar" MaxLength="100" />
+    <Property Name="TypeCorrespondence" Type="varchar" MaxLength="50" />
+    <Property Name="Details" Type="text" />
+    <Property Name="DateOfCorrespondence" Type="datetime" />
+    <Property Name="VtgStaffId" Type="int" />
+    <Property Name="FollowupStaff1" Type="int" />
+    <Property Name="FollowupStaff2" Type="int" />
+    <Property Name="FollowupStaffEmailSent" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DevtDbVaccineTrails.dbo.DatabaseSettings' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="DatabaseSettings">
+    <Key>
+      <PropertyRef Name="type" />
+      <PropertyRef Name="value" />
+    </Key>
+    <Property Name="type" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="value" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Diagnoses">
+    <Key>
+      <PropertyRef Name="DiagnosisId" />
+    </Key>
+    <Property Name="DiagnosisId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DiagnosesIcd">
+    <Key>
+      <PropertyRef Name="DiagnosisId" />
+    </Key>
+    <Property Name="DiagnosisId" Type="int" Nullable="false" />
+    <Property Name="DiagnosisIdParent" Type="int" />
+    <Property Name="CodeId" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="AsciiDesc" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="AsciiShortDesc" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="GroupLevel" Type="int" Nullable="false" />
+    <Property Name="SortOrder" Type="int" />
+  </EntityType>
+  <EntityType Name="Doctors">
+    <Key>
+      <PropertyRef Name="DoctorId" />
+    </Key>
+    <Property Name="DoctorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Surname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Firstname" Type="varchar" MaxLength="50" />
+    <Property Name="MiddleInitials" Type="varchar" MaxLength="10" />
+    <Property Name="TypeDoctor" Type="varchar" MaxLength="20" />
+    <Property Name="Comments" Type="text" />
+    <Property Name="Fullname" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="dtproperties">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="property" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="objectid" Type="int" />
+    <Property Name="property" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="value" Type="varchar" MaxLength="255" />
+    <Property Name="uvalue" Type="nvarchar" MaxLength="255" />
+    <Property Name="lvalue" Type="image" />
+    <Property Name="version" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EthicsApplications">
+    <Key>
+      <PropertyRef Name="EthicsApplicationId" />
+    </Key>
+    <Property Name="EthicsApplicationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StudyId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="255" />
+    <Property Name="RegistrationNumber" Type="varchar" MaxLength="20" />
+    <Property Name="DateSubmitted" Type="datetime" />
+    <Property Name="DateApproved" Type="datetime" />
+    <Property Name="DateReceived" Type="datetime" />
+    <Property Name="OrgApprovedBy" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="EthicsApplicationSubDocs">
+    <Key>
+      <PropertyRef Name="EthicsApplicationSubDocId" />
+    </Key>
+    <Property Name="EthicsApplicationSubDocId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EthicsApplicationId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" />
+    <Property Name="Type" Type="varchar" MaxLength="50" />
+    <Property Name="OrgSentTo" Type="varchar" MaxLength="100" />
+    <Property Name="DateDue" Type="datetime" />
+    <Property Name="DateSubmitted" Type="datetime" />
+    <Property Name="DateReceived" Type="datetime" />
+    <Property Name="DateAcknowledged" Type="datetime" />
+    <Property Name="DateApproved" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Households">
+    <Key>
+      <PropertyRef Name="HouseholdId" />
+    </Key>
+    <Property Name="HouseholdId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AddressStreet" Type="varchar" MaxLength="50" />
+    <Property Name="AddressSuburb" Type="varchar" MaxLength="30" />
+    <Property Name="AddressPostcode" Type="varchar" MaxLength="4" />
+    <Property Name="AddressState" Type="varchar" MaxLength="3" />
+    <Property Name="PhoneHome" Type="varchar" MaxLength="15" />
+    <Property Name="LastConfirmedBy" Type="int" />
+    <Property Name="LastConfirmedWhen" Type="datetime" />
+    <Property Name="AddresseeId" Type="int" />
+    <Property Name="ActiveAddress" Type="int" />
+    <Property Name="HouseholdId_FM" Type="int" />
+  </EntityType>
+  <EntityType Name="InformedConsents">
+    <Key>
+      <PropertyRef Name="InformedConsentId" />
+    </Key>
+    <Property Name="InformedConsentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StudyId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Comments" Type="text" />
+    <Property Name="OrgApprovedBy" Type="varchar" MaxLength="100" />
+    <Property Name="ApprovedBy" Type="int" />
+    <Property Name="ApprovedWhen" Type="datetime" />
+  </EntityType>
+  <EntityType Name="LinkDoctorPractice">
+    <Key>
+      <PropertyRef Name="DoctorPracticeLinkId" />
+    </Key>
+    <Property Name="DoctorPracticeLinkId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DoctorId" Type="int" Nullable="false" />
+    <Property Name="PracticeId" Type="int" Nullable="false" />
+    <Property Name="EffFrom" Type="datetime" />
+    <Property Name="EffTo" Type="datetime" />
+    <Property Name="Comments" Type="text" />
+  </EntityType>
+  <EntityType Name="LinkSubjectDoctorPractice">
+    <Key>
+      <PropertyRef Name="SubjectDoctorPracticeLinkId" />
+    </Key>
+    <Property Name="SubjectDoctorPracticeLinkId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DoctorPracticeLinkId" Type="int" Nullable="false" />
+    <Property Name="PersonId" Type="int" Nullable="false" />
+    <Property Name="Priority" Type="smallint" />
+    <Property Name="ConsentToContactDr" Type="int" />
+    <Property Name="Comments" Type="text" />
+  </EntityType>
+  <EntityType Name="LinkSubjectMedication">
+    <Key>
+      <PropertyRef Name="SubjectMedicationLinkId" />
+    </Key>
+    <Property Name="SubjectMedicationLinkId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PersonId" Type="int" Nullable="false" />
+    <Property Name="NameMedication" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ProductOrGeneric" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="DiagnosisId" Type="int" />
+    <Property Name="Reason" Type="varchar" MaxLength="50" />
+    <Property Name="DoseAmount" Type="varchar" MaxLength="20" />
+    <Property Name="DoseUnits" Type="varchar" MaxLength="20" />
+    <Property Name="DoseFrequency" Type="varchar" MaxLength="20" />
+    <Property Name="Route" Type="varchar" MaxLength="50" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="StopDate" Type="datetime" />
+    <Property Name="IsOngoing" Type="int" />
+    <Property Name="VtgStaffWitness" Type="int" />
+  </EntityType>
+  <EntityType Name="LinkSubjectsStudies">
+    <Key>
+      <PropertyRef Name="SubjectStudyLinkId" />
+    </Key>
+    <Property Name="SubjectStudyLinkId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PersonId" Type="int" Nullable="false" />
+    <Property Name="StudyId" Type="int" Nullable="false" />
+    <Property Name="OfficialSubjectStudyNum" Type="varchar" MaxLength="20" />
+    <Property Name="StudyConsent" Type="int" />
+    <Property Name="DateOfConsent" Type="datetime" />
+    <Property Name="ConsentForFutureUseOfSamples" Type="int" />
+    <Property Name="ConsentWitness" Type="int" />
+    <Property Name="Status" Type="varchar" MaxLength="20" />
+    <Property Name="WithdrawnReason" Type="varchar" MaxLength="100" />
+    <Property Name="EffFrom" Type="datetime" />
+    <Property Name="EffTo" Type="datetime" />
+    <Property Name="VisitStream" Type="varchar" MaxLength="50" />
+    <Property Name="GpLetter1SentDate" Type="datetime" />
+    <Property Name="GpLetter2SentDate" Type="datetime" />
+    <Property Name="GpLetter3SentDate" Type="datetime" />
+    <Property Name="FollowupReminder1SentDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="LinkSubjectStudyInformedConsent">
+    <Key>
+      <PropertyRef Name="SubjectStudyInformedConsentLinkId" />
+    </Key>
+    <Property Name="SubjectStudyInformedConsentLinkId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SubjectStudyLinkId" Type="int" Nullable="false" />
+    <Property Name="InformedConsentId" Type="int" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="20" />
+    <Property Name="VerbalConsentDate" Type="datetime" />
+    <Property Name="VerbalConsentBy" Type="int" />
+    <Property Name="WrittenConsentDate" Type="datetime" />
+    <Property Name="WrittenConsentBy" Type="int" />
+  </EntityType>
+  <EntityType Name="LinkVtgStaffStudy">
+    <Key>
+      <PropertyRef Name="VtgStaffStudyLinkId" />
+    </Key>
+    <Property Name="VtgStaffStudyLinkId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VtgStaffId" Type="int" Nullable="false" />
+    <Property Name="StudyId" Type="int" Nullable="false" />
+    <Property Name="DatabaseRole" Type="varchar" MaxLength="100" />
+    <Property Name="ConcatRoles" Type="varchar" MaxLength="200" />
+    <Property Name="IsBlindedYN" Type="int" />
+    <Property Name="EffFrom" Type="datetime" />
+    <Property Name="EffTo" Type="datetime" />
+  </EntityType>
+  <EntityType Name="LinkVtgStaffStudyRole">
+    <Key>
+      <PropertyRef Name="VtgStaffStudyRoleLinkId" />
+    </Key>
+    <Property Name="VtgStaffStudyRoleLinkId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VtgStaffStudyLinkId" Type="int" Nullable="false" />
+    <Property Name="StudyRoleId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MedicalHistory">
+    <Key>
+      <PropertyRef Name="MedicalHistoryId" />
+    </Key>
+    <Property Name="MedicalHistoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PersonId" Type="int" Nullable="false" />
+    <Property Name="DiagnosisId" Type="int" Nullable="false" />
+    <Property Name="BodySystemId" Type="int" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="20" />
+    <Property Name="YearDiagnosed" Type="varchar" MaxLength="10" />
+    <Property Name="AgeDiagnosed" Type="int" />
+    <Property Name="Comments" Type="text" />
+  </EntityType>
+  <EntityType Name="Medications">
+    <Key>
+      <PropertyRef Name="MedicationId" />
+    </Key>
+    <Property Name="MedicationId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ParticipantConsent">
+    <Key>
+      <PropertyRef Name="RowId" />
+    </Key>
+    <Property Name="RowId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VtgNumber" Type="int" />
+    <Property Name="ProcessingStatusCode" Type="smallint" />
+    <Property Name="FirstName" Type="varchar" MaxLength="50" />
+    <Property Name="LastName" Type="varchar" MaxLength="50" />
+    <Property Name="DateOfBirth" Type="datetime" />
+    <Property Name="Street" Type="varchar" MaxLength="50" />
+    <Property Name="Suburb" Type="varchar" MaxLength="50" />
+    <Property Name="Postcode" Type="varchar" MaxLength="10" />
+    <Property Name="PhoneDesk" Type="varchar" MaxLength="20" />
+    <Property Name="PhoneMobile" Type="varchar" MaxLength="20" />
+    <Property Name="EmailAddress" Type="varchar" MaxLength="100" />
+    <Property Name="NewsletterConsentYesNo" Type="bit" />
+    <Property Name="FutureVtgResearchConsentYesNo" Type="bit" />
+    <Property Name="DbConsentYesNo" Type="bit" />
+    <Property Name="DateConsented" Type="datetime" />
+    <Property Name="FamilyMemberFirstName1" Type="varchar" MaxLength="50" />
+    <Property Name="FamilyMemberLastName1" Type="varchar" MaxLength="50" />
+    <Property Name="FamilyMemberGender1" Type="varchar" MaxLength="1" />
+    <Property Name="FamilyMemberDOB1" Type="datetime" />
+    <Property Name="FamilyMemberRelationship1" Type="varchar" MaxLength="20" />
+    <Property Name="FamilyMemberFirstName2" Type="varchar" MaxLength="50" />
+    <Property Name="FamilyMemberLastName2" Type="varchar" MaxLength="50" />
+    <Property Name="FamilyMemberGender2" Type="varchar" MaxLength="1" />
+    <Property Name="FamilyMemberDOB2" Type="datetime" />
+    <Property Name="FamilyMemberRelationship2" Type="varchar" MaxLength="20" />
+    <Property Name="FamilyMemberFirstName3" Type="varchar" MaxLength="50" />
+    <Property Name="FamilyMemberLastName3" Type="varchar" MaxLength="50" />
+    <Property Name="FamilyMemberGender3" Type="varchar" MaxLength="1" />
+    <Property Name="FamilyMemberDOB3" Type="datetime" />
+    <Property Name="FamilyMemberRelationship3" Type="varchar" MaxLength="20" />
+    <Property Name="FamilyMemberFirstName4" Type="varchar" MaxLength="50" />
+    <Property Name="FamilyMemberLastName4" Type="varchar" MaxLength="50" />
+    <Property Name="FamilyMemberGender4" Type="nchar" MaxLength="10" />
+    <Property Name="FamilyMemberDOB4" Type="datetime" />
+    <Property Name="FamilyMemberRelationship4" Type="varchar" MaxLength="20" />
+    <Property Name="FamilyMemberFirstName5" Type="varchar" MaxLength="50" />
+    <Property Name="FamilyMemberLastName5" Type="varchar" MaxLength="50" />
+    <Property Name="FamilyMemberGender5" Type="varchar" MaxLength="1" />
+    <Property Name="FamilyMemberDOB5" Type="datetime" />
+    <Property Name="FamilyMemberRelationship5" Type="varchar" MaxLength="20" />
+    <Property Name="FamilyMemberFirstName6" Type="varchar" MaxLength="50" />
+    <Property Name="FamilyMemberLastName6" Type="varchar" MaxLength="50" />
+    <Property Name="FamilyMemberGender6" Type="varchar" MaxLength="1" />
+    <Property Name="FamilyMemberDOB6" Type="datetime" />
+    <Property Name="FamilyMemberRelationship6" Type="varchar" MaxLength="20" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="People">
+    <Key>
+      <PropertyRef Name="PersonId" />
+    </Key>
+    <Property Name="PersonId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VtgNumber" Type="int" />
+    <Property Name="UMRN" Type="varchar" MaxLength="10" />
+    <Property Name="DbConsentYesNo" Type="int" />
+    <Property Name="DbConsentType" Type="varchar" MaxLength="50" />
+    <Property Name="DbConsentDateLastConfirmed" Type="datetime" />
+    <Property Name="NewsletterConsentYesNo" Type="int" />
+    <Property Name="NewsletterConsentDateLastConfirmed" Type="datetime" />
+    <Property Name="FutureVtgResearchConsentYesNo" Type="int" />
+    <Property Name="FutureVtgResearchConsentDateLastConfirmed" Type="datetime" />
+    <Property Name="FutureThirdPartyResearchlConsentYesNo" Type="int" />
+    <Property Name="FutureThirdPartyResearchConsentDateLastConfirmed" Type="datetime" />
+    <Property Name="Title" Type="varchar" MaxLength="10" />
+    <Property Name="Surname" Type="varchar" MaxLength="50" />
+    <Property Name="Firstname" Type="varchar" MaxLength="50" />
+    <Property Name="MiddleName" Type="varchar" MaxLength="50" />
+    <Property Name="PreferredName" Type="varchar" MaxLength="50" />
+    <Property Name="Gender" Type="varchar" MaxLength="6" />
+    <Property Name="Dob" Type="date" />
+    <Property Name="Ethnicity" Type="varchar" MaxLength="50" />
+    <Property Name="PhoneWork" Type="varchar" MaxLength="15" />
+    <Property Name="PhoneMobile" Type="varchar" MaxLength="15" />
+    <Property Name="Email" Type="varchar" MaxLength="100" />
+    <Property Name="PreferredContactWritten" Type="varchar" MaxLength="15" />
+    <Property Name="Nok1PersonId" Type="int" />
+    <Property Name="Nok1Relationship" Type="varchar" MaxLength="50" />
+    <Property Name="Nok2PersonId" Type="int" />
+    <Property Name="Nok2Relationship" Type="varchar" MaxLength="50" />
+    <Property Name="AddresseeId" Type="int" />
+    <Property Name="HouseholdId" Type="int" />
+    <Property Name="RecruitmentSource" Type="varchar" MaxLength="100" />
+    <Property Name="Comments" Type="text" />
+    <Property Name="PreferredContactVerbal" Type="varchar" MaxLength="15" />
+    <Property Name="IsNok1ForKids" Type="int" />
+    <Property Name="IsNok2ForKids" Type="int" />
+    <Property Name="AgeInYrs" Type="int" StoreGeneratedPattern="Computed" />
+    <Property Name="AgeInYrMo" Type="varchar" MaxLength="10" StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="Postcodes">
+    <Key>
+      <PropertyRef Name="PostcodeId" />
+    </Key>
+    <Property Name="PostcodeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Pcode" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Locality" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="State" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="Comments" Type="text" />
+    <Property Name="DeliveryOffice" Type="varchar" MaxLength="255" />
+    <Property Name="PresortIndicator" Type="varchar" MaxLength="255" />
+    <Property Name="ParcelZone" Type="varchar" MaxLength="255" />
+    <Property Name="BSPnumber" Type="varchar" MaxLength="255" />
+    <Property Name="BSPname" Type="varchar" MaxLength="255" />
+    <Property Name="Category" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Practices">
+    <Key>
+      <PropertyRef Name="PracticeId" />
+    </Key>
+    <Property Name="PracticeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NamePractice" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="AddressStreet" Type="varchar" MaxLength="100" />
+    <Property Name="AddressSuburb" Type="varchar" MaxLength="30" />
+    <Property Name="AddressPostcode" Type="varchar" MaxLength="4" />
+    <Property Name="AddressState" Type="varchar" MaxLength="3" />
+    <Property Name="Phone1" Type="varchar" MaxLength="15" />
+    <Property Name="Phone2" Type="varchar" MaxLength="15" />
+    <Property Name="Fax" Type="varchar" MaxLength="15" />
+    <Property Name="Comments" Type="text" />
+  </EntityType>
+  <EntityType Name="QuestionnaireResults">
+    <Key>
+      <PropertyRef Name="QuestionnaireResultsId" />
+    </Key>
+    <Property Name="QuestionnaireResultsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="QuestionnaireId" Type="int" Nullable="false" />
+    <Property Name="QuestionnaireResultsTypeId" Type="int" Nullable="false" />
+    <Property Name="DatumValue" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="QuestionnaireResultsTypes">
+    <Key>
+      <PropertyRef Name="QuestionnaireResultsTypeId" />
+    </Key>
+    <Property Name="QuestionnaireResultsTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="DatumType" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Questionnaires">
+    <Key>
+      <PropertyRef Name="QuestionnaireId" />
+    </Key>
+    <Property Name="QuestionnaireId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VisitId" Type="int" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="100" />
+    <Property Name="TypeQuestionnaireId" Type="int" />
+    <Property Name="WasScheduledAtStudyLevelYN" Type="int" />
+    <Property Name="DateIssued" Type="datetime" />
+    <Property Name="IssuedBy" Type="int" />
+    <Property Name="DateReceived" Type="datetime" />
+    <Property Name="ReceivedBy" Type="int" />
+    <Property Name="IsComplete" Type="int" />
+    <Property Name="Comments" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="QuestionnairesByVisit">
+    <Key>
+      <PropertyRef Name="QuestionnairesByVisitId" />
+    </Key>
+    <Property Name="QuestionnairesByVisitId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeQuestionnaireId" Type="int" />
+    <Property Name="VisitScheduleId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="QuestionnaireTypes">
+    <Key>
+      <PropertyRef Name="TypeQuestionnaireId" />
+    </Key>
+    <Property Name="TypeQuestionnaireId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Recruitment">
+    <Key>
+      <PropertyRef Name="RecruitmentId" />
+    </Key>
+    <Property Name="RecruitmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StudyId" Type="int" Nullable="false" />
+    <Property Name="SubjectInitials" Type="varchar" MaxLength="10" />
+    <Property Name="Dob" Type="datetime" />
+    <Property Name="InterviewDate" Type="datetime" />
+    <Property Name="RecruitmentSource" Type="varchar" MaxLength="50" />
+    <Property Name="IsEligible" Type="int" />
+    <Property Name="ReasonIfNotEligible" Type="varchar" MaxLength="50" />
+    <Property Name="IsEnrolled" Type="int" />
+    <Property Name="StudyNumber" Type="varchar" MaxLength="50" />
+    <Property Name="EnquiryNumber" Type="int" />
+  </EntityType>
+  <EntityType Name="RegisteredNurses">
+    <Key>
+      <PropertyRef Name="RegisteredNurseId" />
+    </Key>
+    <Property Name="RegisteredNurseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Surname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Firstname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="MiddleInitials" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Initials" Type="varchar" MaxLength="10" />
+    <Property Name="Location" Type="varchar" MaxLength="50" />
+    <Property Name="Phone1" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Phone2" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Samples">
+    <Key>
+      <PropertyRef Name="SampleId" />
+    </Key>
+    <Property Name="SampleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VisitId" Type="int" Nullable="false" />
+    <Property Name="TypeSampleId" Type="int" />
+    <Property Name="WasScheduledAtStudyLevelYN" Type="int" />
+    <Property Name="Description" Type="varchar" MaxLength="100" />
+    <Property Name="CollectionDate" Type="datetime" />
+    <Property Name="CollectionTime" Type="datetime" />
+    <Property Name="Quantity" Type="float" />
+    <Property Name="Units" Type="varchar" MaxLength="20" />
+    <Property Name="RegisteredNurseId" Type="int" />
+    <Property Name="VtgStaffIdPresent" Type="int" />
+    <Property Name="Comments" Type="varchar" MaxLength="200" />
+    <Property Name="IsComplete" Type="int" />
+  </EntityType>
+  <EntityType Name="SamplesByVisit">
+    <Key>
+      <PropertyRef Name="SamplesByVisitId" />
+    </Key>
+    <Property Name="SamplesByVisitId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeSampleId" Type="int" />
+    <Property Name="VisitScheduleId" Type="int" Nullable="false" />
+    <Property Name="Quantity" Type="float" />
+    <Property Name="Units" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="SampleTypes">
+    <Key>
+      <PropertyRef Name="TypeSampleId" />
+    </Key>
+    <Property Name="TypeSampleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Studies">
+    <Key>
+      <PropertyRef Name="StudyId" />
+    </Key>
+    <Property Name="StudyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NameStudy" Type="varchar" MaxLength="1000" />
+    <Property Name="NicknameStudy" Type="varchar" MaxLength="255" />
+    <Property Name="StudyType" Type="varchar" MaxLength="10" />
+    <Property Name="StudyCoordinator" Type="int" />
+    <Property Name="ExpNumSubjects" Type="smallint" />
+    <Property Name="RecruitmentStartDate" Type="datetime" />
+    <Property Name="RecruitmentEndDate" Type="datetime" />
+    <Property Name="FirstVisitStartDate" Type="datetime" />
+    <Property Name="FirstVisitEndDate" Type="datetime" />
+    <Property Name="SubjectMinAgeInYears" Type="float" />
+    <Property Name="SubjectMinAgeInequality" Type="varchar" MaxLength="5" />
+    <Property Name="SubjectMaxAgeInYears" Type="float" />
+    <Property Name="SubjectMaxAgeInequality" Type="varchar" MaxLength="5" />
+    <Property Name="BackgroundInfo" Type="text" />
+    <Property Name="IsCompletedYN" Type="int" />
+    <Property Name="LastVisitEndDate" Type="datetime" />
+    <Property Name="OfficialStartDate" Type="datetime" />
+    <Property Name="OfficialEndDate" Type="datetime" />
+    <Property Name="GpMailoutStudyTitle" Type="varchar" MaxLength="1000" />
+    <Property Name="GpMailoutStudyInfo" Type="varchar" MaxLength="1000" />
+    <Property Name="GpMailoutStudyObjectives" Type="varchar" MaxLength="1000" />
+    <Property Name="StudyIsCurrentlyBlindedYN" Type="int" />
+    <Property Name="IsSponsoredYN" Type="int" />
+  </EntityType>
+  <EntityType Name="StudyRoles">
+    <Key>
+      <PropertyRef Name="StudyRoleId" />
+    </Key>
+    <Property Name="StudyRoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NameStudyRole" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="SubSampleResults">
+    <Key>
+      <PropertyRef Name="SubSampleResultsId" />
+    </Key>
+    <Property Name="SubSampleResultsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SubSampleId" Type="int" Nullable="false" />
+    <Property Name="SubSampleResultsTypeId" Type="int" Nullable="false" />
+    <Property Name="DatumValue" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="SubSampleResultsTypes">
+    <Key>
+      <PropertyRef Name="SubSampleResultsTypeId" />
+    </Key>
+    <Property Name="SubSampleResultsTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="DatumType" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="SubSamples">
+    <Key>
+      <PropertyRef Name="SubSampleId" />
+    </Key>
+    <Property Name="SubSampleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SampleId" Type="int" Nullable="false" />
+    <Property Name="SubSampleNumber" Type="smallint" Nullable="false" />
+    <Property Name="VtgStaffIdSubSampler" Type="int" Nullable="false" />
+    <Property Name="Millilitres" Type="float" />
+    <Property Name="WhenProcessed" Type="datetime" Nullable="false" />
+    <Property Name="FreezerOrTank" Type="varchar" MaxLength="20" />
+    <Property Name="ShelfOrStack" Type="varchar" MaxLength="20" />
+    <Property Name="BoxOrDrawer" Type="varchar" MaxLength="20" />
+    <Property Name="Position" Type="varchar" MaxLength="20" />
+    <Property Name="PercentPCD" Type="float" />
+    <Property Name="Comment" Type="varchar" MaxLength="50" />
+    <Property Name="AnalysedAtVTG" Type="int" />
+    <Property Name="AnalysisLocationsId" Type="int" Nullable="false" />
+    <Property Name="WhenSent" Type="datetime" />
+    <Property Name="VtgStaffIdSender" Type="int" />
+    <Property Name="VtgStaffIdReceiver" Type="int" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedWhen" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" Nullable="false" />
+    <Property Name="ModifiedWhen" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TravelReimbursements">
+    <Key>
+      <PropertyRef Name="TravelReimbursementId" />
+    </Key>
+    <Property Name="TravelReimbursementId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VisitId" Type="int" Nullable="false" />
+    <Property Name="WasScheduledAtStudyLevelYN" Type="int" />
+    <Property Name="ApprovedBy" Type="int" />
+    <Property Name="ApprovedWhen" Type="datetime" />
+    <Property Name="PaymentAmount" Type="float" />
+    <Property Name="PaymentType" Type="varchar" MaxLength="20" />
+    <Property Name="PaymentDate" Type="datetime" />
+    <Property Name="PaymentCheckedBy" Type="int" />
+    <Property Name="Comments" Type="varchar" MaxLength="200" />
+    <Property Name="IsComplete" Type="int" />
+    <Property Name="WhyNotCompleted" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="TravelReimbursementsByVisit">
+    <Key>
+      <PropertyRef Name="TravelReimbursementsByVisitId" />
+    </Key>
+    <Property Name="TravelReimbursementsByVisitId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VisitScheduleId" Type="int" Nullable="false" />
+    <Property Name="PaymentAmount" Type="float" />
+  </EntityType>
+  <EntityType Name="Vaccinations">
+    <Key>
+      <PropertyRef Name="VaccinationId" />
+    </Key>
+    <Property Name="VaccinationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VisitId" Type="int" Nullable="false" />
+    <Property Name="TypeVaccinationId" Type="int" />
+    <Property Name="WasScheduledAtStudyLevelYN" Type="int" />
+    <Property Name="Description" Type="varchar" MaxLength="100" />
+    <Property Name="DateAdministered" Type="datetime" />
+    <Property Name="TimeAdministered" Type="datetime" />
+    <Property Name="TimeRemovedFromFridge" Type="datetime" />
+    <Property Name="ExpiryDate" Type="datetime" />
+    <Property Name="SideSiteRoute" Type="varchar" MaxLength="50" />
+    <Property Name="RegisteredNurseId" Type="int" />
+    <Property Name="VtgStaffIdPresent" Type="int" />
+    <Property Name="Comments" Type="varchar" MaxLength="200" />
+    <Property Name="AmountInMls" Type="float" />
+    <Property Name="IsComplete" Type="int" />
+  </EntityType>
+  <EntityType Name="VaccinationsByVisit">
+    <Key>
+      <PropertyRef Name="VaccinationsByVisitId" />
+    </Key>
+    <Property Name="VaccinationsByVisitId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeVaccinationId" Type="int" />
+    <Property Name="VisitScheduleId" Type="int" Nullable="false" />
+    <Property Name="AmountInMls" Type="float" />
+  </EntityType>
+  <EntityType Name="VaccinationTypes">
+    <Key>
+      <PropertyRef Name="TypeVaccinationId" />
+    </Key>
+    <Property Name="TypeVaccinationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Visits">
+    <Key>
+      <PropertyRef Name="VisitId" />
+    </Key>
+    <Property Name="VisitId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SubjectStudyLinkId" Type="int" Nullable="false" />
+    <Property Name="VisitScheduleId" Type="int" />
+    <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="VisitOrder" Type="int" />
+    <Property Name="ScheduledDate" Type="datetime" />
+    <Property Name="ScheduledTime" Type="datetime" />
+    <Property Name="ScheduledDateAcceptability" Type="int" />
+    <Property Name="ActualDate" Type="datetime" />
+    <Property Name="ActualTime" Type="datetime" />
+    <Property Name="ActualDateAcceptability" Type="int" />
+    <Property Name="VisitCompletedYN" Type="int" Nullable="false" />
+    <Property Name="VisitOverseenBy" Type="int" />
+    <Property Name="IdealDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="VisitSchedule">
+    <Key>
+      <PropertyRef Name="VisitScheduleId" />
+    </Key>
+    <Property Name="VisitScheduleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StudyId" Type="int" Nullable="false" />
+    <Property Name="VisitOrder" Type="int" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="IdealDaysAfterPrevious" Type="smallint" />
+    <Property Name="MinDaysAfterPrevious" Type="smallint" />
+    <Property Name="MaxDaysAfterPrevious" Type="smallint" />
+    <Property Name="VisitOrderThatTimingIsRelativeTo" Type="int" />
+    <Property Name="Comments" Type="varchar" MaxLength="1000" />
+    <Property Name="VisitStream" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="VtgStaff">
+    <Key>
+      <PropertyRef Name="VtgStaffId" />
+    </Key>
+    <Property Name="VtgStaffId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Surname" Type="varchar" MaxLength="50" />
+    <Property Name="Firstname" Type="varchar" MaxLength="50" />
+    <Property Name="MiddleInitials" Type="varchar" MaxLength="10" />
+    <Property Name="Username" Type="varchar" MaxLength="50" />
+    <Property Name="Phone1" Type="varchar" MaxLength="20" />
+    <Property Name="Phone2" Type="varchar" MaxLength="20" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="VtgStaffLocation" Type="varchar" MaxLength="10" />
+    <Property Name="Details" Type="text" />
+    <Property Name="DbaseRole" Type="varchar" MaxLength="50" />
+    <Property Name="Password" Type="varchar" MaxLength="50" />
+    <Property Name="CurrentStudy" Type="int" />
+    <Property Name="EffFrom" Type="datetime" />
+    <Property Name="EffTo" Type="datetime" />
+    <Property Name="DeletePrivilege" Type="bit" />
+  </EntityType>
+  <EntityType Name="VtgStaffLocations">
+    <Key>
+      <PropertyRef Name="VtgStaffLocationId" />
+    </Key>
+    <Property Name="VtgStaffLocationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VtgStaffLocation" Type="varchar" MaxLength="10" />
+    <Property Name="Description" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VtgStaffRequirements">
+    <Key>
+      <PropertyRef Name="VtgStaffRequirementId" />
+    </Key>
+    <Property Name="VtgStaffRequirementId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VtgStaffId" Type="int" Nullable="false" />
+    <Property Name="VtgStaffRequirementTypeId" Type="int" Nullable="false" />
+    <Property Name="EffFrom" Type="datetime" />
+    <Property Name="ExpiryDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="VtgStaffRequirementTypes">
+    <Key>
+      <PropertyRef Name="VtgStaffRequirementTypeId" />
+    </Key>
+    <Property Name="VtgStaffRequirementTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DevtDbVaccineTrails.dbo.GetRecruitmentSource' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="GetRecruitmentSource">
+    <Key>
+      <PropertyRef Name="ValueMember" />
+    </Key>
+    <Property Name="ValueMember" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DisplayMember" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK__AdverseEv__Visit__5CA1C101">
+    <End Role="Visits" Type="Self.Visits" Multiplicity="1" />
+    <End Role="AdverseEvents" Type="Self.AdverseEvents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Visits">
+        <PropertyRef Name="VisitId" />
+      </Principal>
+      <Dependent Role="AdverseEvents">
+        <PropertyRef Name="VisitId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Correspon__Perso__0B91BA14">
+    <End Role="People" Type="Self.People" Multiplicity="1" />
+    <End Role="Correspondence" Type="Self.Correspondence" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="People">
+        <PropertyRef Name="PersonId" />
+      </Principal>
+      <Dependent Role="Correspondence">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DoctorPra__Docto__04E4BC85">
+    <End Role="Doctors" Type="Self.Doctors" Multiplicity="1" />
+    <End Role="LinkDoctorPractice" Type="Self.LinkDoctorPractice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Doctors">
+        <PropertyRef Name="DoctorId" />
+      </Principal>
+      <Dependent Role="LinkDoctorPractice">
+        <PropertyRef Name="DoctorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DoctorPra__Pract__05D8E0BE">
+    <End Role="Practices" Type="Self.Practices" Multiplicity="1" />
+    <End Role="LinkDoctorPractice" Type="Self.LinkDoctorPractice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Practices">
+        <PropertyRef Name="PracticeId" />
+      </Principal>
+      <Dependent Role="LinkDoctorPractice">
+        <PropertyRef Name="PracticeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EthicsApp__Study__540C7B00">
+    <End Role="Studies" Type="Self.Studies" Multiplicity="1" />
+    <End Role="InformedConsents" Type="Self.InformedConsents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Studies">
+        <PropertyRef Name="StudyId" />
+      </Principal>
+      <Dependent Role="InformedConsents">
+        <PropertyRef Name="StudyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__People__Househol__0A9D95DB">
+    <End Role="Households" Type="Self.Households" Multiplicity="0..1" />
+    <End Role="People" Type="Self.People" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Households">
+        <PropertyRef Name="HouseholdId" />
+      </Principal>
+      <Dependent Role="People">
+        <PropertyRef Name="HouseholdId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__People__Nok1Pers__0F624AF8">
+    <End Role="People" Type="Self.People" Multiplicity="0..1" />
+    <End Role="People1" Type="Self.People" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="People">
+        <PropertyRef Name="PersonId" />
+      </Principal>
+      <Dependent Role="People1">
+        <PropertyRef Name="Nok1PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__People__Nok2Pers__10566F31">
+    <End Role="People" Type="Self.People" Multiplicity="0..1" />
+    <End Role="People1" Type="Self.People" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="People">
+        <PropertyRef Name="PersonId" />
+      </Principal>
+      <Dependent Role="People1">
+        <PropertyRef Name="Nok2PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Questionn__Quest__690797E6">
+    <End Role="Questionnaires" Type="Self.Questionnaires" Multiplicity="1" />
+    <End Role="QuestionnaireResults" Type="Self.QuestionnaireResults" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Questionnaires">
+        <PropertyRef Name="QuestionnaireId" />
+      </Principal>
+      <Dependent Role="QuestionnaireResults">
+        <PropertyRef Name="QuestionnaireId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Questionn__Quest__6BE40491">
+    <End Role="QuestionnaireResultsTypes" Type="Self.QuestionnaireResultsTypes" Multiplicity="1" />
+    <End Role="QuestionnaireResults" Type="Self.QuestionnaireResults" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuestionnaireResultsTypes">
+        <PropertyRef Name="QuestionnaireResultsTypeId" />
+      </Principal>
+      <Dependent Role="QuestionnaireResults">
+        <PropertyRef Name="QuestionnaireResultsTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Questionn__TypeQ__671F4F74">
+    <End Role="QuestionnaireTypes" Type="Self.QuestionnaireTypes" Multiplicity="0..1" />
+    <End Role="QuestionnairesByVisit" Type="Self.QuestionnairesByVisit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuestionnaireTypes">
+        <PropertyRef Name="TypeQuestionnaireId" />
+      </Principal>
+      <Dependent Role="QuestionnairesByVisit">
+        <PropertyRef Name="TypeQuestionnaireId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Questionn__TypeQ__681373AD">
+    <End Role="QuestionnaireTypes" Type="Self.QuestionnaireTypes" Multiplicity="0..1" />
+    <End Role="Questionnaires" Type="Self.Questionnaires" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuestionnaireTypes">
+        <PropertyRef Name="TypeQuestionnaireId" />
+      </Principal>
+      <Dependent Role="Questionnaires">
+        <PropertyRef Name="TypeQuestionnaireId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Questionn__Visit__57DD0BE4">
+    <End Role="VisitSchedule" Type="Self.VisitSchedule" Multiplicity="1" />
+    <End Role="QuestionnairesByVisit" Type="Self.QuestionnairesByVisit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VisitSchedule">
+        <PropertyRef Name="VisitScheduleId" />
+      </Principal>
+      <Dependent Role="QuestionnairesByVisit">
+        <PropertyRef Name="VisitScheduleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Questionn__Visit__5D95E53A">
+    <End Role="Visits" Type="Self.Visits" Multiplicity="1" />
+    <End Role="Questionnaires" Type="Self.Questionnaires" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Visits">
+        <PropertyRef Name="VisitId" />
+      </Principal>
+      <Dependent Role="Questionnaires">
+        <PropertyRef Name="VisitId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Samples__TypeSam__6442E2C9">
+    <End Role="SampleTypes" Type="Self.SampleTypes" Multiplicity="0..1" />
+    <End Role="Samples" Type="Self.Samples" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SampleTypes">
+        <PropertyRef Name="TypeSampleId" />
+      </Principal>
+      <Dependent Role="Samples">
+        <PropertyRef Name="TypeSampleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Samples__VisitId__5F7E2DAC">
+    <End Role="Visits" Type="Self.Visits" Multiplicity="1" />
+    <End Role="Samples" Type="Self.Samples" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Visits">
+        <PropertyRef Name="VisitId" />
+      </Principal>
+      <Dependent Role="Samples">
+        <PropertyRef Name="VisitId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SamplesBy__TypeS__634EBE90">
+    <End Role="SampleTypes" Type="Self.SampleTypes" Multiplicity="0..1" />
+    <End Role="SamplesByVisit" Type="Self.SamplesByVisit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SampleTypes">
+        <PropertyRef Name="TypeSampleId" />
+      </Principal>
+      <Dependent Role="SamplesByVisit">
+        <PropertyRef Name="TypeSampleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SamplesBy__Visit__55F4C372">
+    <End Role="VisitSchedule" Type="Self.VisitSchedule" Multiplicity="1" />
+    <End Role="SamplesByVisit" Type="Self.SamplesByVisit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VisitSchedule">
+        <PropertyRef Name="VisitScheduleId" />
+      </Principal>
+      <Dependent Role="SamplesByVisit">
+        <PropertyRef Name="VisitScheduleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SubjectDo__Docto__06CD04F7">
+    <End Role="LinkDoctorPractice" Type="Self.LinkDoctorPractice" Multiplicity="1" />
+    <End Role="LinkSubjectDoctorPractice" Type="Self.LinkSubjectDoctorPractice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LinkDoctorPractice">
+        <PropertyRef Name="DoctorPracticeLinkId" />
+      </Principal>
+      <Dependent Role="LinkSubjectDoctorPractice">
+        <PropertyRef Name="DoctorPracticeLinkId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SubjectDo__Perso__0E6E26BF">
+    <End Role="People" Type="Self.People" Multiplicity="1" />
+    <End Role="LinkSubjectDoctorPractice" Type="Self.LinkSubjectDoctorPractice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="People">
+        <PropertyRef Name="PersonId" />
+      </Principal>
+      <Dependent Role="LinkSubjectDoctorPractice">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SubjectMe__Perso__0C85DE4D">
+    <End Role="People" Type="Self.People" Multiplicity="1" />
+    <End Role="LinkSubjectMedication" Type="Self.LinkSubjectMedication" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="People">
+        <PropertyRef Name="PersonId" />
+      </Principal>
+      <Dependent Role="LinkSubjectMedication">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SubjectsS__Study__5224328E">
+    <End Role="Studies" Type="Self.Studies" Multiplicity="1" />
+    <End Role="LinkSubjectsStudies" Type="Self.LinkSubjectsStudies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Studies">
+        <PropertyRef Name="StudyId" />
+      </Principal>
+      <Dependent Role="LinkSubjectsStudies">
+        <PropertyRef Name="StudyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SubSample__Analy__625A9A57">
+    <End Role="AnalysisLocations" Type="Self.AnalysisLocations" Multiplicity="1" />
+    <End Role="SubSamples" Type="Self.SubSamples" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AnalysisLocations">
+        <PropertyRef Name="AnalysisLocationsId" />
+      </Principal>
+      <Dependent Role="SubSamples">
+        <PropertyRef Name="AnalysisLocationsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SubSample__Sampl__69FBBC1F">
+    <End Role="Samples" Type="Self.Samples" Multiplicity="1" />
+    <End Role="SubSamples" Type="Self.SubSamples" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Samples">
+        <PropertyRef Name="SampleId" />
+      </Principal>
+      <Dependent Role="SubSamples">
+        <PropertyRef Name="SampleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SubSample__SubSa__6166761E">
+    <End Role="SubSamples" Type="Self.SubSamples" Multiplicity="1" />
+    <End Role="SubSampleResults" Type="Self.SubSampleResults" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubSamples">
+        <PropertyRef Name="SubSampleId" />
+      </Principal>
+      <Dependent Role="SubSampleResults">
+        <PropertyRef Name="SubSampleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SubSample__SubSa__6AEFE058">
+    <End Role="SubSampleResultsTypes" Type="Self.SubSampleResultsTypes" Multiplicity="1" />
+    <End Role="SubSampleResults" Type="Self.SubSampleResults" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubSampleResultsTypes">
+        <PropertyRef Name="SubSampleResultsTypeId" />
+      </Principal>
+      <Dependent Role="SubSampleResults">
+        <PropertyRef Name="SubSampleResultsTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TravelRei__Visit__5BAD9CC8">
+    <End Role="Visits" Type="Self.Visits" Multiplicity="1" />
+    <End Role="TravelReimbursements" Type="Self.TravelReimbursements" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Visits">
+        <PropertyRef Name="VisitId" />
+      </Principal>
+      <Dependent Role="TravelReimbursements">
+        <PropertyRef Name="VisitId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Vaccinati__TypeV__65370702">
+    <End Role="VaccinationTypes" Type="Self.VaccinationTypes" Multiplicity="0..1" />
+    <End Role="VaccinationsByVisit" Type="Self.VaccinationsByVisit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VaccinationTypes">
+        <PropertyRef Name="TypeVaccinationId" />
+      </Principal>
+      <Dependent Role="VaccinationsByVisit">
+        <PropertyRef Name="TypeVaccinationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Vaccinati__TypeV__662B2B3B">
+    <End Role="VaccinationTypes" Type="Self.VaccinationTypes" Multiplicity="0..1" />
+    <End Role="Vaccinations" Type="Self.Vaccinations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VaccinationTypes">
+        <PropertyRef Name="TypeVaccinationId" />
+      </Principal>
+      <Dependent Role="Vaccinations">
+        <PropertyRef Name="TypeVaccinationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Vaccinati__Visit__56E8E7AB">
+    <End Role="VisitSchedule" Type="Self.VisitSchedule" Multiplicity="1" />
+    <End Role="VaccinationsByVisit" Type="Self.VaccinationsByVisit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VisitSchedule">
+        <PropertyRef Name="VisitScheduleId" />
+      </Principal>
+      <Dependent Role="VaccinationsByVisit">
+        <PropertyRef Name="VisitScheduleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Vaccinati__Visit__5E8A0973">
+    <End Role="Visits" Type="Self.Visits" Multiplicity="1" />
+    <End Role="Vaccinations" Type="Self.Vaccinations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Visits">
+        <PropertyRef Name="VisitId" />
+      </Principal>
+      <Dependent Role="Vaccinations">
+        <PropertyRef Name="VisitId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Visits__SubjectS__55009F39">
+    <End Role="LinkSubjectsStudies" Type="Self.LinkSubjectsStudies" Multiplicity="1" />
+    <End Role="Visits" Type="Self.Visits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LinkSubjectsStudies">
+        <PropertyRef Name="SubjectStudyLinkId" />
+      </Principal>
+      <Dependent Role="Visits">
+        <PropertyRef Name="SubjectStudyLinkId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Visits__VisitSch__58D1301D">
+    <End Role="VisitSchedule" Type="Self.VisitSchedule" Multiplicity="0..1" />
+    <End Role="Visits" Type="Self.Visits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VisitSchedule">
+        <PropertyRef Name="VisitScheduleId" />
+      </Principal>
+      <Dependent Role="Visits">
+        <PropertyRef Name="VisitScheduleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VisitSche__Study__531856C7">
+    <End Role="Studies" Type="Self.Studies" Multiplicity="1" />
+    <End Role="VisitSchedule" Type="Self.VisitSchedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Studies">
+        <PropertyRef Name="StudyId" />
+      </Principal>
+      <Dependent Role="VisitSchedule">
+        <PropertyRef Name="StudyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AdverseEvents_DiagnosesIcd">
+    <End Role="DiagnosesIcd" Type="Self.DiagnosesIcd" Multiplicity="0..1" />
+    <End Role="AdverseEvents" Type="Self.AdverseEvents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DiagnosesIcd">
+        <PropertyRef Name="DiagnosisId" />
+      </Principal>
+      <Dependent Role="AdverseEvents">
+        <PropertyRef Name="DiagnosisId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Correspondence_Studies">
+    <End Role="Studies" Type="Self.Studies" Multiplicity="0..1" />
+    <End Role="Correspondence" Type="Self.Correspondence" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Studies">
+        <PropertyRef Name="StudyId" />
+      </Principal>
+      <Dependent Role="Correspondence">
+        <PropertyRef Name="StudyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DiagnosesIcd_DiagnosesIcd">
+    <End Role="DiagnosesIcd" Type="Self.DiagnosesIcd" Multiplicity="0..1" />
+    <End Role="DiagnosesIcd1" Type="Self.DiagnosesIcd" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DiagnosesIcd">
+        <PropertyRef Name="DiagnosisId" />
+      </Principal>
+      <Dependent Role="DiagnosesIcd1">
+        <PropertyRef Name="DiagnosisIdParent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EthicsApplications_Studies">
+    <End Role="Studies" Type="Self.Studies" Multiplicity="1" />
+    <End Role="EthicsApplications" Type="Self.EthicsApplications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Studies">
+        <PropertyRef Name="StudyId" />
+      </Principal>
+      <Dependent Role="EthicsApplications">
+        <PropertyRef Name="StudyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EthicsApplicationSubDocs_EthicsApplications">
+    <End Role="EthicsApplications" Type="Self.EthicsApplications" Multiplicity="1" />
+    <End Role="EthicsApplicationSubDocs" Type="Self.EthicsApplicationSubDocs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EthicsApplications">
+        <PropertyRef Name="EthicsApplicationId" />
+      </Principal>
+      <Dependent Role="EthicsApplicationSubDocs">
+        <PropertyRef Name="EthicsApplicationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LinkSubjectStudyInformedConsent_InformedConsents">
+    <End Role="InformedConsents" Type="Self.InformedConsents" Multiplicity="1" />
+    <End Role="LinkSubjectStudyInformedConsent" Type="Self.LinkSubjectStudyInformedConsent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InformedConsents">
+        <PropertyRef Name="InformedConsentId" />
+      </Principal>
+      <Dependent Role="LinkSubjectStudyInformedConsent">
+        <PropertyRef Name="InformedConsentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LinkSubjectStudyInformedConsent_LinkSubjectsStudies">
+    <End Role="LinkSubjectsStudies" Type="Self.LinkSubjectsStudies" Multiplicity="1" />
+    <End Role="LinkSubjectStudyInformedConsent" Type="Self.LinkSubjectStudyInformedConsent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LinkSubjectsStudies">
+        <PropertyRef Name="SubjectStudyLinkId" />
+      </Principal>
+      <Dependent Role="LinkSubjectStudyInformedConsent">
+        <PropertyRef Name="SubjectStudyLinkId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LinkVtgStaffStudy_Studies">
+    <End Role="Studies" Type="Self.Studies" Multiplicity="1" />
+    <End Role="LinkVtgStaffStudy" Type="Self.LinkVtgStaffStudy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Studies">
+        <PropertyRef Name="StudyId" />
+      </Principal>
+      <Dependent Role="LinkVtgStaffStudy">
+        <PropertyRef Name="StudyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LinkVtgStaffStudy_VtgStaff">
+    <End Role="VtgStaff" Type="Self.VtgStaff" Multiplicity="1" />
+    <End Role="LinkVtgStaffStudy" Type="Self.LinkVtgStaffStudy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VtgStaff">
+        <PropertyRef Name="VtgStaffId" />
+      </Principal>
+      <Dependent Role="LinkVtgStaffStudy">
+        <PropertyRef Name="VtgStaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LinkVtgStaffStudyRole_LinkVtgStaffStudy">
+    <End Role="LinkVtgStaffStudy" Type="Self.LinkVtgStaffStudy" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="LinkVtgStaffStudyRole" Type="Self.LinkVtgStaffStudyRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LinkVtgStaffStudy">
+        <PropertyRef Name="VtgStaffStudyLinkId" />
+      </Principal>
+      <Dependent Role="LinkVtgStaffStudyRole">
+        <PropertyRef Name="VtgStaffStudyLinkId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LinkVtgStaffStudyRole_StudyRoles">
+    <End Role="StudyRoles" Type="Self.StudyRoles" Multiplicity="1" />
+    <End Role="LinkVtgStaffStudyRole" Type="Self.LinkVtgStaffStudyRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StudyRoles">
+        <PropertyRef Name="StudyRoleId" />
+      </Principal>
+      <Dependent Role="LinkVtgStaffStudyRole">
+        <PropertyRef Name="StudyRoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MedicalHistory_BodySystems">
+    <End Role="BodySystems" Type="Self.BodySystems" Multiplicity="1" />
+    <End Role="MedicalHistory" Type="Self.MedicalHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BodySystems">
+        <PropertyRef Name="BodySystemId" />
+      </Principal>
+      <Dependent Role="MedicalHistory">
+        <PropertyRef Name="BodySystemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MedicalHistory_DiagnosesIcd">
+    <End Role="DiagnosesIcd" Type="Self.DiagnosesIcd" Multiplicity="1" />
+    <End Role="MedicalHistory" Type="Self.MedicalHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DiagnosesIcd">
+        <PropertyRef Name="DiagnosisId" />
+      </Principal>
+      <Dependent Role="MedicalHistory">
+        <PropertyRef Name="DiagnosisId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MedicalHistory_People">
+    <End Role="People" Type="Self.People" Multiplicity="1" />
+    <End Role="MedicalHistory" Type="Self.MedicalHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="People">
+        <PropertyRef Name="PersonId" />
+      </Principal>
+      <Dependent Role="MedicalHistory">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Recruitment_Studies">
+    <End Role="Studies" Type="Self.Studies" Multiplicity="1" />
+    <End Role="Recruitment" Type="Self.Recruitment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Studies">
+        <PropertyRef Name="StudyId" />
+      </Principal>
+      <Dependent Role="Recruitment">
+        <PropertyRef Name="StudyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Samples_VtgStaff">
+    <End Role="VtgStaff" Type="Self.VtgStaff" Multiplicity="0..1" />
+    <End Role="Samples" Type="Self.Samples" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VtgStaff">
+        <PropertyRef Name="VtgStaffId" />
+      </Principal>
+      <Dependent Role="Samples">
+        <PropertyRef Name="VtgStaffIdPresent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Studies_VtgStaff">
+    <End Role="VtgStaff" Type="Self.VtgStaff" Multiplicity="0..1" />
+    <End Role="Studies" Type="Self.Studies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VtgStaff">
+        <PropertyRef Name="VtgStaffId" />
+      </Principal>
+      <Dependent Role="Studies">
+        <PropertyRef Name="StudyCoordinator" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubjectsStudiesLink_People">
+    <End Role="People" Type="Self.People" Multiplicity="1" />
+    <End Role="LinkSubjectsStudies" Type="Self.LinkSubjectsStudies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="People">
+        <PropertyRef Name="PersonId" />
+      </Principal>
+      <Dependent Role="LinkSubjectsStudies">
+        <PropertyRef Name="PersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TravelReimbursementsByVisit_VisitSchedule">
+    <End Role="VisitSchedule" Type="Self.VisitSchedule" Multiplicity="1" />
+    <End Role="TravelReimbursementsByVisit" Type="Self.TravelReimbursementsByVisit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VisitSchedule">
+        <PropertyRef Name="VisitScheduleId" />
+      </Principal>
+      <Dependent Role="TravelReimbursementsByVisit">
+        <PropertyRef Name="VisitScheduleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Vaccinations_VtgStaff">
+    <End Role="VtgStaff" Type="Self.VtgStaff" Multiplicity="0..1" />
+    <End Role="Vaccinations" Type="Self.Vaccinations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VtgStaff">
+        <PropertyRef Name="VtgStaffId" />
+      </Principal>
+      <Dependent Role="Vaccinations">
+        <PropertyRef Name="VtgStaffIdPresent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VtgStaffRequirements_VtgStaff">
+    <End Role="VtgStaff" Type="Self.VtgStaff" Multiplicity="1" />
+    <End Role="VtgStaffRequirements" Type="Self.VtgStaffRequirements" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VtgStaff">
+        <PropertyRef Name="VtgStaffId" />
+      </Principal>
+      <Dependent Role="VtgStaffRequirements">
+        <PropertyRef Name="VtgStaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VtgStaffRequirements_VtgStaffRequirementTypes">
+    <End Role="VtgStaffRequirementTypes" Type="Self.VtgStaffRequirementTypes" Multiplicity="1" />
+    <End Role="VtgStaffRequirements" Type="Self.VtgStaffRequirements" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VtgStaffRequirementTypes">
+        <PropertyRef Name="VtgStaffRequirementTypeId" />
+      </Principal>
+      <Dependent Role="VtgStaffRequirements">
+        <PropertyRef Name="VtgStaffRequirementTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="uspGetStudyList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="uspParticipantById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="uspParticipantByStudyId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="StudyId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="uspParticipantList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="VTGModelStoreContainer">
+    <EntitySet Name="AdverseEvents" EntityType="Self.AdverseEvents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AnalysisLocations" EntityType="Self.AnalysisLocations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AppParameters" EntityType="Self.AppParameters" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AppValueList" EntityType="Self.AppValueList" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AppValueListData" EntityType="Self.AppValueListData" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BodySystems" EntityType="Self.BodySystems" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Correspondence" EntityType="Self.Correspondence" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Diagnoses" EntityType="Self.Diagnoses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DiagnosesIcd" EntityType="Self.DiagnosesIcd" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Doctors" EntityType="Self.Doctors" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="dtproperties" EntityType="Self.dtproperties" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EthicsApplications" EntityType="Self.EthicsApplications" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EthicsApplicationSubDocs" EntityType="Self.EthicsApplicationSubDocs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Households" EntityType="Self.Households" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InformedConsents" EntityType="Self.InformedConsents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LinkDoctorPractice" EntityType="Self.LinkDoctorPractice" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LinkSubjectDoctorPractice" EntityType="Self.LinkSubjectDoctorPractice" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LinkSubjectMedication" EntityType="Self.LinkSubjectMedication" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LinkSubjectsStudies" EntityType="Self.LinkSubjectsStudies" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LinkSubjectStudyInformedConsent" EntityType="Self.LinkSubjectStudyInformedConsent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LinkVtgStaffStudy" EntityType="Self.LinkVtgStaffStudy" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LinkVtgStaffStudyRole" EntityType="Self.LinkVtgStaffStudyRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MedicalHistory" EntityType="Self.MedicalHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Medications" EntityType="Self.Medications" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ParticipantConsent" EntityType="Self.ParticipantConsent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="People" EntityType="Self.People" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Postcodes" EntityType="Self.Postcodes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Practices" EntityType="Self.Practices" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QuestionnaireResults" EntityType="Self.QuestionnaireResults" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QuestionnaireResultsTypes" EntityType="Self.QuestionnaireResultsTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Questionnaires" EntityType="Self.Questionnaires" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QuestionnairesByVisit" EntityType="Self.QuestionnairesByVisit" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QuestionnaireTypes" EntityType="Self.QuestionnaireTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Recruitment" EntityType="Self.Recruitment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RegisteredNurses" EntityType="Self.RegisteredNurses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Samples" EntityType="Self.Samples" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SamplesByVisit" EntityType="Self.SamplesByVisit" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SampleTypes" EntityType="Self.SampleTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Studies" EntityType="Self.Studies" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StudyRoles" EntityType="Self.StudyRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SubSampleResults" EntityType="Self.SubSampleResults" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SubSampleResultsTypes" EntityType="Self.SubSampleResultsTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SubSamples" EntityType="Self.SubSamples" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TravelReimbursements" EntityType="Self.TravelReimbursements" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TravelReimbursementsByVisit" EntityType="Self.TravelReimbursementsByVisit" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vaccinations" EntityType="Self.Vaccinations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VaccinationsByVisit" EntityType="Self.VaccinationsByVisit" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VaccinationTypes" EntityType="Self.VaccinationTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Visits" EntityType="Self.Visits" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VisitSchedule" EntityType="Self.VisitSchedule" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VtgStaff" EntityType="Self.VtgStaff" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VtgStaffLocations" EntityType="Self.VtgStaffLocations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VtgStaffRequirements" EntityType="Self.VtgStaffRequirements" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VtgStaffRequirementTypes" EntityType="Self.VtgStaffRequirementTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DatabaseSettings" EntityType="Self.DatabaseSettings" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [DatabaseSettings].[type] AS [type], 
+    [DatabaseSettings].[value] AS [value]
+    FROM [dbo].[DatabaseSettings] AS [DatabaseSettings]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="GetRecruitmentSource" EntityType="Self.GetRecruitmentSource" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [GetRecruitmentSource].[ValueMember] AS [ValueMember], 
+    [GetRecruitmentSource].[DisplayMember] AS [DisplayMember]
+    FROM [dbo].[GetRecruitmentSource] AS [GetRecruitmentSource]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__AdverseEv__Visit__5CA1C101" Association="Self.FK__AdverseEv__Visit__5CA1C101">
+      <End Role="Visits" EntitySet="Visits" />
+      <End Role="AdverseEvents" EntitySet="AdverseEvents" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Correspon__Perso__0B91BA14" Association="Self.FK__Correspon__Perso__0B91BA14">
+      <End Role="People" EntitySet="People" />
+      <End Role="Correspondence" EntitySet="Correspondence" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DoctorPra__Docto__04E4BC85" Association="Self.FK__DoctorPra__Docto__04E4BC85">
+      <End Role="Doctors" EntitySet="Doctors" />
+      <End Role="LinkDoctorPractice" EntitySet="LinkDoctorPractice" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DoctorPra__Pract__05D8E0BE" Association="Self.FK__DoctorPra__Pract__05D8E0BE">
+      <End Role="Practices" EntitySet="Practices" />
+      <End Role="LinkDoctorPractice" EntitySet="LinkDoctorPractice" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EthicsApp__Study__540C7B00" Association="Self.FK__EthicsApp__Study__540C7B00">
+      <End Role="Studies" EntitySet="Studies" />
+      <End Role="InformedConsents" EntitySet="InformedConsents" />
+    </AssociationSet>
+    <AssociationSet Name="FK__People__Househol__0A9D95DB" Association="Self.FK__People__Househol__0A9D95DB">
+      <End Role="Households" EntitySet="Households" />
+      <End Role="People" EntitySet="People" />
+    </AssociationSet>
+    <AssociationSet Name="FK__People__Nok1Pers__0F624AF8" Association="Self.FK__People__Nok1Pers__0F624AF8">
+      <End Role="People" EntitySet="People" />
+      <End Role="People1" EntitySet="People" />
+    </AssociationSet>
+    <AssociationSet Name="FK__People__Nok2Pers__10566F31" Association="Self.FK__People__Nok2Pers__10566F31">
+      <End Role="People" EntitySet="People" />
+      <End Role="People1" EntitySet="People" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Questionn__Quest__690797E6" Association="Self.FK__Questionn__Quest__690797E6">
+      <End Role="Questionnaires" EntitySet="Questionnaires" />
+      <End Role="QuestionnaireResults" EntitySet="QuestionnaireResults" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Questionn__Quest__6BE40491" Association="Self.FK__Questionn__Quest__6BE40491">
+      <End Role="QuestionnaireResultsTypes" EntitySet="QuestionnaireResultsTypes" />
+      <End Role="QuestionnaireResults" EntitySet="QuestionnaireResults" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Questionn__TypeQ__671F4F74" Association="Self.FK__Questionn__TypeQ__671F4F74">
+      <End Role="QuestionnaireTypes" EntitySet="QuestionnaireTypes" />
+      <End Role="QuestionnairesByVisit" EntitySet="QuestionnairesByVisit" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Questionn__TypeQ__681373AD" Association="Self.FK__Questionn__TypeQ__681373AD">
+      <End Role="QuestionnaireTypes" EntitySet="QuestionnaireTypes" />
+      <End Role="Questionnaires" EntitySet="Questionnaires" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Questionn__Visit__57DD0BE4" Association="Self.FK__Questionn__Visit__57DD0BE4">
+      <End Role="VisitSchedule" EntitySet="VisitSchedule" />
+      <End Role="QuestionnairesByVisit" EntitySet="QuestionnairesByVisit" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Questionn__Visit__5D95E53A" Association="Self.FK__Questionn__Visit__5D95E53A">
+      <End Role="Visits" EntitySet="Visits" />
+      <End Role="Questionnaires" EntitySet="Questionnaires" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Samples__TypeSam__6442E2C9" Association="Self.FK__Samples__TypeSam__6442E2C9">
+      <End Role="SampleTypes" EntitySet="SampleTypes" />
+      <End Role="Samples" EntitySet="Samples" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Samples__VisitId__5F7E2DAC" Association="Self.FK__Samples__VisitId__5F7E2DAC">
+      <End Role="Visits" EntitySet="Visits" />
+      <End Role="Samples" EntitySet="Samples" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SamplesBy__TypeS__634EBE90" Association="Self.FK__SamplesBy__TypeS__634EBE90">
+      <End Role="SampleTypes" EntitySet="SampleTypes" />
+      <End Role="SamplesByVisit" EntitySet="SamplesByVisit" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SamplesBy__Visit__55F4C372" Association="Self.FK__SamplesBy__Visit__55F4C372">
+      <End Role="VisitSchedule" EntitySet="VisitSchedule" />
+      <End Role="SamplesByVisit" EntitySet="SamplesByVisit" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SubjectDo__Docto__06CD04F7" Association="Self.FK__SubjectDo__Docto__06CD04F7">
+      <End Role="LinkDoctorPractice" EntitySet="LinkDoctorPractice" />
+      <End Role="LinkSubjectDoctorPractice" EntitySet="LinkSubjectDoctorPractice" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SubjectDo__Perso__0E6E26BF" Association="Self.FK__SubjectDo__Perso__0E6E26BF">
+      <End Role="People" EntitySet="People" />
+      <End Role="LinkSubjectDoctorPractice" EntitySet="LinkSubjectDoctorPractice" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SubjectMe__Perso__0C85DE4D" Association="Self.FK__SubjectMe__Perso__0C85DE4D">
+      <End Role="People" EntitySet="People" />
+      <End Role="LinkSubjectMedication" EntitySet="LinkSubjectMedication" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SubjectsS__Study__5224328E" Association="Self.FK__SubjectsS__Study__5224328E">
+      <End Role="Studies" EntitySet="Studies" />
+      <End Role="LinkSubjectsStudies" EntitySet="LinkSubjectsStudies" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SubSample__Analy__625A9A57" Association="Self.FK__SubSample__Analy__625A9A57">
+      <End Role="AnalysisLocations" EntitySet="AnalysisLocations" />
+      <End Role="SubSamples" EntitySet="SubSamples" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SubSample__Sampl__69FBBC1F" Association="Self.FK__SubSample__Sampl__69FBBC1F">
+      <End Role="Samples" EntitySet="Samples" />
+      <End Role="SubSamples" EntitySet="SubSamples" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SubSample__SubSa__6166761E" Association="Self.FK__SubSample__SubSa__6166761E">
+      <End Role="SubSamples" EntitySet="SubSamples" />
+      <End Role="SubSampleResults" EntitySet="SubSampleResults" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SubSample__SubSa__6AEFE058" Association="Self.FK__SubSample__SubSa__6AEFE058">
+      <End Role="SubSampleResultsTypes" EntitySet="SubSampleResultsTypes" />
+      <End Role="SubSampleResults" EntitySet="SubSampleResults" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TravelRei__Visit__5BAD9CC8" Association="Self.FK__TravelRei__Visit__5BAD9CC8">
+      <End Role="Visits" EntitySet="Visits" />
+      <End Role="TravelReimbursements" EntitySet="TravelReimbursements" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Vaccinati__TypeV__65370702" Association="Self.FK__Vaccinati__TypeV__65370702">
+      <End Role="VaccinationTypes" EntitySet="VaccinationTypes" />
+      <End Role="VaccinationsByVisit" EntitySet="VaccinationsByVisit" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Vaccinati__TypeV__662B2B3B" Association="Self.FK__Vaccinati__TypeV__662B2B3B">
+      <End Role="VaccinationTypes" EntitySet="VaccinationTypes" />
+      <End Role="Vaccinations" EntitySet="Vaccinations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Vaccinati__Visit__56E8E7AB" Association="Self.FK__Vaccinati__Visit__56E8E7AB">
+      <End Role="VisitSchedule" EntitySet="VisitSchedule" />
+      <End Role="VaccinationsByVisit" EntitySet="VaccinationsByVisit" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Vaccinati__Visit__5E8A0973" Association="Self.FK__Vaccinati__Visit__5E8A0973">
+      <End Role="Visits" EntitySet="Visits" />
+      <End Role="Vaccinations" EntitySet="Vaccinations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Visits__SubjectS__55009F39" Association="Self.FK__Visits__SubjectS__55009F39">
+      <End Role="LinkSubjectsStudies" EntitySet="LinkSubjectsStudies" />
+      <End Role="Visits" EntitySet="Visits" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Visits__VisitSch__58D1301D" Association="Self.FK__Visits__VisitSch__58D1301D">
+      <End Role="VisitSchedule" EntitySet="VisitSchedule" />
+      <End Role="Visits" EntitySet="Visits" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VisitSche__Study__531856C7" Association="Self.FK__VisitSche__Study__531856C7">
+      <End Role="Studies" EntitySet="Studies" />
+      <End Role="VisitSchedule" EntitySet="VisitSchedule" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AdverseEvents_DiagnosesIcd" Association="Self.FK_AdverseEvents_DiagnosesIcd">
+      <End Role="DiagnosesIcd" EntitySet="DiagnosesIcd" />
+      <End Role="AdverseEvents" EntitySet="AdverseEvents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Correspondence_Studies" Association="Self.FK_Correspondence_Studies">
+      <End Role="Studies" EntitySet="Studies" />
+      <End Role="Correspondence" EntitySet="Correspondence" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DiagnosesIcd_DiagnosesIcd" Association="Self.FK_DiagnosesIcd_DiagnosesIcd">
+      <End Role="DiagnosesIcd" EntitySet="DiagnosesIcd" />
+      <End Role="DiagnosesIcd1" EntitySet="DiagnosesIcd" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EthicsApplications_Studies" Association="Self.FK_EthicsApplications_Studies">
+      <End Role="Studies" EntitySet="Studies" />
+      <End Role="EthicsApplications" EntitySet="EthicsApplications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EthicsApplicationSubDocs_EthicsApplications" Association="Self.FK_EthicsApplicationSubDocs_EthicsApplications">
+      <End Role="EthicsApplications" EntitySet="EthicsApplications" />
+      <End Role="EthicsApplicationSubDocs" EntitySet="EthicsApplicationSubDocs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LinkSubjectStudyInformedConsent_InformedConsents" Association="Self.FK_LinkSubjectStudyInformedConsent_InformedConsents">
+      <End Role="InformedConsents" EntitySet="InformedConsents" />
+      <End Role="LinkSubjectStudyInformedConsent" EntitySet="LinkSubjectStudyInformedConsent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LinkSubjectStudyInformedConsent_LinkSubjectsStudies" Association="Self.FK_LinkSubjectStudyInformedConsent_LinkSubjectsStudies">
+      <End Role="LinkSubjectsStudies" EntitySet="LinkSubjectsStudies" />
+      <End Role="LinkSubjectStudyInformedConsent" EntitySet="LinkSubjectStudyInformedConsent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LinkVtgStaffStudy_Studies" Association="Self.FK_LinkVtgStaffStudy_Studies">
+      <End Role="Studies" EntitySet="Studies" />
+      <End Role="LinkVtgStaffStudy" EntitySet="LinkVtgStaffStudy" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LinkVtgStaffStudy_VtgStaff" Association="Self.FK_LinkVtgStaffStudy_VtgStaff">
+      <End Role="VtgStaff" EntitySet="VtgStaff" />
+      <End Role="LinkVtgStaffStudy" EntitySet="LinkVtgStaffStudy" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LinkVtgStaffStudyRole_LinkVtgStaffStudy" Association="Self.FK_LinkVtgStaffStudyRole_LinkVtgStaffStudy">
+      <End Role="LinkVtgStaffStudy" EntitySet="LinkVtgStaffStudy" />
+      <End Role="LinkVtgStaffStudyRole" EntitySet="LinkVtgStaffStudyRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LinkVtgStaffStudyRole_StudyRoles" Association="Self.FK_LinkVtgStaffStudyRole_StudyRoles">
+      <End Role="StudyRoles" EntitySet="StudyRoles" />
+      <End Role="LinkVtgStaffStudyRole" EntitySet="LinkVtgStaffStudyRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MedicalHistory_BodySystems" Association="Self.FK_MedicalHistory_BodySystems">
+      <End Role="BodySystems" EntitySet="BodySystems" />
+      <End Role="MedicalHistory" EntitySet="MedicalHistory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MedicalHistory_DiagnosesIcd" Association="Self.FK_MedicalHistory_DiagnosesIcd">
+      <End Role="DiagnosesIcd" EntitySet="DiagnosesIcd" />
+      <End Role="MedicalHistory" EntitySet="MedicalHistory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MedicalHistory_People" Association="Self.FK_MedicalHistory_People">
+      <End Role="People" EntitySet="People" />
+      <End Role="MedicalHistory" EntitySet="MedicalHistory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recruitment_Studies" Association="Self.FK_Recruitment_Studies">
+      <End Role="Studies" EntitySet="Studies" />
+      <End Role="Recruitment" EntitySet="Recruitment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Samples_VtgStaff" Association="Self.FK_Samples_VtgStaff">
+      <End Role="VtgStaff" EntitySet="VtgStaff" />
+      <End Role="Samples" EntitySet="Samples" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Studies_VtgStaff" Association="Self.FK_Studies_VtgStaff">
+      <End Role="VtgStaff" EntitySet="VtgStaff" />
+      <End Role="Studies" EntitySet="Studies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubjectsStudiesLink_People" Association="Self.FK_SubjectsStudiesLink_People">
+      <End Role="People" EntitySet="People" />
+      <End Role="LinkSubjectsStudies" EntitySet="LinkSubjectsStudies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TravelReimbursementsByVisit_VisitSchedule" Association="Self.FK_TravelReimbursementsByVisit_VisitSchedule">
+      <End Role="VisitSchedule" EntitySet="VisitSchedule" />
+      <End Role="TravelReimbursementsByVisit" EntitySet="TravelReimbursementsByVisit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Vaccinations_VtgStaff" Association="Self.FK_Vaccinations_VtgStaff">
+      <End Role="VtgStaff" EntitySet="VtgStaff" />
+      <End Role="Vaccinations" EntitySet="Vaccinations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VtgStaffRequirements_VtgStaff" Association="Self.FK_VtgStaffRequirements_VtgStaff">
+      <End Role="VtgStaff" EntitySet="VtgStaff" />
+      <End Role="VtgStaffRequirements" EntitySet="VtgStaffRequirements" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VtgStaffRequirements_VtgStaffRequirementTypes" Association="Self.FK_VtgStaffRequirements_VtgStaffRequirementTypes">
+      <End Role="VtgStaffRequirementTypes" EntitySet="VtgStaffRequirementTypes" />
+      <End Role="VtgStaffRequirements" EntitySet="VtgStaffRequirements" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
