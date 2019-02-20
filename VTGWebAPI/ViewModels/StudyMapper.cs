@@ -4,11 +4,12 @@ using System.Linq;
 using System.Web;
 using VTGWebAPI.App_Data;
 
+
 namespace VTGWebAPI.ViewModels
 {
     public class StudyMapper
     {
-        //Chnage Model to ViewModel
+        //Change Model to ViewModel
         public StudyViewModel GetStudyViewModel(Study study)
         {
 

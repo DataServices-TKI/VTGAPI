@@ -23,22 +23,24 @@ namespace VTGWebAPI.Controllers
             return db.VtgStaffs;
         }
 
-        [HttpGet]     
-        [Route ("api/VtgStaffs/AuthenticateUser")]   
+        [HttpGet]
+        [Route("api/VtgStaffs/AuthenticateUser")]
         [ActionName("AuthenticateUser")]
-        public bool AuthenticateUser(string username, string password)
+        public UserViewModel AuthenticateUser(string username, string password)
         {
-            var user=db.VtgStaffs.Where(s=>s.Username==username & s.Password==password).FirstOrDefault();
+            var user = db.VtgStaffs.Where(s => s.Username == username & s.Password == password).FirstOrDefault();
+            var mapper = new UserMapper();
+            var userViewModel = mapper.GetuserViewModel(user);
+
+            userViewModel.StudyNickName = db.Studies.Where(s => s.StudyId == userViewModel.CurrentStudy).FirstOrDefault().NicknameStudy;
             if (user != null)
-            {
-                return true;
-                
-            }
-            
-            else
-            {
-                return false;
-            }
+                {
+                    return userViewModel;
+                }
+                else
+                { 
+                    return null;
+                }
         }
 
         // GET: api/VtgStaffs/5

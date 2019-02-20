@@ -54,7 +54,6 @@ namespace VTGWebAPI.App_Data
         public string Nok1Relationship { get; set; }
         public Nullable<int> Nok2PersonId { get; set; }
         public string Nok2Relationship { get; set; }
-        public Nullable<int> AddresseeId { get; set; }
         public Nullable<int> HouseholdId { get; set; }
         public string RecruitmentSource { get; set; }
         public string Comments { get; set; }
@@ -63,6 +62,7 @@ namespace VTGWebAPI.App_Data
         public Nullable<int> IsNok2ForKids { get; set; }
         public Nullable<int> AgeInYrs { get; set; }
         public string AgeInYrMo { get; set; }
+        public Nullable<int> AddresseeId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Correspondence> Correspondences { get; set; }

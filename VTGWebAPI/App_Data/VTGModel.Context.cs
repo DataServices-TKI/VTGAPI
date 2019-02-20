@@ -85,18 +85,18 @@ namespace VTGWebAPI.App_Data
         public virtual DbSet<DatabaseSetting> DatabaseSettings { get; set; }
         public virtual DbSet<GetRecruitmentSource> GetRecruitmentSources { get; set; }
     
-        public virtual ObjectResult<uspParticipantByStudyId_Result> GetParticipantList()
+        public virtual ObjectResult<ParticipantDetail> GetParticipantList()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uspParticipantByStudyId_Result>("GetParticipantList");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ParticipantDetail>("GetParticipantList");
         }
     
-        public virtual ObjectResult<uspParticipantByStudyId_Result> GetParticipantById(Nullable<int> id)
+        public virtual ObjectResult<ParticipantDetail> GetParticipantById(Nullable<int> id)
         {
             var idParameter = id.HasValue ?
                 new ObjectParameter("id", id) :
                 new ObjectParameter("id", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uspParticipantByStudyId_Result>("GetParticipantById", idParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ParticipantDetail>("GetParticipantById", idParameter);
         }
     
         public virtual ObjectResult<Study> GetStudyList()
@@ -109,13 +109,31 @@ namespace VTGWebAPI.App_Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Study>("GetStudyList", mergeOption);
         }
     
-        public virtual ObjectResult<uspParticipantByStudyId_Result> GetParticipantByStudyId(Nullable<int> studyId)
+        public virtual ObjectResult<ParticipantDetail> GetParticipantByStudyId(Nullable<int> studyId)
         {
             var studyIdParameter = studyId.HasValue ?
                 new ObjectParameter("StudyId", studyId) :
                 new ObjectParameter("StudyId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uspParticipantByStudyId_Result>("GetParticipantByStudyId", studyIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ParticipantDetail>("GetParticipantByStudyId", studyIdParameter);
+        }
+    
+        public virtual ObjectResult<string> uspGetStaffFullNameById(Nullable<int> vtgStaffId)
+        {
+            var vtgStaffIdParameter = vtgStaffId.HasValue ?
+                new ObjectParameter("vtgStaffId", vtgStaffId) :
+                new ObjectParameter("vtgStaffId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("uspGetStaffFullNameById", vtgStaffIdParameter);
+        }
+    
+        public virtual ObjectResult<ParticipantConsentById> GetParticipantConsentById(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ParticipantConsentById>("GetParticipantConsentById", idParameter);
         }
     }
 }

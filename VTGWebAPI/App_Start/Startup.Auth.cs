@@ -10,6 +10,9 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using VTGWebAPI.Providers;
 using VTGWebAPI.Models;
+using AutoMapper;
+using VTGWebAPI.App_Data;
+using VTGWebAPI.ViewModels;
 
 namespace VTGWebAPI
 {
@@ -22,6 +25,9 @@ namespace VTGWebAPI
         // For more information on configuring authentication, please visit http://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
+            var map = new AutoMapper();
+            map.Mapping();
+                       
             // Configure the db context and user manager to use a single instance per request
             app.CreatePerOwinContext(ApplicationDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
@@ -65,5 +71,9 @@ namespace VTGWebAPI
             //    ClientSecret = ""
             //});
         }
+
+       
+
+       
     }
 }

@@ -63,6 +63,8 @@
     <Property Name="AppValueListColumn" Type="varchar" MaxLength="50" />
     <Property Name="AppValueListColumnCount" Type="int" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DevtDbVaccineTrails.dbo.AppValueListData' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="AppValueListData">
     <Key>
       <PropertyRef Name="AppValueListId" />
@@ -265,6 +267,7 @@ warning 6002: The table/view 'DevtDbVaccineTrails.dbo.DatabaseSettings' does not
     <Property Name="ConsentWitness" Type="int" />
     <Property Name="Status" Type="varchar" MaxLength="20" />
     <Property Name="WithdrawnReason" Type="varchar" MaxLength="100" />
+    <Property Name="WithdrawnReasonOther" Type="varchar" MaxLength="100" />
     <Property Name="EffFrom" Type="datetime" />
     <Property Name="EffTo" Type="datetime" />
     <Property Name="VisitStream" Type="varchar" MaxLength="50" />
@@ -411,7 +414,6 @@ warning 6002: The table/view 'DevtDbVaccineTrails.dbo.DatabaseSettings' does not
     <Property Name="Nok1Relationship" Type="varchar" MaxLength="50" />
     <Property Name="Nok2PersonId" Type="int" />
     <Property Name="Nok2Relationship" Type="varchar" MaxLength="50" />
-    <Property Name="AddresseeId" Type="int" />
     <Property Name="HouseholdId" Type="int" />
     <Property Name="RecruitmentSource" Type="varchar" MaxLength="100" />
     <Property Name="Comments" Type="text" />
@@ -420,6 +422,7 @@ warning 6002: The table/view 'DevtDbVaccineTrails.dbo.DatabaseSettings' does not
     <Property Name="IsNok2ForKids" Type="int" />
     <Property Name="AgeInYrs" Type="int" StoreGeneratedPattern="Computed" />
     <Property Name="AgeInYrMo" Type="varchar" MaxLength="10" StoreGeneratedPattern="Computed" />
+    <Property Name="AddresseeId" Type="int" />
   </EntityType>
   <EntityType Name="Postcodes">
     <Key>
@@ -1478,20 +1481,25 @@ warning 6002: The table/view 'DevtDbVaccineTrails.dbo.GetRecruitmentSource' does
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="uspGetStudyList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="uspParticipantById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="uspGetParticipantById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />
   </Function>
-  <Function Name="uspParticipantByStudyId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="uspGetParticipantByStudyId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="StudyId" Type="int" Mode="In" />
   </Function>
-  <Function Name="uspParticipantList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="uspGetParticipantConsentById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="uspGetParticipantList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="uspGetStaffFullNameById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="vtgStaffId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="uspGetStudyList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="VTGModelStoreContainer">
     <EntitySet Name="AdverseEvents" EntityType="Self.AdverseEvents" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AnalysisLocations" EntityType="Self.AnalysisLocations" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AppParameters" EntityType="Self.AppParameters" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AppValueList" EntityType="Self.AppValueList" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="AppValueListData" EntityType="Self.AppValueListData" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BodySystems" EntityType="Self.BodySystems" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Correspondence" EntityType="Self.Correspondence" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Diagnoses" EntityType="Self.Diagnoses" Schema="dbo" store:Type="Tables" />
@@ -1542,6 +1550,15 @@ warning 6002: The table/view 'DevtDbVaccineTrails.dbo.GetRecruitmentSource' does
     <EntitySet Name="VtgStaffLocations" EntityType="Self.VtgStaffLocations" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VtgStaffRequirements" EntityType="Self.VtgStaffRequirements" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VtgStaffRequirementTypes" EntityType="Self.VtgStaffRequirementTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AppValueListData" EntityType="Self.AppValueListData" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [AppValueListData].[AppValueListId] AS [AppValueListId], 
+    [AppValueListData].[UniqueRowId] AS [UniqueRowId], 
+    [AppValueListData].[AppValueListData] AS [AppValueListData], 
+    [AppValueListData].[AppValueListDescription] AS [AppValueListDescription], 
+    [AppValueListData].[SortOrder] AS [SortOrder]
+    FROM [dbo].[AppValueListData] AS [AppValueListData]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="DatabaseSettings" EntityType="Self.DatabaseSettings" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [DatabaseSettings].[type] AS [type], 

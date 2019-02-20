@@ -11,7 +11,7 @@ namespace VTGWebAPI.App_Data
 {
     using System;
     
-    public partial class uspParticipantByStudyId_Result
+    public partial class ParticipantDetail
     {
         public int PersonId { get; set; }
         public Nullable<int> VtgNumber { get; set; }
@@ -41,7 +41,6 @@ namespace VTGWebAPI.App_Data
         public string Nok1Relationship { get; set; }
         public Nullable<int> Nok2PersonId { get; set; }
         public string Nok2Relationship { get; set; }
-        public Nullable<int> AddresseeId { get; set; }
         public Nullable<int> HouseholdId { get; set; }
         public string RecruitmentSource { get; set; }
         public string Comments { get; set; }
@@ -50,14 +49,28 @@ namespace VTGWebAPI.App_Data
         public Nullable<int> IsNok2ForKids { get; set; }
         public Nullable<int> AgeInYrs { get; set; }
         public string AgeInYrMo { get; set; }
+        public Nullable<int> AddresseeId { get; set; }
         public string NoK1Person { get; set; }
         public string NoK2Person { get; set; }
         public string AddressStreet { get; set; }
         public string AddressSuburb { get; set; }
         public string AddressPostcode { get; set; }
         public string AddressState { get; set; }
-        public int StudyId { get; set; }
-        public string NicknameStudy { get; set; }
         public Nullable<int> ActiveAddress { get; set; }
+        public Nullable<System.DateTime> LastConfirmedWhen { get; set; }
+        public Nullable<int> LastConfirmedBy { get; set; }
+        public string ConfirmedBy { get; set; }
+        public string PhoneHome { get; set; }
+        public Nullable<int> HouseholdAddressee { get; set; }
+        public Nullable<int> StudyId { get; set; }
+        public string NicknameStudy { get; set; }
+        public int SubjectStudyLinkId { get; set; }
+        public string Status { get; set; }
+        public string OfficialSubjectStudyNum { get; set; }
+        public string WithdrawnReason { get; set; }
+        public string WithdrawnReasonOther { get; set; }
+        public Nullable<System.DateTime> EffFrom { get; set; }
+        public Nullable<System.DateTime> EffTo { get; set; }
+        public string VisitStream { get; set; }
     }
 }

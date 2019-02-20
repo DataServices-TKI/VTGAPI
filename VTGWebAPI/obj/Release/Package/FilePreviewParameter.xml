@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="VaccineTrial/VTGAPI" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\rkhadka\\Documents\\Visual\ Studio\ 2015\\Projects\\VTGWebAPI\\VTGWebAPI\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\rkhadka\\Documents\\Visual\ Studio\ 2015\\Projects\\VTGWebAPI\\VTGWebAPI\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="Add write permission to App_Data Folder" description="Add write permission to App_Data folder" value="VaccineTrial/VTGAPI/App_Data" tags="Hidden">
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\rkhadka\\Documents\\Visual\ Studio\ 2015\\Projects\\VTGWebAPI\\VTGWebAPI\\obj\\Release\\Package\\PackageTmp\\App_Data$" />
+  </parameter>
+  <parameter name="DefaultConnection-Web.config Connection String" description="" value="Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-VTGWebAPI-20181122111847.mdf;Initial Catalog=aspnet-VTGWebAPI-20181122111847;Integrated Security=True" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\rkhadka\\Documents\\Visual\ Studio\ 2015\\Projects\\VTGWebAPI\\VTGWebAPI\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+  <parameter name="VTGEntities-Web.config Connection String" description="" value="metadata=res://*/App_Data.VTGModel.csdl|res://*/App_Data.VTGModel.ssdl|res://*/App_Data.VTGModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=hosql93;Initial Catalog=DevtDbVaccineTrails;Integrated Security=True&quot;" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\rkhadka\\Documents\\Visual\ Studio\ 2015\\Projects\\VTGWebAPI\\VTGWebAPI\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='VTGEntities']/@connectionString" />
+  </parameter>
+</parameters>

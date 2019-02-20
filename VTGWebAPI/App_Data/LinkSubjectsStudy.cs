@@ -38,6 +38,7 @@ namespace VTGWebAPI.App_Data
         public Nullable<System.DateTime> GpLetter2SentDate { get; set; }
         public Nullable<System.DateTime> GpLetter3SentDate { get; set; }
         public Nullable<System.DateTime> FollowupReminder1SentDate { get; set; }
+        public string WithdrawnReasonOther { get; set; }
     
         public virtual Study Study { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

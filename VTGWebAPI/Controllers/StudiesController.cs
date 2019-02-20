@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -36,15 +37,12 @@ namespace VTGWebAPI.Controllers
 
         // GET: api/Studies/5
         [ResponseType(typeof(Study))]
-        public IHttpActionResult GetStudy(int id)
+        public StudyViewModel GetStudy(int id)
         {
-            Study study = db.Studies.Find(id);
-            if (study == null)
-            {
-                return NotFound();
-            }
+            var study = db.Studies.Where(s=>s.StudyId==id).FirstOrDefault();
+            var studyViewModel = Mapper.Map<Study, StudyViewModel>(study);
 
-            return Ok(study);
+             return studyViewModel;
         }
 
         // PUT: api/Studies/5

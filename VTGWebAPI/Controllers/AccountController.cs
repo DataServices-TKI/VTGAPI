@@ -20,6 +20,7 @@ using VTGWebAPI.App_Data;
 using System.Linq;
 using VTGWebAPI.ViewModels;
 
+
 namespace VTGWebAPI.Controllers
 {
    // [Authorize]
@@ -72,38 +73,38 @@ namespace VTGWebAPI.Controllers
 
 
         // GET api/Account/UserInfo
-      //  [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+     //  [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]       
         [Route("UserInfo")]
-        public string GetUserInfo()
+        public UserViewModel GetUserInfo()
         {
-            //var fullname = System.Security.Principal.WindowsIdentity.GetCurrent().Name;                
-            // var nameArray = fullname.Split('\\');
-            // var username = nameArray[1].Trim().ToLower();
-            var fullname = Environment.UserName;
-        
-            return fullname;
+              //var fullname = User.Identity.Name;//for DEPLOYMENT      
+              var fullname = System.Security.Principal.WindowsIdentity.GetCurrent().Name;//For local debug         
 
-                //if (fullname != null && nameArray[0].Trim().ToLower() == "ichr")
-                //{
-                ////check if profile in DB
-                //    var user = db.VtgStaffs.Where(s => s.Username == username).FirstOrDefault();
-                //var mapper = new UserMapper();
-                //var userViewModel = mapper.GetuserViewModel(user);
+            var nameArray = fullname.Split('\\');
+            var username = nameArray[1].Trim().ToLower();
 
-                //userViewModel.StudyNickName =db.Studies.Where(s => s.StudyId == userViewModel.CurrentStudy).FirstOrDefault().NicknameStudy;
-                //if (user != null)
-                //        {
-                //            return userViewModel;
-                //        }
-                //    else
-                //        return null;
-               
-                //}
-                //else
-                //{
-                //    return null;
-                //}
-          }
+            if (fullname != null && nameArray[0].Trim().ToLower() == "ichr")
+            {
+                //check if profile in DB
+                var user = db.VtgStaffs.Where(s => s.Username == username).FirstOrDefault();
+                var mapper = new UserMapper();
+                var userViewModel = mapper.GetuserViewModel(user);
+
+                userViewModel.StudyNickName = db.Studies.Where(s => s.StudyId == userViewModel.CurrentStudy).FirstOrDefault().NicknameStudy;
+                if (user != null)
+                {
+                    return userViewModel;
+                }
+                else
+                    return null;
+
+            }
+            else
+            {
+                return null;
+            }
+
+        }
 
         // POST api/Account/Logout
         [Route("Logout")]

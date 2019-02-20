@@ -10,7 +10,7 @@ namespace VTGWebAPI.ViewModels
     {
 
         //Change Model to ViewModel
-        public ParticipantViewModel GetParticipantViewModel(uspParticipantByStudyId_Result participantModel)
+        public ParticipantViewModel GetParticipantViewModel(ParticipantDetail participantModel)
         {
             var participantViewModel = new ParticipantViewModel();
 
@@ -47,25 +47,37 @@ namespace VTGWebAPI.ViewModels
             participantViewModel.RecruitmentSource                                   = participantModel.RecruitmentSource;
             participantViewModel.Comments                                            = participantModel.Comments;
             participantViewModel.PreferredContactVerbal                              = participantModel.PreferredContactVerbal;
-            participantViewModel.IsNok1ForKids                                       = ((participantModel.IsNok1ForKids.HasValue && participantModel.IsNok1ForKids==-1)?1:0);
-            participantViewModel.IsNok2ForKids                                       = ((participantModel.IsNok2ForKids.HasValue && participantModel.IsNok2ForKids == -1) ? 1 : 0);
+            participantViewModel.IsNok1ForKids                                       = ((participantModel.IsNok1ForKids.HasValue && participantModel.IsNok1ForKids==1)?true:false);
+            participantViewModel.IsNok2ForKids                                       = ((participantModel.IsNok2ForKids.HasValue && participantModel.IsNok2ForKids ==1) ? true : false);
             participantViewModel.AgeInYrs                                            = participantModel.AgeInYrs;
             participantViewModel.AgeInYrMo                                           = participantModel.AgeInYrMo;
             participantViewModel.StudyNickName                                       = participantModel.NicknameStudy;
-            participantViewModel.StudyId                                             = participantModel.StudyId;
+            participantViewModel.StudyId                                             = participantModel.StudyId.HasValue?participantModel.StudyId.Value:0;
+
+            //Address
+            participantViewModel.ActiveAddress                                       = participantModel.ActiveAddress.HasValue && participantModel.ActiveAddress==1?true:false;
             participantViewModel.State                                               = participantModel.AddressState;
             participantViewModel.Suburb                                              = participantModel.AddressSuburb;
             participantViewModel.Postcode                                            = participantModel.AddressPostcode;
             participantViewModel.Street                                              = participantModel.AddressStreet;
-            participantViewModel.ActiveAddress                                       = (participantModel.ActiveAddress==-1?true:false);
+            participantViewModel.ActiveAddress                                       = (participantModel.ActiveAddress==1?true:false);
+            participantViewModel.LastConfirmedWhen                                   = participantModel.LastConfirmedWhen;
+            participantViewModel.LastConfirmedBy                                     = participantModel.LastConfirmedBy;
+            participantViewModel.ConfirmedBy                                         = participantModel.ConfirmedBy;
+            participantViewModel.PhoneHome                                           = participantModel.PhoneHome;
+            participantViewModel.HouseholdAddressee                                  = participantModel.HouseholdAddressee;
+          //  participantViewModel.PhoneHome = participantModel.PhoneHome;
 
 
-            ////Address
-            //participantViewModel.Street                                              = ((participantModel.HouseholdId.HasValue) ? participantModel.Household.AddressStreet:"");
-            //participantViewModel.Suburb                                              = ((participantModel.HouseholdId.HasValue) ?  participantModel.Household.AddressSuburb:"");
-            //participantViewModel.Postcode                                            = ((participantModel.HouseholdId.HasValue) ? participantModel.Household.AddressPostcode:"");
-            //participantViewModel.State                                               = ((participantModel.HouseholdId.HasValue) ? participantModel.Household.AddressState:"");
-            //participantViewModel.ActiveAddress                                       = ((participantModel.HouseholdId.HasValue && participantModel.Household.ActiveAddress==-1)? true:false);
+            participantViewModel.StudyParticipationStatus                            = participantModel.Status;
+            participantViewModel.OfficialSubjectStudyNum                             = participantModel.OfficialSubjectStudyNum;
+          //  participantViewModel.VisitStream                                         = participantModel.VisitStream;
+            participantViewModel.Reason                                              = participantModel.WithdrawnReason;
+            participantViewModel.ReasonOther                                         = participantModel.WithdrawnReasonOther;
+            participantViewModel.EffectiveFrom                                       = participantModel.EffFrom;
+            participantViewModel.EffectiveTo                                         = participantModel.EffTo;
+
+            
 
 
 
@@ -107,15 +119,18 @@ namespace VTGWebAPI.ViewModels
             participant.Nok1Relationship                                    = participantViewModel.Nok1Relationship;
             participant.Nok2PersonId                                        = participantViewModel.Nok2PersonId;
             participant.Nok2Relationship                                    = participantViewModel.Nok2Relationship;
-            participant.AddresseeId                                         = participantViewModel.AddresseeId;
+            participant.AddresseeId                                          = participantViewModel.AddresseeId;
             participant.HouseholdId                                         = participantViewModel.HouseholdId;
             participant.RecruitmentSource                                   = participantViewModel.RecruitmentSource;
             participant.Comments                                            = participantViewModel.Comments;
             participant.PreferredContactVerbal                              = participantViewModel.PreferredContactVerbal;
-            participant.IsNok1ForKids                                       = participantViewModel.IsNok1ForKids;
-            participant.IsNok2ForKids                                       = participantViewModel.IsNok2ForKids;
+            participant.IsNok1ForKids                                       = participantViewModel.IsNok1ForKids?1:0;
+            participant.IsNok2ForKids                                       = participantViewModel.IsNok2ForKids?1:0;
             participant.AgeInYrs                                            = participantViewModel.AgeInYrs;
             participant.AgeInYrMo                                           = participantViewModel.AgeInYrMo;
+            
+
+
 
             return participant;
 

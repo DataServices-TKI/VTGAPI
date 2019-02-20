@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using VTGWebAPI.App_Data;
+using VTGWebAPI.ViewModels;
 
 namespace VTGWebAPI.ViewModels
 {
@@ -42,8 +44,8 @@ namespace VTGWebAPI.ViewModels
         public string RecruitmentSource { get; set; }
         public string Comments { get; set; }
         public string PreferredContactVerbal { get; set; }
-        public int? IsNok1ForKids { get; set; }
-        public int? IsNok2ForKids { get; set; }
+        public Boolean IsNok1ForKids { get; set; }
+        public Boolean IsNok2ForKids { get; set; }
         public int? AgeInYrs { get; set; }
         public string AgeInYrMo { get; set; }
 
@@ -53,15 +55,31 @@ namespace VTGWebAPI.ViewModels
 
 
         //Address
-        public bool ActiveAddress { get; set; }
+        public Boolean ActiveAddress { get; set; }
         public string BuildingUnit { get; set; }
         public string Street { get; set; }
         public string Suburb { get; set; }
         public string Postcode { get; set; }
         public string State { get; set; }
+        public DateTime? LastConfirmedWhen { get; set; }
+        public int? LastConfirmedBy { get; set; }
+        public String ConfirmedBy { get; set; }
+        public String  PhoneHome{ get; set; }
+        public int? HouseholdAddressee { get; set; }
 
+        //Study participation Details
+        public String StudyParticipationStatus { get; set; }
+        public String VisitStream { get; set; }
+        public String Reason { get; set; }
+        public String ReasonOther { get; set; }
+        public DateTime? EffectiveFrom { get; set; }
+        public DateTime? EffectiveTo{ get; set; }
+        public string OfficialSubjectStudyNum { get; set; }
 
         public IEnumerable<ParticipantViewModel> HouseholdMembers { get; set; }
-        
+        public IEnumerable<CorrespondanceViewModel> Correspondance { get; set; }
+        public IEnumerable<MedicalHistoryViewModel> MedicalHistory { get; set; }
+        public IEnumerable<LinkedInformedConsentViewModel> InformedConsents { get; set; }
+
     }
 }
