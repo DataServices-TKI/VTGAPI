@@ -16,10 +16,18 @@ namespace VTGWebAPI.ViewModels
         public DateTime? RecruitmentEndDate { get; set; }
         public DateTime? FirstVisitStartDate { get; set; }
         public DateTime? FirstVisitEndDate { get; set; }
-        public float? SubjectMinAgeInYears { get; set; }
+        public double? SubjectMinAgeInYears { get; set; }        
         public string SubjectMinAgeInequality { get; set; }
-        public float? SubjectMaxAgeInYears { get; set; }
+        public bool GreaterThan { get; set; }
+        public bool GreaterThanEquals { get; set; }
+        public double? SubjectMaxAgeInYears { get; set; }
+        public int MinYear { get; set; }
+        public int MinMonth { get; set; }
         public string SubjectMaxAgeInequality { get; set; }
+        public bool LessThan { get; set; }
+        public bool LessThanEquals { get; set; }
+        public int MaxYear { get; set; }
+        public int MaxMonth { get; set; }
         public string BackgroundInfo { get; set; }
         public int? IsCompletedYN { get; set; }
         public DateTime? LastVisitEndDate { get; set; }
@@ -28,7 +36,10 @@ namespace VTGWebAPI.ViewModels
         public string GpMailoutStudyTitle { get; set; }
         public string GpMailoutStudyInfo { get; set; }
         public string GpMailoutStudyObjectives { get; set; }
-        public int? StudyIsCurrentlyBlindedYN { get; set; }
+        public bool StudyIsCurrentlyBlindedYN { get; set; }
         public int? IsSponsoredYN { get; set; }
+        public int? ElligibleByPhone { get; set; } 
+        public int? EnrolledRecruits { get; set; }
+        public int? LinkedDb { get; set; }
     }
 }

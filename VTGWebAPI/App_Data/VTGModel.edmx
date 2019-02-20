@@ -1499,6 +1499,9 @@ warning 6002: The table/view 'DevtDbVaccineTrails.dbo.GetRecruitmentSource' does
         <Function Name="uspGetStaffFullNameById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="vtgStaffId" Type="int" Mode="In" />
         </Function>
+        <Function Name="uspGetStudyDetailById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="studyId" Type="int" Mode="In" />
+        </Function>
         <Function Name="uspGetStudyList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="VTGModelStoreContainer">
           <EntitySet Name="AdverseEvents" EntityType="Self.AdverseEvents" Schema="dbo" store:Type="Tables" />
@@ -3679,7 +3682,10 @@ warning 6002: The table/view 'DevtDbVaccineTrails.dbo.GetRecruitmentSource' does
           <Parameter Name="vtgStaffId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetParticipantConsentById" ReturnType="Collection(VTGModel.ParticipantConsentById)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetStudyDetailById" ReturnType="Collection(VTGModel.StudyDetailById)">
+            <Parameter Name="studyId" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="GetRecruitmentSource">
@@ -3788,6 +3794,35 @@ warning 6002: The table/view 'DevtDbVaccineTrails.dbo.GetRecruitmentSource' does
           <Property Type="DateTime" Name="WrittenConsentDate" Nullable="true" Precision="23" />
           <Property Type="Int32" Name="WrittenConsentBy" Nullable="true" />
           <Property Type="String" Name="Name" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="StudyDetailById">
+          <Property Type="Int32" Name="StudyId" Nullable="false" />
+          <Property Type="String" Name="NameStudy" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="NicknameStudy" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="StudyType" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="StudyCoordinator" Nullable="true" />
+          <Property Type="Int16" Name="ExpNumSubjects" Nullable="true" />
+          <Property Type="DateTime" Name="RecruitmentStartDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="RecruitmentEndDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="FirstVisitStartDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="FirstVisitEndDate" Nullable="true" Precision="23" />
+          <Property Type="Double" Name="SubjectMinAgeInYears" Nullable="true" />
+          <Property Type="String" Name="SubjectMinAgeInequality" Nullable="true" MaxLength="5" />
+          <Property Type="Double" Name="SubjectMaxAgeInYears" Nullable="true" />
+          <Property Type="String" Name="SubjectMaxAgeInequality" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="BackgroundInfo" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="IsCompletedYN" Nullable="true" />
+          <Property Type="DateTime" Name="LastVisitEndDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="OfficialStartDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="OfficialEndDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="GpMailoutStudyTitle" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="GpMailoutStudyInfo" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="GpMailoutStudyObjectives" Nullable="true" MaxLength="1000" />
+          <Property Type="Int32" Name="StudyIsCurrentlyBlindedYN" Nullable="true" />
+          <Property Type="Int32" Name="IsSponsoredYN" Nullable="true" />
+          <Property Type="Int32" Name="ElligibleByPhone" Nullable="true" />
+          <Property Type="Int32" Name="EnrolledRecruits" Nullable="true" />
+          <Property Type="Int32" Name="LinkedDB" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4861,6 +4896,39 @@ warning 6002: The table/view 'DevtDbVaccineTrails.dbo.GetRecruitmentSource' does
                 <ScalarProperty Name="WrittenConsentDate" ColumnName="WrittenConsentDate" />
                 <ScalarProperty Name="WrittenConsentBy" ColumnName="WrittenConsentBy" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetStudyDetailById" FunctionName="VTGModel.Store.uspGetStudyDetailById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="VTGModel.StudyDetailById">
+                <ScalarProperty Name="StudyId" ColumnName="StudyId" />
+                <ScalarProperty Name="NameStudy" ColumnName="NameStudy" />
+                <ScalarProperty Name="NicknameStudy" ColumnName="NicknameStudy" />
+                <ScalarProperty Name="StudyType" ColumnName="StudyType" />
+                <ScalarProperty Name="StudyCoordinator" ColumnName="StudyCoordinator" />
+                <ScalarProperty Name="ExpNumSubjects" ColumnName="ExpNumSubjects" />
+                <ScalarProperty Name="RecruitmentStartDate" ColumnName="RecruitmentStartDate" />
+                <ScalarProperty Name="RecruitmentEndDate" ColumnName="RecruitmentEndDate" />
+                <ScalarProperty Name="FirstVisitStartDate" ColumnName="FirstVisitStartDate" />
+                <ScalarProperty Name="FirstVisitEndDate" ColumnName="FirstVisitEndDate" />
+                <ScalarProperty Name="SubjectMinAgeInYears" ColumnName="SubjectMinAgeInYears" />
+                <ScalarProperty Name="SubjectMinAgeInequality" ColumnName="SubjectMinAgeInequality" />
+                <ScalarProperty Name="SubjectMaxAgeInYears" ColumnName="SubjectMaxAgeInYears" />
+                <ScalarProperty Name="SubjectMaxAgeInequality" ColumnName="SubjectMaxAgeInequality" />
+                <ScalarProperty Name="BackgroundInfo" ColumnName="BackgroundInfo" />
+                <ScalarProperty Name="IsCompletedYN" ColumnName="IsCompletedYN" />
+                <ScalarProperty Name="LastVisitEndDate" ColumnName="LastVisitEndDate" />
+                <ScalarProperty Name="OfficialStartDate" ColumnName="OfficialStartDate" />
+                <ScalarProperty Name="OfficialEndDate" ColumnName="OfficialEndDate" />
+                <ScalarProperty Name="GpMailoutStudyTitle" ColumnName="GpMailoutStudyTitle" />
+                <ScalarProperty Name="GpMailoutStudyInfo" ColumnName="GpMailoutStudyInfo" />
+                <ScalarProperty Name="GpMailoutStudyObjectives" ColumnName="GpMailoutStudyObjectives" />
+                <ScalarProperty Name="StudyIsCurrentlyBlindedYN" ColumnName="StudyIsCurrentlyBlindedYN" />
+                <ScalarProperty Name="IsSponsoredYN" ColumnName="IsSponsoredYN" />
+                <ScalarProperty Name="ElligibleByPhone" ColumnName="ElligibleByPhone" />
+                <ScalarProperty Name="EnrolledRecruits" ColumnName="EnrolledRecruits" />
+                <ScalarProperty Name="LinkedDB" ColumnName="LinkedDB" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

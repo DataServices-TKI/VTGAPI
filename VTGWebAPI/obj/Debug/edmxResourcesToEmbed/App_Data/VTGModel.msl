@@ -1070,5 +1070,38 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetStudyDetailById" FunctionName="VTGModel.Store.uspGetStudyDetailById">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="VTGModel.StudyDetailById">
+          <ScalarProperty Name="StudyId" ColumnName="StudyId" />
+          <ScalarProperty Name="NameStudy" ColumnName="NameStudy" />
+          <ScalarProperty Name="NicknameStudy" ColumnName="NicknameStudy" />
+          <ScalarProperty Name="StudyType" ColumnName="StudyType" />
+          <ScalarProperty Name="StudyCoordinator" ColumnName="StudyCoordinator" />
+          <ScalarProperty Name="ExpNumSubjects" ColumnName="ExpNumSubjects" />
+          <ScalarProperty Name="RecruitmentStartDate" ColumnName="RecruitmentStartDate" />
+          <ScalarProperty Name="RecruitmentEndDate" ColumnName="RecruitmentEndDate" />
+          <ScalarProperty Name="FirstVisitStartDate" ColumnName="FirstVisitStartDate" />
+          <ScalarProperty Name="FirstVisitEndDate" ColumnName="FirstVisitEndDate" />
+          <ScalarProperty Name="SubjectMinAgeInYears" ColumnName="SubjectMinAgeInYears" />
+          <ScalarProperty Name="SubjectMinAgeInequality" ColumnName="SubjectMinAgeInequality" />
+          <ScalarProperty Name="SubjectMaxAgeInYears" ColumnName="SubjectMaxAgeInYears" />
+          <ScalarProperty Name="SubjectMaxAgeInequality" ColumnName="SubjectMaxAgeInequality" />
+          <ScalarProperty Name="BackgroundInfo" ColumnName="BackgroundInfo" />
+          <ScalarProperty Name="IsCompletedYN" ColumnName="IsCompletedYN" />
+          <ScalarProperty Name="LastVisitEndDate" ColumnName="LastVisitEndDate" />
+          <ScalarProperty Name="OfficialStartDate" ColumnName="OfficialStartDate" />
+          <ScalarProperty Name="OfficialEndDate" ColumnName="OfficialEndDate" />
+          <ScalarProperty Name="GpMailoutStudyTitle" ColumnName="GpMailoutStudyTitle" />
+          <ScalarProperty Name="GpMailoutStudyInfo" ColumnName="GpMailoutStudyInfo" />
+          <ScalarProperty Name="GpMailoutStudyObjectives" ColumnName="GpMailoutStudyObjectives" />
+          <ScalarProperty Name="StudyIsCurrentlyBlindedYN" ColumnName="StudyIsCurrentlyBlindedYN" />
+          <ScalarProperty Name="IsSponsoredYN" ColumnName="IsSponsoredYN" />
+          <ScalarProperty Name="ElligibleByPhone" ColumnName="ElligibleByPhone" />
+          <ScalarProperty Name="EnrolledRecruits" ColumnName="EnrolledRecruits" />
+          <ScalarProperty Name="LinkedDB" ColumnName="LinkedDB" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

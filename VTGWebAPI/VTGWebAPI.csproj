@@ -201,6 +201,9 @@
     <Compile Include="App_Data\ParticipantDetail.cs">
       <DependentUpon>VTGModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="App_Data\StudyDetailById.cs">
+      <DependentUpon>VTGModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Data\uspGetStudyList_Result.cs">
       <DependentUpon>VTGModel.tt</DependentUpon>
     </Compile>
