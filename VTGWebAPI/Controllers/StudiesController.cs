@@ -41,6 +41,8 @@ namespace VTGWebAPI.Controllers
         {
             var study = db.GetStudyDetailById(id).FirstOrDefault();
             var studyViewModel = Mapper.Map<StudyDetailById, StudyViewModel>(study);
+
+            #region SubjectAgeCriteria
             if (!string.IsNullOrEmpty(studyViewModel.SubjectMinAgeInequality))
             {
                 if (studyViewModel.SubjectMinAgeInequality == "GTOET")
@@ -50,8 +52,8 @@ namespace VTGWebAPI.Controllers
                 else if (studyViewModel.SubjectMinAgeInequality == "GT")
                 {
                     studyViewModel.GreaterThan = true;
-                }                  
-                              
+                }
+
             }
 
             if (studyViewModel.SubjectMinAgeInYears.HasValue)
@@ -68,13 +70,13 @@ namespace VTGWebAPI.Controllers
                     var remainder = studyViewModel.SubjectMinAgeInYears.Value;
                     studyViewModel.MinMonth = (int)(remainder * 12);
                 }
-            
-               
+
+
             }
 
             if (!string.IsNullOrEmpty(studyViewModel.SubjectMaxAgeInequality))
             {
-                if (studyViewModel.SubjectMinAgeInequality == "LTOET")
+                if (studyViewModel.SubjectMaxAgeInequality == "LTOET")
                 {
                     studyViewModel.LessThanEquals = true;
                 }
@@ -99,7 +101,25 @@ namespace VTGWebAPI.Controllers
                 }
 
             }
+            #endregion
 
+            #region Recruitment
+                var recuitment = db.Recruitments.Where(r=>r.StudyId==id).ToArray();
+                var recruitmentViewModel = Mapper.Map<Recruitment[], IEnumerable<RecruitmentViewModel>>(recuitment);
+                studyViewModel.RecruitmentList = recruitmentViewModel;
+            #endregion
+
+            #region InformedConsent
+                var informedConsent = db.InformedConsents.Where(ic => ic.StudyId == id).ToArray();
+                var informedConsentViewModel = Mapper.Map<InformedConsent[], IEnumerable<InformedConsentViewModel>>(informedConsent);
+                studyViewModel.InformedConsentList = informedConsentViewModel;
+            #endregion
+
+            #region StaffRoles
+                var staff = db.GetStaffRolesForStudy(id).ToArray();
+                var staffRolesViewModel = Mapper.Map<StaffRolesForStudy[], IEnumerable<LinkVtgStaffStudyViewModel>>(staff);
+                studyViewModel.LinkVtgStaffStudies = staffRolesViewModel;
+                #endregion
 
             return studyViewModel;
         }

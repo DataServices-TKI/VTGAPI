@@ -1494,6 +1494,9 @@ warning 6002: The table/view 'DevtDbVaccineTrails.dbo.GetRecruitmentSource' does
   <Function Name="uspGetStaffFullNameById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="vtgStaffId" Type="int" Mode="In" />
   </Function>
+  <Function Name="uspGetStaffRolesForStudy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="studyId" Type="int" Mode="In" />
+  </Function>
   <Function Name="uspGetStudyDetailById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="studyId" Type="int" Mode="In" />
   </Function>

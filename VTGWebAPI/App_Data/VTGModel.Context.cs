@@ -144,5 +144,14 @@ namespace VTGWebAPI.App_Data
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<StudyDetailById>("GetStudyDetailById", studyIdParameter);
         }
+    
+        public virtual ObjectResult<StaffRolesForStudy> GetStaffRolesForStudy(Nullable<int> studyId)
+        {
+            var studyIdParameter = studyId.HasValue ?
+                new ObjectParameter("studyId", studyId) :
+                new ObjectParameter("studyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<StaffRolesForStudy>("GetStaffRolesForStudy", studyIdParameter);
+        }
     }
 }

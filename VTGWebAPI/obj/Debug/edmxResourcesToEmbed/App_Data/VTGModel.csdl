@@ -1879,6 +1879,9 @@
     <FunctionImport Name="GetStudyDetailById" ReturnType="Collection(VTGModel.StudyDetailById)">
       <Parameter Name="studyId" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="GetStaffRolesForStudy" ReturnType="Collection(VTGModel.StaffRolesForStudy)">
+      <Parameter Name="studyId" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="GetRecruitmentSource">
     <Key>
@@ -2015,5 +2018,16 @@
     <Property Type="Int32" Name="ElligibleByPhone" Nullable="true" />
     <Property Type="Int32" Name="EnrolledRecruits" Nullable="true" />
     <Property Type="Int32" Name="LinkedDB" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="StaffRolesForStudy">
+    <Property Type="Int32" Name="VtgStaffStudyLinkId" Nullable="false" />
+    <Property Type="Int32" Name="VtgStaffId" Nullable="false" />
+    <Property Type="Int32" Name="StudyId" Nullable="false" />
+    <Property Type="String" Name="DatabaseRole" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="ConcatRoles" Nullable="true" MaxLength="200" />
+    <Property Type="Int32" Name="IsBlindedYN" Nullable="true" />
+    <Property Type="DateTime" Name="EffFrom" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="EffTo" Nullable="true" Precision="23" />
+    <Property Type="String" Name="StaffMember" Nullable="true" MaxLength="101" />
   </ComplexType>
 </Schema>

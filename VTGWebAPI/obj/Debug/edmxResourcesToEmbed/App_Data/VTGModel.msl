@@ -1103,5 +1103,20 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetStaffRolesForStudy" FunctionName="VTGModel.Store.uspGetStaffRolesForStudy">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="VTGModel.StaffRolesForStudy">
+          <ScalarProperty Name="VtgStaffStudyLinkId" ColumnName="VtgStaffStudyLinkId" />
+          <ScalarProperty Name="VtgStaffId" ColumnName="VtgStaffId" />
+          <ScalarProperty Name="StudyId" ColumnName="StudyId" />
+          <ScalarProperty Name="DatabaseRole" ColumnName="DatabaseRole" />
+          <ScalarProperty Name="ConcatRoles" ColumnName="ConcatRoles" />
+          <ScalarProperty Name="IsBlindedYN" ColumnName="IsBlindedYN" />
+          <ScalarProperty Name="EffFrom" ColumnName="EffFrom" />
+          <ScalarProperty Name="EffTo" ColumnName="EffTo" />
+          <ScalarProperty Name="StaffMember" ColumnName="StaffMember" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

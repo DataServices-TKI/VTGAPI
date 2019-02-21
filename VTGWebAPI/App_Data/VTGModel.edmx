@@ -1499,6 +1499,9 @@ warning 6002: The table/view 'DevtDbVaccineTrails.dbo.GetRecruitmentSource' does
         <Function Name="uspGetStaffFullNameById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="vtgStaffId" Type="int" Mode="In" />
         </Function>
+        <Function Name="uspGetStaffRolesForStudy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="studyId" Type="int" Mode="In" />
+        </Function>
         <Function Name="uspGetStudyDetailById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="studyId" Type="int" Mode="In" />
         </Function>
@@ -3685,6 +3688,9 @@ warning 6002: The table/view 'DevtDbVaccineTrails.dbo.GetRecruitmentSource' does
           <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetStudyDetailById" ReturnType="Collection(VTGModel.StudyDetailById)">
+          <Parameter Name="studyId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetStaffRolesForStudy" ReturnType="Collection(VTGModel.StaffRolesForStudy)">
             <Parameter Name="studyId" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
@@ -3823,6 +3829,17 @@ warning 6002: The table/view 'DevtDbVaccineTrails.dbo.GetRecruitmentSource' does
           <Property Type="Int32" Name="ElligibleByPhone" Nullable="true" />
           <Property Type="Int32" Name="EnrolledRecruits" Nullable="true" />
           <Property Type="Int32" Name="LinkedDB" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="StaffRolesForStudy">
+          <Property Type="Int32" Name="VtgStaffStudyLinkId" Nullable="false" />
+          <Property Type="Int32" Name="VtgStaffId" Nullable="false" />
+          <Property Type="Int32" Name="StudyId" Nullable="false" />
+          <Property Type="String" Name="DatabaseRole" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ConcatRoles" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="IsBlindedYN" Nullable="true" />
+          <Property Type="DateTime" Name="EffFrom" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="EffTo" Nullable="true" Precision="23" />
+          <Property Type="String" Name="StaffMember" Nullable="true" MaxLength="101" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4929,6 +4946,21 @@ warning 6002: The table/view 'DevtDbVaccineTrails.dbo.GetRecruitmentSource' does
                 <ScalarProperty Name="ElligibleByPhone" ColumnName="ElligibleByPhone" />
                 <ScalarProperty Name="EnrolledRecruits" ColumnName="EnrolledRecruits" />
                 <ScalarProperty Name="LinkedDB" ColumnName="LinkedDB" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetStaffRolesForStudy" FunctionName="VTGModel.Store.uspGetStaffRolesForStudy">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="VTGModel.StaffRolesForStudy">
+                <ScalarProperty Name="VtgStaffStudyLinkId" ColumnName="VtgStaffStudyLinkId" />
+                <ScalarProperty Name="VtgStaffId" ColumnName="VtgStaffId" />
+                <ScalarProperty Name="StudyId" ColumnName="StudyId" />
+                <ScalarProperty Name="DatabaseRole" ColumnName="DatabaseRole" />
+                <ScalarProperty Name="ConcatRoles" ColumnName="ConcatRoles" />
+                <ScalarProperty Name="IsBlindedYN" ColumnName="IsBlindedYN" />
+                <ScalarProperty Name="EffFrom" ColumnName="EffFrom" />
+                <ScalarProperty Name="EffTo" ColumnName="EffTo" />
+                <ScalarProperty Name="StaffMember" ColumnName="StaffMember" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

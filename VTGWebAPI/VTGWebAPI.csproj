@@ -201,6 +201,9 @@
     <Compile Include="App_Data\ParticipantDetail.cs">
       <DependentUpon>VTGModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="App_Data\StaffRolesForStudy.cs">
+      <DependentUpon>VTGModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Data\StudyDetailById.cs">
       <DependentUpon>VTGModel.tt</DependentUpon>
     </Compile>
@@ -254,8 +257,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\CorrespondanceViewModel.cs" />
+    <Compile Include="ViewModels\InformedConsentViewModel.cs" />
     <Compile Include="ViewModels\LinkedInformedConsentViewModel.cs" />
+    <Compile Include="ViewModels\LinkVtgStaffStudyViewModel.cs" />
     <Compile Include="ViewModels\MedicalHistoryViewModel.cs" />
+    <Compile Include="ViewModels\RecruitmentViewModel.cs" />
     <Compile Include="ViewModels\ReferenceListViewModel.cs" />
     <Compile Include="ViewModels\StudyMapper.cs" />
     <Compile Include="ViewModels\StudyViewModel.cs" />
