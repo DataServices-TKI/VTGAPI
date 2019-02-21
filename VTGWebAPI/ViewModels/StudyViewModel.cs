@@ -44,7 +44,7 @@ namespace VTGWebAPI.ViewModels
         public int? LinkedDb { get; set; }
 
         public IEnumerable<RecruitmentViewModel> RecruitmentList { get; set; }
-        public IEnumerable<VisitSchedule> VisitList { get; set; }
+        public IEnumerable<VisitScheduleViewModel> VisitList { get; set; }
         public IEnumerable<InformedConsentViewModel> InformedConsentList { get; set; }
         public IEnumerable<CorrespondanceViewModel> Correspondence { get; set; }        
         public IEnumerable<LinkVtgStaffStudyViewModel> LinkVtgStaffStudies { get; set; }

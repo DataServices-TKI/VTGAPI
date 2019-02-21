@@ -102,9 +102,14 @@ namespace VTGWebAPI.Controllers
 
             }
             #endregion
+            #region VisitSchedule
+            var visitSchedule = db.VisitSchedules.Where(v => v.StudyId == id).ToArray();
+            var visitList=Mapper.Map<VisitSchedule[], IEnumerable<VisitScheduleViewModel>> (visitSchedule);
+            studyViewModel.VisitList = visitList;
+            #endregion
 
             #region Recruitment
-                var recuitment = db.Recruitments.Where(r=>r.StudyId==id).ToArray();
+            var recuitment = db.Recruitments.Where(r=>r.StudyId==id).ToArray();
                 var recruitmentViewModel = Mapper.Map<Recruitment[], IEnumerable<RecruitmentViewModel>>(recuitment);
                 studyViewModel.RecruitmentList = recruitmentViewModel;
             #endregion
