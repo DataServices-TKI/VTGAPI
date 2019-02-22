@@ -103,8 +103,9 @@ namespace VTGWebAPI.Controllers
             }
             #endregion
             #region VisitSchedule
-            var visitSchedule = db.VisitSchedules.Where(v => v.StudyId == id).ToArray();
-            var visitList=Mapper.Map<VisitSchedule[], IEnumerable<VisitScheduleViewModel>> (visitSchedule);
+            var visitSchedule = db.GetStudyVisitTasks(id).ToArray();
+            var visitList=Mapper.Map<StudyVisitTasks[], IEnumerable<VisitScheduleViewModel>> (visitSchedule);          
+           
             studyViewModel.VisitList = visitList;
             #endregion
 

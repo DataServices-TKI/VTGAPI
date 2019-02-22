@@ -1118,5 +1118,25 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetStudyVisitTasks" FunctionName="VTGModel.Store.uspGetStudyVisitTasks">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="VTGModel.StudyVisitTasks">
+          <ScalarProperty Name="VisitScheduleId" ColumnName="VisitScheduleId" />
+          <ScalarProperty Name="StudyId" ColumnName="StudyId" />
+          <ScalarProperty Name="VisitOrder" ColumnName="VisitOrder" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="IdealDaysAfterPrevious" ColumnName="IdealDaysAfterPrevious" />
+          <ScalarProperty Name="MinDaysAfterPrevious" ColumnName="MinDaysAfterPrevious" />
+          <ScalarProperty Name="MaxDaysAfterPrevious" ColumnName="MaxDaysAfterPrevious" />
+          <ScalarProperty Name="VisitOrderThatTimingIsRelativeTo" ColumnName="VisitOrderThatTimingIsRelativeTo" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="VisitStream" ColumnName="VisitStream" />
+          <ScalarProperty Name="Vaccine" ColumnName="Vaccine" />
+          <ScalarProperty Name="Samples" ColumnName="Samples" />
+          <ScalarProperty Name="Travel" ColumnName="Travel" />
+          <ScalarProperty Name="Questionnaire" ColumnName="Questionnaire" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

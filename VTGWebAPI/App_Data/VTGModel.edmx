@@ -1506,6 +1506,9 @@ warning 6002: The table/view 'DevtDbVaccineTrails.dbo.GetRecruitmentSource' does
           <Parameter Name="studyId" Type="int" Mode="In" />
         </Function>
         <Function Name="uspGetStudyList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="uspGetStudyVisitTasks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="studyId" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="VTGModelStoreContainer">
           <EntitySet Name="AdverseEvents" EntityType="Self.AdverseEvents" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AnalysisLocations" EntityType="Self.AnalysisLocations" Schema="dbo" store:Type="Tables" />
@@ -3691,6 +3694,9 @@ warning 6002: The table/view 'DevtDbVaccineTrails.dbo.GetRecruitmentSource' does
           <Parameter Name="studyId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetStaffRolesForStudy" ReturnType="Collection(VTGModel.StaffRolesForStudy)">
+          <Parameter Name="studyId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetStudyVisitTasks" ReturnType="Collection(VTGModel.StudyVisitTasks)">
             <Parameter Name="studyId" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
@@ -3840,6 +3846,22 @@ warning 6002: The table/view 'DevtDbVaccineTrails.dbo.GetRecruitmentSource' does
           <Property Type="DateTime" Name="EffFrom" Nullable="true" Precision="23" />
           <Property Type="DateTime" Name="EffTo" Nullable="true" Precision="23" />
           <Property Type="String" Name="StaffMember" Nullable="true" MaxLength="101" />
+        </ComplexType>
+        <ComplexType Name="StudyVisitTasks">
+          <Property Type="Int32" Name="VisitScheduleId" Nullable="false" />
+          <Property Type="Int32" Name="StudyId" Nullable="false" />
+          <Property Type="Int32" Name="VisitOrder" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="50" />
+          <Property Type="Int16" Name="IdealDaysAfterPrevious" Nullable="true" />
+          <Property Type="Int16" Name="MinDaysAfterPrevious" Nullable="true" />
+          <Property Type="Int16" Name="MaxDaysAfterPrevious" Nullable="true" />
+          <Property Type="Int32" Name="VisitOrderThatTimingIsRelativeTo" Nullable="true" />
+          <Property Type="String" Name="Comments" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="VisitStream" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Vaccine" Nullable="true" />
+          <Property Type="Int32" Name="Samples" Nullable="true" />
+          <Property Type="Int32" Name="Travel" Nullable="true" />
+          <Property Type="Int32" Name="Questionnaire" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4961,6 +4983,26 @@ warning 6002: The table/view 'DevtDbVaccineTrails.dbo.GetRecruitmentSource' does
                 <ScalarProperty Name="EffFrom" ColumnName="EffFrom" />
                 <ScalarProperty Name="EffTo" ColumnName="EffTo" />
                 <ScalarProperty Name="StaffMember" ColumnName="StaffMember" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetStudyVisitTasks" FunctionName="VTGModel.Store.uspGetStudyVisitTasks">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="VTGModel.StudyVisitTasks">
+                <ScalarProperty Name="VisitScheduleId" ColumnName="VisitScheduleId" />
+                <ScalarProperty Name="StudyId" ColumnName="StudyId" />
+                <ScalarProperty Name="VisitOrder" ColumnName="VisitOrder" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IdealDaysAfterPrevious" ColumnName="IdealDaysAfterPrevious" />
+                <ScalarProperty Name="MinDaysAfterPrevious" ColumnName="MinDaysAfterPrevious" />
+                <ScalarProperty Name="MaxDaysAfterPrevious" ColumnName="MaxDaysAfterPrevious" />
+                <ScalarProperty Name="VisitOrderThatTimingIsRelativeTo" ColumnName="VisitOrderThatTimingIsRelativeTo" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="VisitStream" ColumnName="VisitStream" />
+                <ScalarProperty Name="Vaccine" ColumnName="Vaccine" />
+                <ScalarProperty Name="Samples" ColumnName="Samples" />
+                <ScalarProperty Name="Travel" ColumnName="Travel" />
+                <ScalarProperty Name="Questionnaire" ColumnName="Questionnaire" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -1501,6 +1501,9 @@ warning 6002: The table/view 'DevtDbVaccineTrails.dbo.GetRecruitmentSource' does
     <Parameter Name="studyId" Type="int" Mode="In" />
   </Function>
   <Function Name="uspGetStudyList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="uspGetStudyVisitTasks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="studyId" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="VTGModelStoreContainer">
     <EntitySet Name="AdverseEvents" EntityType="Self.AdverseEvents" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AnalysisLocations" EntityType="Self.AnalysisLocations" Schema="dbo" store:Type="Tables" />

@@ -207,6 +207,9 @@
     <Compile Include="App_Data\StudyDetailById.cs">
       <DependentUpon>VTGModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="App_Data\StudyVisitTasks.cs">
+      <DependentUpon>VTGModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Data\uspGetStudyList_Result.cs">
       <DependentUpon>VTGModel.tt</DependentUpon>
     </Compile>
@@ -262,10 +265,13 @@
     <Compile Include="ViewModels\LinkedInformedConsentViewModel.cs" />
     <Compile Include="ViewModels\LinkVtgStaffStudyViewModel.cs" />
     <Compile Include="ViewModels\MedicalHistoryViewModel.cs" />
+    <Compile Include="ViewModels\QuestionnaireByVisitViewModel.cs" />
     <Compile Include="ViewModels\RecruitmentViewModel.cs" />
     <Compile Include="ViewModels\ReferenceListViewModel.cs" />
+    <Compile Include="ViewModels\SamplesByVisitViewModel.cs" />
     <Compile Include="ViewModels\StudyMapper.cs" />
     <Compile Include="ViewModels\StudyViewModel.cs" />
+    <Compile Include="ViewModels\TravelReimbursementsByVisitViewModel.cs" />
     <Compile Include="ViewModels\UserMapper.cs" />
     <Compile Include="ViewModels\ParticipantMapper.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -461,6 +467,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ParticipantViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
+    <Compile Include="ViewModels\VaccinationsByVisitViewModel.cs" />
     <Compile Include="ViewModels\VisitScheduleViewModel.cs" />
     <Compile Include="ViewModels\VisitViewModel.cs" />
   </ItemGroup>

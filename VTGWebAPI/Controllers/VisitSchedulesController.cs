@@ -28,11 +28,52 @@ namespace VTGWebAPI.Controllers
         }
 
         // GET: api/VisitSchedules/5
-        [ResponseType(typeof(VisitSchedule))]
+       // [ResponseType(typeof(VisitSchedule))]
         public VisitScheduleViewModel GetVisitSchedule(int id)
         {
             var visitSchedule = db.VisitSchedules.Find(id);
             var visitScheduleViewModel = Mapper.Map<VisitSchedule, VisitScheduleViewModel>(visitSchedule);
+
+           
+            //Vaccines
+            var vaccines = db.VaccinationsByVisits.Where(v => v.VisitScheduleId == id).ToArray();
+            var vaccinesViewModel = Mapper.Map<VaccinationsByVisit[], IEnumerable<VaccinationsByVisitViewModel>>(vaccines);
+
+            foreach (var vac in vaccinesViewModel)
+            {
+                vac.VaccineName = db.VaccinationTypes.Find(vac.TypeVaccinationId).Description;
+
+            }
+            
+                visitScheduleViewModel.VaccineList = vaccinesViewModel;
+
+
+            //Samples
+            var samples = db.SamplesByVisits.Where(s => s.VisitScheduleId == id).ToArray();
+            var samplesViewModel = Mapper.Map<SamplesByVisit[], IEnumerable<SamplesByVisitViewModel>>(samples);
+            foreach (var sam in samplesViewModel)
+            {
+                sam.SampleName = db.SampleTypes.Find(sam.TypeSampleId).Description;
+
+            }
+
+            visitScheduleViewModel.SampleList = samplesViewModel;
+
+            //Travel
+           var travel = db.TravelReimbursementsByVisits.Where(t => t.VisitScheduleId == id).ToArray();
+           var travelViewModel = Mapper.Map<TravelReimbursementsByVisit[], IEnumerable<TravelReimbursementsByVisitViewModel>>(travel);
+           visitScheduleViewModel.TravelList = travelViewModel;
+
+            //Questionnaire
+             var questionnaire = db.QuestionnairesByVisits.Where(q => q.VisitScheduleId == id).ToArray();
+            var questionnaireViewModel = Mapper.Map<QuestionnairesByVisit[], IEnumerable<QuestionnaireByVisitViewModel>>(questionnaire);
+            foreach (var question in questionnaireViewModel)
+            {
+                question.QuestionnaireTypeName = db.QuestionnaireTypes.Find(question.TypeQuestionnaireId).Description;
+            }
+            visitScheduleViewModel.QuestionList = questionnaireViewModel;
+
+
             return visitScheduleViewModel;
         }
 
