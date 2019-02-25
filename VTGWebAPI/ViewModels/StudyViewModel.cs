@@ -37,7 +37,7 @@ namespace VTGWebAPI.ViewModels
         public string GpMailoutStudyTitle { get; set; }
         public string GpMailoutStudyInfo { get; set; }
         public string GpMailoutStudyObjectives { get; set; }
-        public bool StudyIsCurrentlyBlindedYN { get; set; }
+        public bool? StudyIsCurrentlyBlindedYN { get; set; }
         public int? IsSponsoredYN { get; set; }
         public int? ElligibleByPhone { get; set; } 
         public int? EnrolledRecruits { get; set; }

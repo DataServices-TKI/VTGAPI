@@ -91,17 +91,19 @@ namespace VTGWebAPI.Controllers
                 {
                     studyViewModel.MaxYear = (int)(studyViewModel.SubjectMaxAgeInYears.Value);
                     var remainder = (studyViewModel.SubjectMaxAgeInYears.Value % 1);
-                    studyViewModel.MaxMonth = (int)(remainder * 12);
+                    studyViewModel.MaxMonth = (int)(Math.Round(remainder * 12));
                 }
                 else
                 {
                     studyViewModel.MaxYear = 0;
                     var remainder = studyViewModel.SubjectMaxAgeInYears.Value;
-                    studyViewModel.MaxMonth = (int)(remainder * 12);
+                    studyViewModel.MaxMonth = (int)(Math.Round(remainder * 12));
                 }
 
             }
             #endregion
+
+
             #region VisitSchedule
             var visitSchedule = db.GetStudyVisitTasks(id).ToArray();
             var visitList=Mapper.Map<StudyVisitTasks[], IEnumerable<VisitScheduleViewModel>> (visitSchedule);          
@@ -132,17 +134,55 @@ namespace VTGWebAPI.Controllers
 
         // PUT: api/Studies/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutStudy(int id, Study study)
+        public IHttpActionResult PutStudy(int id, StudyViewModel studyViewModel)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != study.StudyId)
+            if (id != studyViewModel.StudyId)
             {
                 return BadRequest();
             }
+
+            #region SubjectAgeCriteria
+            
+                if (studyViewModel.GreaterThanEquals)
+                {
+                    studyViewModel.SubjectMinAgeInequality = "GTOET";
+                }
+                else if (studyViewModel.GreaterThan )
+                {
+                    studyViewModel.SubjectMinAgeInequality = "GT";
+                }
+
+            //Age Min
+
+
+                var minMonth =(double) studyViewModel.MinMonth/12;               
+                studyViewModel.SubjectMinAgeInYears = (double)(studyViewModel.MinYear) + minMonth;
+                
+
+
+
+           
+                if (studyViewModel.LessThanEquals)
+                {
+                    studyViewModel.SubjectMaxAgeInequality = "LTOET";
+                    
+                }
+                else if (studyViewModel.LessThan)
+                {
+                    studyViewModel.SubjectMaxAgeInequality = "LT";                   
+                }
+
+            var maxMonth = (double)studyViewModel.MaxMonth / 12;
+            studyViewModel.SubjectMaxAgeInYears = (double)(studyViewModel.MaxYear) + maxMonth;
+
+            #endregion
+            var studyMapper = new StudyMapper();
+            var study = studyMapper.GetStudy(studyViewModel);
 
             db.Entry(study).State = EntityState.Modified;
 
@@ -167,12 +207,45 @@ namespace VTGWebAPI.Controllers
 
         // POST: api/Studies
         [ResponseType(typeof(Study))]
-        public IHttpActionResult PostStudy(Study study)
+        public IHttpActionResult PostStudy(StudyViewModel studyViewModel)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+
+            #region SubjectAgeCriteria
+
+            if (studyViewModel.GreaterThanEquals)
+            {
+                studyViewModel.SubjectMinAgeInequality = "GTOET";
+            }
+            else if (studyViewModel.GreaterThan)
+            {
+                studyViewModel.SubjectMinAgeInequality = "GT";
+            }
+
+            //Age Min
+            var minMonth = (double)studyViewModel.MinMonth / 12;
+            studyViewModel.SubjectMinAgeInYears = (double)(studyViewModel.MinYear) + minMonth;
+
+            if (studyViewModel.LessThanEquals)
+            {
+                studyViewModel.SubjectMaxAgeInequality = "LTOET";
+
+            }
+            else if (studyViewModel.LessThan)
+            {
+                studyViewModel.SubjectMaxAgeInequality = "LT";
+            }
+
+            var maxMonth = (double)studyViewModel.MaxMonth / 12;
+            studyViewModel.SubjectMaxAgeInYears = (double)(studyViewModel.MaxYear) + maxMonth;
+
+            #endregion
+
+            var studyMapper = new StudyMapper();
+            var study = studyMapper.GetStudy(studyViewModel);
 
             db.Studies.Add(study);
             db.SaveChanges();
