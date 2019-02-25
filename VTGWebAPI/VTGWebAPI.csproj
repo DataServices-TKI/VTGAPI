@@ -252,7 +252,10 @@
     <Compile Include="Controllers\AppValueListDataController.cs" />
     <Compile Include="Controllers\BodySystemsController.cs" />
     <Compile Include="Controllers\DiagnosesIcdsController.cs" />
+    <Compile Include="Controllers\DoctorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LinkDoctorPracticesController.cs" />
+    <Compile Include="Controllers\PracticesController.cs" />
     <Compile Include="Controllers\StudiesController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\VisitSchedulesController.cs" />
@@ -261,10 +264,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\CorrespondanceViewModel.cs" />
+    <Compile Include="ViewModels\DoctorsViewModel.cs" />
     <Compile Include="ViewModels\InformedConsentViewModel.cs" />
     <Compile Include="ViewModels\LinkedInformedConsentViewModel.cs" />
     <Compile Include="ViewModels\LinkVtgStaffStudyViewModel.cs" />
     <Compile Include="ViewModels\MedicalHistoryViewModel.cs" />
+    <Compile Include="ViewModels\PracticesViewModel.cs" />
     <Compile Include="ViewModels\QuestionnaireByVisitViewModel.cs" />
     <Compile Include="ViewModels\RecruitmentViewModel.cs" />
     <Compile Include="ViewModels\ReferenceListViewModel.cs" />

@@ -26,6 +26,8 @@ namespace VTGWebAPI
                 cfg.CreateMap<SamplesByVisit, SamplesByVisitViewModel>();
                 cfg.CreateMap<TravelReimbursementsByVisit, TravelReimbursementsByVisitViewModel>();
                 cfg.CreateMap<QuestionnairesByVisit, QuestionnaireByVisitViewModel>();
+                cfg.CreateMap<Practice, PracticesViewModel>();
+                cfg.CreateMap<Doctor, DoctorsViewModel>();
             });
 
           
