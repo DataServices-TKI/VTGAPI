@@ -1058,9 +1058,8 @@
         <ComplexTypeMapping TypeName="VTGModel.ParticipantConsentById">
           <ScalarProperty Name="PersonId" ColumnName="PersonId" />
           <ScalarProperty Name="StudyId" ColumnName="StudyId" />
-          <ScalarProperty Name="SubjectStudyLinkId" ColumnName="SubjectStudyLinkId" />
           <ScalarProperty Name="SubjectStudyInformedConsentLinkId" ColumnName="SubjectStudyInformedConsentLinkId" />
-          <ScalarProperty Name="SubjectStudyLinkId1" ColumnName="SubjectStudyLinkId1" />
+          <ScalarProperty Name="SubjectStudyLinkId" ColumnName="SubjectStudyLinkId" />
           <ScalarProperty Name="InformedConsentId" ColumnName="InformedConsentId" />
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="VerbalConsentDate" ColumnName="VerbalConsentDate" />
@@ -1068,7 +1067,74 @@
           <ScalarProperty Name="WrittenConsentDate" ColumnName="WrittenConsentDate" />
           <ScalarProperty Name="WrittenConsentBy" ColumnName="WrittenConsentBy" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="InformedConsentId1" ColumnName="InformedConsentId1" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetStudyDetailById" FunctionName="VTGModel.Store.uspGetStudyDetailById">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="VTGModel.StudyDetailById">
+          <ScalarProperty Name="StudyId" ColumnName="StudyId" />
+          <ScalarProperty Name="NameStudy" ColumnName="NameStudy" />
+          <ScalarProperty Name="NicknameStudy" ColumnName="NicknameStudy" />
+          <ScalarProperty Name="StudyType" ColumnName="StudyType" />
+          <ScalarProperty Name="StudyCoordinator" ColumnName="StudyCoordinator" />
+          <ScalarProperty Name="ExpNumSubjects" ColumnName="ExpNumSubjects" />
+          <ScalarProperty Name="RecruitmentStartDate" ColumnName="RecruitmentStartDate" />
+          <ScalarProperty Name="RecruitmentEndDate" ColumnName="RecruitmentEndDate" />
+          <ScalarProperty Name="FirstVisitStartDate" ColumnName="FirstVisitStartDate" />
+          <ScalarProperty Name="FirstVisitEndDate" ColumnName="FirstVisitEndDate" />
+          <ScalarProperty Name="SubjectMinAgeInYears" ColumnName="SubjectMinAgeInYears" />
+          <ScalarProperty Name="SubjectMinAgeInequality" ColumnName="SubjectMinAgeInequality" />
+          <ScalarProperty Name="SubjectMaxAgeInYears" ColumnName="SubjectMaxAgeInYears" />
+          <ScalarProperty Name="SubjectMaxAgeInequality" ColumnName="SubjectMaxAgeInequality" />
+          <ScalarProperty Name="BackgroundInfo" ColumnName="BackgroundInfo" />
+          <ScalarProperty Name="IsCompletedYN" ColumnName="IsCompletedYN" />
+          <ScalarProperty Name="LastVisitEndDate" ColumnName="LastVisitEndDate" />
+          <ScalarProperty Name="OfficialStartDate" ColumnName="OfficialStartDate" />
+          <ScalarProperty Name="OfficialEndDate" ColumnName="OfficialEndDate" />
+          <ScalarProperty Name="GpMailoutStudyTitle" ColumnName="GpMailoutStudyTitle" />
+          <ScalarProperty Name="GpMailoutStudyInfo" ColumnName="GpMailoutStudyInfo" />
+          <ScalarProperty Name="GpMailoutStudyObjectives" ColumnName="GpMailoutStudyObjectives" />
+          <ScalarProperty Name="StudyIsCurrentlyBlindedYN" ColumnName="StudyIsCurrentlyBlindedYN" />
+          <ScalarProperty Name="IsSponsoredYN" ColumnName="IsSponsoredYN" />
+          <ScalarProperty Name="ElligibleByPhone" ColumnName="ElligibleByPhone" />
+          <ScalarProperty Name="EnrolledRecruits" ColumnName="EnrolledRecruits" />
+          <ScalarProperty Name="LinkedDB" ColumnName="LinkedDB" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetStaffRolesForStudy" FunctionName="VTGModel.Store.uspGetStaffRolesForStudy">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="VTGModel.StaffRolesForStudy">
+          <ScalarProperty Name="VtgStaffStudyLinkId" ColumnName="VtgStaffStudyLinkId" />
+          <ScalarProperty Name="VtgStaffId" ColumnName="VtgStaffId" />
+          <ScalarProperty Name="StudyId" ColumnName="StudyId" />
+          <ScalarProperty Name="DatabaseRole" ColumnName="DatabaseRole" />
+          <ScalarProperty Name="ConcatRoles" ColumnName="ConcatRoles" />
+          <ScalarProperty Name="IsBlindedYN" ColumnName="IsBlindedYN" />
+          <ScalarProperty Name="EffFrom" ColumnName="EffFrom" />
+          <ScalarProperty Name="EffTo" ColumnName="EffTo" />
+          <ScalarProperty Name="StaffMember" ColumnName="StaffMember" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetStudyVisitTasks" FunctionName="VTGModel.Store.uspGetStudyVisitTasks">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="VTGModel.StudyVisitTasks">
+          <ScalarProperty Name="VisitScheduleId" ColumnName="VisitScheduleId" />
+          <ScalarProperty Name="StudyId" ColumnName="StudyId" />
+          <ScalarProperty Name="VisitOrder" ColumnName="VisitOrder" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="IdealDaysAfterPrevious" ColumnName="IdealDaysAfterPrevious" />
+          <ScalarProperty Name="MinDaysAfterPrevious" ColumnName="MinDaysAfterPrevious" />
+          <ScalarProperty Name="MaxDaysAfterPrevious" ColumnName="MaxDaysAfterPrevious" />
+          <ScalarProperty Name="VisitOrderThatTimingIsRelativeTo" ColumnName="VisitOrderThatTimingIsRelativeTo" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="VisitStream" ColumnName="VisitStream" />
+          <ScalarProperty Name="Vaccine" ColumnName="Vaccine" />
+          <ScalarProperty Name="Samples" ColumnName="Samples" />
+          <ScalarProperty Name="Travel" ColumnName="Travel" />
+          <ScalarProperty Name="Questionnaire" ColumnName="Questionnaire" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

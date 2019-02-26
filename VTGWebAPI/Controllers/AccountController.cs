@@ -65,7 +65,7 @@ namespace VTGWebAPI.Controllers
             ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
             return new UserInfoViewModel
             {
-                Email = User.Identity.GetUserName(),
+                Email = System.Security.Principal.WindowsIdentity.GetCurrent().Name,
                 HasRegistered = externalLogin == null,
                 LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
             };
@@ -77,8 +77,8 @@ namespace VTGWebAPI.Controllers
         [Route("UserInfo")]
         public UserViewModel GetUserInfo()
         {
-              //var fullname = User.Identity.Name;//for DEPLOYMENT      
-              var fullname = System.Security.Principal.WindowsIdentity.GetCurrent().Name;//For local debug         
+           //   var fullname = User.Identity.Name;//for DEPLOYMENT      
+             var fullname = System.Security.Principal.WindowsIdentity.GetCurrent().Name;//For local debug         
 
             var nameArray = fullname.Split('\\');
             var username = nameArray[1].Trim().ToLower();

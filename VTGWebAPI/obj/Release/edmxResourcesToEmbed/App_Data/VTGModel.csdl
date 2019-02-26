@@ -1876,6 +1876,15 @@
     <FunctionImport Name="GetParticipantConsentById" ReturnType="Collection(VTGModel.ParticipantConsentById)">
       <Parameter Name="id" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="GetStudyDetailById" ReturnType="Collection(VTGModel.StudyDetailById)">
+      <Parameter Name="studyId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetStaffRolesForStudy" ReturnType="Collection(VTGModel.StaffRolesForStudy)">
+      <Parameter Name="studyId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetStudyVisitTasks" ReturnType="Collection(VTGModel.StudyVisitTasks)">
+      <Parameter Name="studyId" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="GetRecruitmentSource">
     <Key>
@@ -1974,9 +1983,8 @@
   <ComplexType Name="ParticipantConsentById">
     <Property Type="Int32" Name="PersonId" Nullable="false" />
     <Property Type="Int32" Name="StudyId" Nullable="true" />
-    <Property Type="Int32" Name="SubjectStudyLinkId" Nullable="false" />
     <Property Type="Int32" Name="SubjectStudyInformedConsentLinkId" Nullable="true" />
-    <Property Type="Int32" Name="SubjectStudyLinkId1" Nullable="true" />
+    <Property Type="Int32" Name="SubjectStudyLinkId" Nullable="true" />
     <Property Type="Int32" Name="InformedConsentId" Nullable="true" />
     <Property Type="String" Name="Status" Nullable="true" MaxLength="20" />
     <Property Type="DateTime" Name="VerbalConsentDate" Nullable="true" Precision="23" />
@@ -1984,6 +1992,61 @@
     <Property Type="DateTime" Name="WrittenConsentDate" Nullable="true" Precision="23" />
     <Property Type="Int32" Name="WrittenConsentBy" Nullable="true" />
     <Property Type="String" Name="Name" Nullable="true" MaxLength="100" />
-    <Property Type="Int32" Name="InformedConsentId1" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="StudyDetailById">
+    <Property Type="Int32" Name="StudyId" Nullable="false" />
+    <Property Type="String" Name="NameStudy" Nullable="true" MaxLength="1000" />
+    <Property Type="String" Name="NicknameStudy" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="StudyType" Nullable="true" MaxLength="10" />
+    <Property Type="Int32" Name="StudyCoordinator" Nullable="true" />
+    <Property Type="Int16" Name="ExpNumSubjects" Nullable="true" />
+    <Property Type="DateTime" Name="RecruitmentStartDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="RecruitmentEndDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="FirstVisitStartDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="FirstVisitEndDate" Nullable="true" Precision="23" />
+    <Property Type="Double" Name="SubjectMinAgeInYears" Nullable="true" />
+    <Property Type="String" Name="SubjectMinAgeInequality" Nullable="true" MaxLength="5" />
+    <Property Type="Double" Name="SubjectMaxAgeInYears" Nullable="true" />
+    <Property Type="String" Name="SubjectMaxAgeInequality" Nullable="true" MaxLength="5" />
+    <Property Type="String" Name="BackgroundInfo" Nullable="true" MaxLength="Max" />
+    <Property Type="Int32" Name="IsCompletedYN" Nullable="true" />
+    <Property Type="DateTime" Name="LastVisitEndDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="OfficialStartDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="OfficialEndDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="GpMailoutStudyTitle" Nullable="true" MaxLength="1000" />
+    <Property Type="String" Name="GpMailoutStudyInfo" Nullable="true" MaxLength="1000" />
+    <Property Type="String" Name="GpMailoutStudyObjectives" Nullable="true" MaxLength="1000" />
+    <Property Type="Int32" Name="StudyIsCurrentlyBlindedYN" Nullable="true" />
+    <Property Type="Int32" Name="IsSponsoredYN" Nullable="true" />
+    <Property Type="Int32" Name="ElligibleByPhone" Nullable="true" />
+    <Property Type="Int32" Name="EnrolledRecruits" Nullable="true" />
+    <Property Type="Int32" Name="LinkedDB" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="StaffRolesForStudy">
+    <Property Type="Int32" Name="VtgStaffStudyLinkId" Nullable="false" />
+    <Property Type="Int32" Name="VtgStaffId" Nullable="false" />
+    <Property Type="Int32" Name="StudyId" Nullable="false" />
+    <Property Type="String" Name="DatabaseRole" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="ConcatRoles" Nullable="true" MaxLength="200" />
+    <Property Type="Int32" Name="IsBlindedYN" Nullable="true" />
+    <Property Type="DateTime" Name="EffFrom" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="EffTo" Nullable="true" Precision="23" />
+    <Property Type="String" Name="StaffMember" Nullable="true" MaxLength="101" />
+  </ComplexType>
+  <ComplexType Name="StudyVisitTasks">
+    <Property Type="Int32" Name="VisitScheduleId" Nullable="false" />
+    <Property Type="Int32" Name="StudyId" Nullable="false" />
+    <Property Type="Int32" Name="VisitOrder" Nullable="false" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="50" />
+    <Property Type="Int16" Name="IdealDaysAfterPrevious" Nullable="true" />
+    <Property Type="Int16" Name="MinDaysAfterPrevious" Nullable="true" />
+    <Property Type="Int16" Name="MaxDaysAfterPrevious" Nullable="true" />
+    <Property Type="Int32" Name="VisitOrderThatTimingIsRelativeTo" Nullable="true" />
+    <Property Type="String" Name="Comments" Nullable="true" MaxLength="1000" />
+    <Property Type="String" Name="VisitStream" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Vaccine" Nullable="true" />
+    <Property Type="Int32" Name="Samples" Nullable="true" />
+    <Property Type="Int32" Name="Travel" Nullable="true" />
+    <Property Type="Int32" Name="Questionnaire" Nullable="true" />
   </ComplexType>
 </Schema>

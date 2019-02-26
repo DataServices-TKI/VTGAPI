@@ -23,6 +23,10 @@ namespace VTGWebAPI
                 cfg.CreateMap<InformedConsent, InformedConsentViewModel>();
                 cfg.CreateMap<InformedConsentViewModel, InformedConsent>();
                 cfg.CreateMap<StaffRolesForStudy,LinkVtgStaffStudyViewModel>();
+                cfg.CreateMap<VtgStaff, VtgStaffViewModel>();
+                cfg.CreateMap<StudyRole, StudyRoleViewModel>();
+                cfg.CreateMap<LinkVtgStaffStudyViewModel, LinkVtgStaffStudy>();
+                cfg.CreateMap<LinkVtgStaffStudy, LinkVtgStaffStudyViewModel>();
                 cfg.CreateMap<StudyVisitTasks, VisitScheduleViewModel> ();
                 cfg.CreateMap<VisitSchedule, VisitScheduleViewModel>();
                 cfg.CreateMap<VaccinationsByVisit, VaccinationsByVisitViewModel>();

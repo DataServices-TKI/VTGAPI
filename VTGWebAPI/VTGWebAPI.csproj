@@ -275,6 +275,7 @@
     <Compile Include="ViewModels\ReferenceListViewModel.cs" />
     <Compile Include="ViewModels\SamplesByVisitViewModel.cs" />
     <Compile Include="ViewModels\StudyMapper.cs" />
+    <Compile Include="ViewModels\StudyRoleViewModel.cs" />
     <Compile Include="ViewModels\StudyViewModel.cs" />
     <Compile Include="ViewModels\TravelReimbursementsByVisitViewModel.cs" />
     <Compile Include="ViewModels\UserMapper.cs" />
@@ -475,6 +476,7 @@
     <Compile Include="ViewModels\VaccinationsByVisitViewModel.cs" />
     <Compile Include="ViewModels\VisitScheduleViewModel.cs" />
     <Compile Include="ViewModels\VisitViewModel.cs" />
+    <Compile Include="ViewModels\VtgStaffViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />

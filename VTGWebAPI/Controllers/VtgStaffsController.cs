@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -18,10 +19,13 @@ namespace VTGWebAPI.Controllers
         private VTGEntities db = new VTGEntities();
 
         // GET: api/VtgStaffs
-        public IEnumerable<VtgStaff> GetVtgStaffs()
+        public IEnumerable<VtgStaffViewModel> GetVtgStaffs()
         {
-            return db.VtgStaffs;
+            var staff=db.VtgStaffs.ToList();
+            var staffVM = Mapper.Map<List<VtgStaff>, IEnumerable<VtgStaffViewModel>>(staff);
+            return staffVM;
         }
+       
 
         [HttpGet]
         [Route("api/VtgStaffs/AuthenticateUser")]
@@ -53,7 +57,7 @@ namespace VTGWebAPI.Controllers
             user = mapper.GetuserViewModel(vtgStaff);
             return user;
         }
-
+              
         // PUT: api/VtgStaffs/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutVtgStaff(int id, VtgStaff vtgStaff)
@@ -103,7 +107,6 @@ namespace VTGWebAPI.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = vtgStaff.VtgStaffId }, vtgStaff);
         }
-
         
 
         // DELETE: api/VtgStaffs/5
@@ -122,6 +125,74 @@ namespace VTGWebAPI.Controllers
             return Ok(vtgStaff);
         }
 
+        #region VTGStaffRoles
+        //GET: api/VtgStaffs/Conatcts
+        [Route("api/VtgStaffs/Conatcts")]
+        public IEnumerable<StudyRoleViewModel> GetVtgStaffContactRoles()
+        {
+            var roles = db.StudyRoles.ToList();
+            var rolesVM = Mapper.Map<List<StudyRole>, IEnumerable<StudyRoleViewModel>>(roles);
+            return rolesVM;
+        }
+
+        [Route("api/VtgStaffs/Conatcts/{id}")]
+        public LinkVtgStaffStudyViewModel GetVtgStaffRole(int id)
+        {
+            var vtgStaffRole = db.LinkVtgStaffStudies.Find(id);
+            var vtgStaffRoleVM = Mapper.Map<LinkVtgStaffStudy, LinkVtgStaffStudyViewModel>(vtgStaffRole);
+            return vtgStaffRoleVM;
+        }
+
+        [Route("api/VtgStaffs/Conatcts/{id}")]
+        public IHttpActionResult PutStudyRoles(int id, LinkVtgStaffStudyViewModel vtgStaffRoleVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (id != vtgStaffRoleVM.VtgStaffStudyLinkId)
+            {
+                return BadRequest();
+            }
+
+            var vtgStaffRole = Mapper.Map<LinkVtgStaffStudyViewModel, LinkVtgStaffStudy>(vtgStaffRoleVM);
+
+            db.Entry(vtgStaffRole).State = EntityState.Modified;
+            db.SaveChanges();
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        [Route("api/VtgStaffs/Conatcts")]
+        public IHttpActionResult PostLinkVtgStaffStudy(LinkVtgStaffStudyViewModel vtgStaffRole)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var vtgStaff = Mapper.Map<LinkVtgStaffStudyViewModel, LinkVtgStaffStudy>(vtgStaffRole);
+            db.LinkVtgStaffStudies.Add(vtgStaff);
+            db.SaveChanges();
+
+            return CreatedAtRoute("DefaultApi", new { id = vtgStaff.VtgStaffId }, vtgStaff);
+        }
+
+        [Route("api/VtgStaffs/Conatcts/{id}")]
+        public IHttpActionResult DeleteVtgStaffRole(int id)
+        {
+            var vtgStaffRole = db.LinkVtgStaffStudies.Find(id);
+            if (vtgStaffRole == null)
+            {
+                return NotFound();
+            }
+
+            db.LinkVtgStaffStudies.Remove(vtgStaffRole);
+            db.SaveChanges();
+
+            return Ok(vtgStaffRole);
+        }
+        
+        #endregion
         protected override void Dispose(bool disposing)
         {
             if (disposing)

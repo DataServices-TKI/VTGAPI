@@ -20,7 +20,7 @@ namespace VTGWebAPI
 
             config.Formatters.Remove(config.Formatters.XmlFormatter);
 
-            //var cors = new EnableCorsAttribute("https://uat.telethonkids.org.au", "*", "*");
+          // var cors = new EnableCorsAttribute("http://vtguat.telethonkids.org.au", "*", "*");
             
            var cors = new EnableCorsAttribute("http://localhost:4200", "*", "*");
           //  var cors = new EnableCorsAttribute("https://dataservices-tki.github.io", "*", "*");
