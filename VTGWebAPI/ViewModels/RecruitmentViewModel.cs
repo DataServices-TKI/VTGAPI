@@ -13,9 +13,9 @@ namespace VTGWebAPI.ViewModels
         public DateTime? Dob { get; set; }
         public DateTime? InterviewDate { get; set; }
         public string RecruitmentSource { get; set; }
-        public int? IsEligible { get; set; }
+        public bool? IsEligible { get; set; }
         public string ReasonIfNotEligible { get; set; }
-        public int? IsEnrolled { get; set; }
+        public bool? IsEnrolled { get; set; }
         public string StudyNumber { get; set; }
         public int? EnquiryNumber { get; set; }
     }

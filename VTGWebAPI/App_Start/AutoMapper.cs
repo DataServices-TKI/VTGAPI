@@ -19,7 +19,9 @@ namespace VTGWebAPI
                 cfg.CreateMap<StudyDetailById, StudyViewModel>();
                 cfg.CreateMap<StudyViewModel, Study>();
                 cfg.CreateMap<Recruitment, RecruitmentViewModel>();
+                cfg.CreateMap<RecruitmentViewModel, Recruitment>();
                 cfg.CreateMap<InformedConsent, InformedConsentViewModel>();
+                cfg.CreateMap<InformedConsentViewModel, InformedConsent>();
                 cfg.CreateMap<StaffRolesForStudy,LinkVtgStaffStudyViewModel>();
                 cfg.CreateMap<StudyVisitTasks, VisitScheduleViewModel> ();
                 cfg.CreateMap<VisitSchedule, VisitScheduleViewModel>();

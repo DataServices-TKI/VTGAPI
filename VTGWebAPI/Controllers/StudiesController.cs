@@ -34,6 +34,27 @@ namespace VTGWebAPI.Controllers
 
 
         }
+        [Route("api/Studies/{studyId}/Consent/{id}")]
+        public InformedConsentViewModel GetConsent(int studyId, int id )
+        {    
+            #region InformedConsent
+            var informedConsent = db.InformedConsents.Where(ic => ic.StudyId == studyId && ic.InformedConsentId==id).FirstOrDefault();
+            var informedConsentViewModel = Mapper.Map<InformedConsent,InformedConsentViewModel>(informedConsent);
+           
+            #endregion
+            return informedConsentViewModel;
+        }
+
+        [Route("api/Studies/{studyId}/Recruit/{id}")]
+        public RecruitmentViewModel GetRecruitment(int studyId, int id)
+        {
+            #region Recruitment
+            var recruit = db.Recruitments.Where(ic => ic.StudyId == studyId && ic.RecruitmentId == id).FirstOrDefault();
+            var recruitVM = Mapper.Map<Recruitment, RecruitmentViewModel>(recruit);
+
+            #endregion
+            return recruitVM;
+        }
 
         // GET: api/Studies/5
         [ResponseType(typeof(Study))]
@@ -41,6 +62,8 @@ namespace VTGWebAPI.Controllers
         {
             var study = db.GetStudyDetailById(id).FirstOrDefault();
             var studyViewModel = Mapper.Map<StudyDetailById, StudyViewModel>(study);
+
+
 
             #region SubjectAgeCriteria
             if (!string.IsNullOrEmpty(studyViewModel.SubjectMinAgeInequality))
@@ -132,6 +155,49 @@ namespace VTGWebAPI.Controllers
             return studyViewModel;
         }
 
+        [Route("api/Studies/InformedConsents/{id}")]     
+        public IHttpActionResult PutStudyConsent(int id, InformedConsentViewModel informedConsent)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (id != informedConsent.InformedConsentId)
+            {
+                return BadRequest();
+            }
+
+            var consent = Mapper.Map<InformedConsentViewModel, InformedConsent>(informedConsent);
+
+            db.Entry(consent).State = EntityState.Modified;           
+            db.SaveChanges();
+            
+           
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        [Route("api/Studies/Recruitments/{id}")]
+        public IHttpActionResult PutStudyRecruitment(int id, RecruitmentViewModel recruitVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (id != recruitVM.RecruitmentId)
+            {
+                return BadRequest();
+            }
+
+            var recruit = Mapper.Map<RecruitmentViewModel, Recruitment>(recruitVM);
+
+            db.Entry(recruit).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+
         // PUT: api/Studies/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutStudy(int id, StudyViewModel studyViewModel)
@@ -154,18 +220,12 @@ namespace VTGWebAPI.Controllers
                 }
                 else if (studyViewModel.GreaterThan )
                 {
-                    studyViewModel.SubjectMinAgeInequality = "GT";
-                }
+                    studyViewModel.SubjectMinAgeInequality = "GT";               }
 
             //Age Min
 
-
                 var minMonth =(double) studyViewModel.MinMonth/12;               
                 studyViewModel.SubjectMinAgeInYears = (double)(studyViewModel.MinYear) + minMonth;
-                
-
-
-
            
                 if (studyViewModel.LessThanEquals)
                 {
@@ -253,6 +313,38 @@ namespace VTGWebAPI.Controllers
             return CreatedAtRoute("DefaultApi", new { id = study.StudyId }, study);
         }
 
+        ///Studies/InformedConsents
+        [Route("api/Studies/InformedConsents")]
+        public IHttpActionResult PostStudyConsent(InformedConsentViewModel informedConsent)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var consent = Mapper.Map<InformedConsentViewModel, InformedConsent>(informedConsent);
+
+            db.InformedConsents.Add(consent);
+            db.SaveChanges();
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        ///Studies/InformedConsents
+        [Route("api/Studies/Recruitments")]
+        public IHttpActionResult PostStudyRecruitment(RecruitmentViewModel recruitmentVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var recruitment = Mapper.Map<RecruitmentViewModel, Recruitment>(recruitmentVM);
+
+            db.Recruitments.Add(recruitment);
+            db.SaveChanges();
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
         // DELETE: api/Studies/5
         [ResponseType(typeof(Study))]
         public IHttpActionResult DeleteStudy(int id)
@@ -269,6 +361,56 @@ namespace VTGWebAPI.Controllers
             return Ok(study);
         }
 
+        [Route("api/Studies/{id}/visit/{visitId}")]
+        public IHttpActionResult DeleteStudyVisit(int id, int visitId)
+        {
+            Study study = db.Studies.Find(id);
+
+            var visitSchedule = db.VisitSchedules.Where(s=>s.StudyId==id && s.VisitScheduleId==visitId).FirstOrDefault();
+            if (visitSchedule == null)
+            {
+                return NotFound();
+            }
+
+            db.VisitSchedules.Remove(visitSchedule);
+            db.SaveChanges();
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        [Route("api/Studies/{id}/consent/{consentId}")]
+        public IHttpActionResult DeleteStudyConsnent(int id, int consentId)
+        {
+          
+
+            var consent = db.InformedConsents.Where(s => s.StudyId == id && s.InformedConsentId == consentId).FirstOrDefault();
+            if (consent == null)
+            {
+                return NotFound();
+            }
+
+            db.InformedConsents.Remove(consent);
+            db.SaveChanges();
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        [Route("api/Studies/{id}/recruit/{recruitId}")]
+        public IHttpActionResult DeleteStudyRecruit(int id, int recruitId)
+        {
+
+
+            var recruit = db.Recruitments.Where(r => r.StudyId == id && r.RecruitmentId == recruitId).FirstOrDefault();
+            if (recruit == null)
+            {
+                return NotFound();
+            }
+
+            db.Recruitments.Remove(recruit);
+            db.SaveChanges();
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
