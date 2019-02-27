@@ -16,6 +16,8 @@ namespace VTGWebAPI
                 cfg.CreateMap<Correspondence, CorrespondanceViewModel>();
                 cfg.CreateMap<MedicalHistory, MedicalHistoryViewModel>();
                 cfg.CreateMap<ParticipantConsentById, LinkedInformedConsentViewModel>();
+                cfg.CreateMap<LinkVtgStaffStudyViewModel, LinkSubjectStudyInformedConsent>();
+                cfg.CreateMap<LinkSubjectStudyInformedConsent, LinkVtgStaffStudyViewModel>();
                 cfg.CreateMap<StudyDetailById, StudyViewModel>();
                 cfg.CreateMap<StudyViewModel, Study>();
                 cfg.CreateMap<Recruitment, RecruitmentViewModel>();

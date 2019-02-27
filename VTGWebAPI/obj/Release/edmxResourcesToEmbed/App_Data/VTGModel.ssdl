@@ -736,6 +736,8 @@ warning 6002: The table/view 'DevtDbVaccineTrails.dbo.DatabaseSettings' does not
     <Property Name="VisitCompletedYN" Type="int" Nullable="false" />
     <Property Name="VisitOverseenBy" Type="int" />
     <Property Name="IdealDate" Type="datetime" />
+    <Property Name="EarliestDate" Type="date" />
+    <Property Name="LatestDate" Type="date" />
   </EntityType>
   <EntityType Name="VisitSchedule">
     <Key>

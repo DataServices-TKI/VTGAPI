@@ -82,4 +82,3 @@ C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\S
 C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\AutoMapper.pdb
 C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\AutoMapper.xml
 C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\System.ValueTuple.xml
-C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\obj\Release\VTGWebAPI.csprojResolveAssemblyReference.cache

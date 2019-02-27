@@ -271,14 +271,123 @@ namespace VTGWebAPI.Controllers
             linkedStudy.StudyId = participant.StudyId;
             db.LinkSubjectsStudies.Add(linkedStudy);
 
-        
-
-
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = person.PersonId }, person);
         }
 
+        [Route("api/Participants/InformedConsents")]         
+        public IHttpActionResult PostPateintConsents(LinkedInformedConsentViewModel informedConsentVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var informedConsent = new LinkSubjectStudyInformedConsent()
+            {
+                SubjectStudyLinkId = informedConsentVM.SubjectStudyLinkId,
+                InformedConsentId = informedConsentVM.InformedConsentId,
+                VerbalConsentDate = informedConsentVM.VerbalConsentDate,
+                VerbalConsentBy = informedConsentVM.VerbalConsentBy,
+                WrittenConsentDate = informedConsentVM.WrittenConsentDate,
+                WrittenConsentBy = informedConsentVM.WrittenConsentBy,
+                Status = informedConsentVM.Status
+
+            };
+            
+           // var informedConsent = Mapper.Map<LinkedInformedConsentViewModel, LinkSubjectStudyInformedConsent>(informedConsentVM);
+            db.LinkSubjectStudyInformedConsents.Add(informedConsent);
+            db.SaveChanges();
+
+            return Ok(informedConsent);
+
+        }
+
+        [Route("api/Participants/InformedConsents/{id}")]
+        public IHttpActionResult PutPateintConsent(int id, LinkedInformedConsentViewModel informedConsentVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != informedConsentVM.SubjectStudyInformedConsentLinkId)
+            {
+                return BadRequest();
+            }
+
+            var informedConsent = new LinkSubjectStudyInformedConsent()
+            {
+                SubjectStudyInformedConsentLinkId = informedConsentVM.SubjectStudyInformedConsentLinkId,
+                SubjectStudyLinkId = informedConsentVM.SubjectStudyLinkId,
+                InformedConsentId = informedConsentVM.InformedConsentId,
+                VerbalConsentDate = informedConsentVM.VerbalConsentDate,
+                VerbalConsentBy = informedConsentVM.VerbalConsentBy,
+                WrittenConsentDate = informedConsentVM.WrittenConsentDate,
+                WrittenConsentBy = informedConsentVM.WrittenConsentBy,
+                Status = informedConsentVM.Status
+
+            };
+
+            db.Entry(informedConsent).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!PersonExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        
+
+    }
+
+        [Route("api/Participants/InformedConsents/{id}")]
+        public LinkedInformedConsentViewModel GetPateintConsentDetail(int id)
+        {
+            var consent = db.LinkSubjectStudyInformedConsents.Find(id);
+            // var consentVM = Mapper.Map<LinkSubjectStudyInformedConsent, LinkedInformedConsentViewModel>(consent);
+            var consentVM = new LinkedInformedConsentViewModel();
+            
+                consentVM.SubjectStudyInformedConsentLinkId = consent.SubjectStudyInformedConsentLinkId;
+                consentVM.SubjectStudyLinkId = consent.SubjectStudyLinkId;
+                consentVM.InformedConsentId = consent.InformedConsentId;
+                consentVM.Status = consent.Status;
+                consentVM.VerbalConsentBy = consent.VerbalConsentBy;
+                consentVM.VerbalConsentDate = consent.VerbalConsentDate;
+                consentVM.WrittenConsentBy = consent.WrittenConsentBy;
+                consentVM.WrittenConsentDate = consent.WrittenConsentDate;
+
+           
+            return consentVM;
+        }
+
+
+        [Route("api/Participants/InformedConsents/{id}")]
+        public IHttpActionResult DeleteInformedConsent(int id)
+        {
+            LinkSubjectStudyInformedConsent consent = db.LinkSubjectStudyInformedConsents.Find(id);
+            if (consent == null)
+            {
+                return NotFound();
+            }
+
+            db.LinkSubjectStudyInformedConsents.Remove(consent);
+            db.SaveChanges();
+
+            return Ok(consent);
+
+        }
         // DELETE: api/Participant/5
         [ResponseType(typeof(Person))]
         public IHttpActionResult DeletePerson(int id)

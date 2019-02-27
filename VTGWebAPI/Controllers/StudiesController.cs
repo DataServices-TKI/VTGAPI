@@ -31,9 +31,20 @@ namespace VTGWebAPI.Controllers
                     studyListViewModel.Add(mapper.GetStudyViewModel(s));
                 }
             return studyListViewModel;
-
-
         }
+
+
+        [Route("api/Studies/{studyId}/Consent")]
+        public IEnumerable<InformedConsentViewModel> GetConsentList(int studyId)
+        {
+            #region InformedConsent
+            var informedConsents = db.InformedConsents.Where(ic => ic.StudyId == studyId).ToList();
+            var informedConsentsViewModel = Mapper.Map<List<InformedConsent>, IEnumerable<InformedConsentViewModel>>(informedConsents);
+
+            #endregion
+            return informedConsentsViewModel;
+        }
+
         [Route("api/Studies/{studyId}/Consent/{id}")]
         public InformedConsentViewModel GetConsent(int studyId, int id )
         {    
