@@ -757,6 +757,8 @@
     <EntitySetMapping Name="Visits">
       <EntityTypeMapping TypeName="VTGModel.Visit">
         <MappingFragment StoreEntitySet="Visits">
+          <ScalarProperty Name="LatestDate" ColumnName="LatestDate" />
+          <ScalarProperty Name="EarliestDate" ColumnName="EarliestDate" />
           <ScalarProperty Name="VisitId" ColumnName="VisitId" />
           <ScalarProperty Name="SubjectStudyLinkId" ColumnName="SubjectStudyLinkId" />
           <ScalarProperty Name="VisitScheduleId" ColumnName="VisitScheduleId" />

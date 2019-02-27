@@ -741,6 +741,8 @@ warning 6002: The table/view 'DevtDbVaccineTrails.dbo.DatabaseSettings' does not
           <Property Name="VisitCompletedYN" Type="int" Nullable="false" />
           <Property Name="VisitOverseenBy" Type="int" />
           <Property Name="IdealDate" Type="datetime" />
+          <Property Name="EarliestDate" Type="date" />
+          <Property Name="LatestDate" Type="date" />
         </EntityType>
         <EntityType Name="VisitSchedule">
           <Key>
@@ -2636,6 +2638,8 @@ warning 6002: The table/view 'DevtDbVaccineTrails.dbo.GetRecruitmentSource' does
           <NavigationProperty Name="TravelReimbursements" Relationship="Self.FK__TravelRei__Visit__5BAD9CC8" FromRole="Visits" ToRole="TravelReimbursements" />
           <NavigationProperty Name="Vaccinations" Relationship="Self.FK__Vaccinati__Visit__5E8A0973" FromRole="Visits" ToRole="Vaccinations" />
           <NavigationProperty Name="VisitSchedule" Relationship="Self.FK__Visits__VisitSch__58D1301D" FromRole="Visits" ToRole="VisitSchedule" />
+          <Property Name="EarliestDate" Type="DateTime" Precision="0" />
+          <Property Name="LatestDate" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="VisitSchedule">
           <Key>
@@ -4625,6 +4629,8 @@ warning 6002: The table/view 'DevtDbVaccineTrails.dbo.GetRecruitmentSource' does
           <EntitySetMapping Name="Visits">
             <EntityTypeMapping TypeName="VTGModel.Visit">
               <MappingFragment StoreEntitySet="Visits">
+                <ScalarProperty Name="LatestDate" ColumnName="LatestDate" />
+                <ScalarProperty Name="EarliestDate" ColumnName="EarliestDate" />
                 <ScalarProperty Name="VisitId" ColumnName="VisitId" />
                 <ScalarProperty Name="SubjectStudyLinkId" ColumnName="SubjectStudyLinkId" />
                 <ScalarProperty Name="VisitScheduleId" ColumnName="VisitScheduleId" />

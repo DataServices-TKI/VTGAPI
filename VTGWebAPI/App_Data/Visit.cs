@@ -38,6 +38,8 @@ namespace VTGWebAPI.App_Data
         public int VisitCompletedYN { get; set; }
         public Nullable<int> VisitOverseenBy { get; set; }
         public Nullable<System.DateTime> IdealDate { get; set; }
+        public Nullable<System.DateTime> EarliestDate { get; set; }
+        public Nullable<System.DateTime> LatestDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AdverseEvent> AdverseEvents { get; set; }

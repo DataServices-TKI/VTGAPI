@@ -23,13 +23,11 @@ namespace VTGWebAPI.ViewModels
         public DateTime? IdealDate { get; set; }
 
         public string Participatnt { get; set;}
-        public string StudyID { get; set; }
+        public int PersonId { get; set; }
+        public int StudyID { get; set; }
+        public DateTime VisitDate { get; set; }
         public int Status { get; set; }
-        public DateTime Visit1 { get; set; }
-        public DateTime Visit2 { get; set; }
-        public DateTime Visit3 { get; set; }
-        public DateTime Visit4 { get; set; }
-        public DateTime Visit5 { get; set; }
-        public DateTime Visit6 { get; set; }    
+        public DateTime? EarliestDate { get; set; }
+        public DateTime? LatestDate { get; set; }
     }
 }

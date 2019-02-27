@@ -66,9 +66,9 @@ namespace VTGWebAPI.ViewModels
             participantViewModel.ConfirmedBy                                         = participantModel.ConfirmedBy;
             participantViewModel.PhoneHome                                           = participantModel.PhoneHome;
             participantViewModel.HouseholdAddressee                                  = participantModel.HouseholdAddressee;
-          //  participantViewModel.PhoneHome = participantModel.PhoneHome;
+            //  participantViewModel.PhoneHome = participantModel.PhoneHome;
 
-
+            participantViewModel.SubjectStudyLinkId                                  =participantModel.SubjectStudyLinkId;
             participantViewModel.StudyParticipationStatus                            = participantModel.Status;
             participantViewModel.OfficialSubjectStudyNum                             = participantModel.OfficialSubjectStudyNum;
           //  participantViewModel.VisitStream                                         = participantModel.VisitStream;

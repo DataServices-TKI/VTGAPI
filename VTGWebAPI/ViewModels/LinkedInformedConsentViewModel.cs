@@ -19,6 +19,7 @@ namespace VTGWebAPI.ViewModels
         public int? VerbalConsentBy { get; set; }
         public string VerbalConsentByName { get; set; }
         public DateTime? WrittenConsentDate { get; set; }
+        public string WrittenConsenByName { get; set; }
         public int? WrittenConsentBy { get; set; }
         public string Name { get; set; }
 

@@ -83,7 +83,19 @@ namespace VTGWebAPI.Controllers
                 var ic = db.GetParticipantConsentById(participant.PersonId).Where(s=>s.StudyId==participant.StudyId).ToArray();
                 var informedConsents = Mapper.Map< ParticipantConsentById[], IEnumerable<LinkedInformedConsentViewModel>>(ic);
 
-                participant.InformedConsents = informedConsents.ToList();
+                foreach (var i in informedConsents)
+                {
+                    if (i.WrittenConsentBy.HasValue)
+                    {
+                        i.WrittenConsenByName = db.uspGetStaffFullNameById(i.WrittenConsentBy.Value).FirstOrDefault();
+                    }
+                    if (i.VerbalConsentBy.HasValue)
+                    {
+                        i.VerbalConsentByName = db.uspGetStaffFullNameById(i.VerbalConsentBy.Value).FirstOrDefault();
+                    }
+                }
+
+                    participant.InformedConsents = informedConsents.ToList();
                 
 
                 #endregion

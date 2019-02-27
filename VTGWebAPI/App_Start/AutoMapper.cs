@@ -29,6 +29,8 @@ namespace VTGWebAPI
                 cfg.CreateMap<LinkVtgStaffStudy, LinkVtgStaffStudyViewModel>();
                 cfg.CreateMap<StudyVisitTasks, VisitScheduleViewModel> ();
                 cfg.CreateMap<VisitSchedule, VisitScheduleViewModel>();
+                cfg.CreateMap<Visit, VisitViewModel>();
+                cfg.CreateMap<VisitViewModel,Visit>();
                 cfg.CreateMap<VaccinationsByVisit, VaccinationsByVisitViewModel>();
                 cfg.CreateMap<SamplesByVisit, SamplesByVisitViewModel>();
                 cfg.CreateMap<TravelReimbursementsByVisit, TravelReimbursementsByVisitViewModel>();

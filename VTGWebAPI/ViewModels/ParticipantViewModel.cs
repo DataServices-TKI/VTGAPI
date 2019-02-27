@@ -68,6 +68,7 @@ namespace VTGWebAPI.ViewModels
         public int? HouseholdAddressee { get; set; }
 
         //Study participation Details
+        public int SubjectStudyLinkId { get; set; }
         public String StudyParticipationStatus { get; set; }
         public String VisitStream { get; set; }
         public String Reason { get; set; }
