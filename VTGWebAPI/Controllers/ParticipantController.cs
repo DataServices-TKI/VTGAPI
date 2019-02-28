@@ -101,8 +101,7 @@ namespace VTGWebAPI.Controllers
                 #endregion
                 //Corresponsdance 
                 #region Corresponsdance
-                var userCorrespondance = db.Correspondences.Where(c => c.StudyId == studyId && c.PersonId == id).ToArray();
-                
+                var userCorrespondance = db.Correspondences.Where(c => c.StudyId == studyId && c.PersonId == id).ToArray();                
                
                  var correspondance = Mapper.Map<Correspondence[], IEnumerable<CorrespondanceViewModel>>(userCorrespondance);
                
@@ -139,6 +138,25 @@ namespace VTGWebAPI.Controllers
                         participant.MedicalHistory = medicalHistory;
                 #endregion
                 #region Practices/Doctors
+
+                    var linkedDocPractice = db.LinkSubjectDoctorPractices.Where(d => d.PersonId == id).ToList();
+                    var linkedDocPracticeVM = Mapper.Map<List<LinkSubjectDoctorPractice>,IEnumerable<LinkedSubjectDoctorPracticeViewModel>>(linkedDocPractice);
+
+                foreach(var link in linkedDocPracticeVM)
+                {                   
+                    var practiceDocs = db.LinkDoctorPractices.Where(p => p.DoctorPracticeLinkId == link.DoctorPracticeLinkId).FirstOrDefault();
+
+                    //PracticeName
+                    link.Practice = db.Practices.Where(p => p.PracticeId == practiceDocs.PracticeId).Select(p => p.NamePractice).FirstOrDefault();
+                    link.PracticeId = practiceDocs.PracticeId;
+                    //Doctor Detail
+                    var doctor = db.Doctors.Where(d => d.DoctorId == practiceDocs.DoctorId).FirstOrDefault();
+                    link.DoctorId = practiceDocs.DoctorId;
+                    link.DoctorName = doctor.Fullname;
+                    link.DoctorType = doctor.TypeDoctor;
+                }
+                participant.LinkedSubjectDoctorPractices = linkedDocPracticeVM;
+
 
                 #endregion
 
@@ -231,8 +249,7 @@ namespace VTGWebAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Participant
-    
+        // POST: api/Participant    
         public IHttpActionResult PostPerson(ParticipantViewModel participant)
         {
             if (!ModelState.IsValid)
@@ -275,6 +292,109 @@ namespace VTGWebAPI.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = person.PersonId }, person);
         }
+
+        [ResponseType(typeof(Person))]
+        public IHttpActionResult DeletePerson(int id)
+        {
+            Person person = db.People.Find(id);
+            if (person == null)
+            {
+                return NotFound();
+            }
+
+            db.People.Remove(person);
+            db.SaveChanges();
+
+            return Ok(person);
+        }
+
+
+
+
+
+        [Route("api/Participants/Correspondances")]
+        public IHttpActionResult PostPateintCorrespondence(CorrespondanceViewModel corresVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            
+            var correpondence = Mapper.Map<CorrespondanceViewModel, Correspondence>(corresVM);
+            db.Correspondences.Add(correpondence);
+            db.SaveChanges();
+
+            return Ok(correpondence);
+        }
+
+
+        [Route("api/Participants/Correspondances/{id}")]
+        public CorrespondanceViewModel GetPateintCorrespondenceDetail(int id)
+        {
+            var corres = db.Correspondences.Find(id);
+            var corresVM = Mapper.Map<Correspondence, CorrespondanceViewModel>(corres);
+
+            return corresVM;
+        }
+
+
+        [Route("api/Participants/Correspondances/{id}")]
+        public IHttpActionResult PutPateintCorrespondence(int id, CorrespondanceViewModel corresVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != corresVM.CorrespondenceId)
+            {
+                return BadRequest();
+            }
+
+            var corres = Mapper.Map<CorrespondanceViewModel, Correspondence>(corresVM);
+
+            db.Entry(corres).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!PersonExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+
+
+        }
+
+        [Route("api/Participants/Correspondances/{id}")]
+        public IHttpActionResult DeleteInformedCorrespondence(int id)
+        {
+            Correspondence corres = db.Correspondences.Find(id);
+            if (corres == null)
+            {
+                return NotFound();
+            }
+
+            db.Correspondences.Remove(corres);
+            db.SaveChanges();
+
+            return Ok(corres);
+
+        }
+
+
+
+
 
         [Route("api/Participants/InformedConsents")]         
         public IHttpActionResult PostPateintConsents(LinkedInformedConsentViewModel informedConsentVM)
@@ -388,21 +508,44 @@ namespace VTGWebAPI.Controllers
             return Ok(consent);
 
         }
-        // DELETE: api/Participant/5
-        [ResponseType(typeof(Person))]
-        public IHttpActionResult DeletePerson(int id)
+
+
+
+        //Linked Doctors and Practices
+
+        [Route("api/Participants/LinkedDoctorPractice")]
+        public IHttpActionResult PostPateintLinkDoctorPractice(LinkedSubjectDoctorPracticeViewModel linkedDocVM)
         {
-            Person person = db.People.Find(id);
-            if (person == null)
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            linkedDocVM.DoctorPracticeLinkId = db.LinkDoctorPractices.Where(l => l.DoctorId == linkedDocVM.DoctorId && l.PracticeId == linkedDocVM.PracticeId).Select(l => l.DoctorPracticeLinkId).FirstOrDefault();
+
+            var linkedDocPrac = Mapper.Map<LinkedSubjectDoctorPracticeViewModel, LinkSubjectDoctorPractice>(linkedDocVM);
+            db.LinkSubjectDoctorPractices.Add(linkedDocPrac);
+            db.SaveChanges();
+
+            return Ok(linkedDocPrac);
+
+        }
+
+        [Route("api/Participants/LinkedDoctorPractice/{id}")]
+        public IHttpActionResult DeleteLinkedPracticeDoctor(int id)
+        {
+            LinkSubjectDoctorPractice linkedDoc = db.LinkSubjectDoctorPractices.Find(id);
+            if (linkedDoc == null)
             {
                 return NotFound();
             }
 
-            db.People.Remove(person);
+            db.LinkSubjectDoctorPractices.Remove(linkedDoc);
             db.SaveChanges();
 
-            return Ok(person);
+            return Ok(linkedDoc);
+
         }
+
 
         protected override void Dispose(bool disposing)
         {

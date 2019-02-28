@@ -14,6 +14,7 @@ namespace VTGWebAPI
         {
             Mapper.Initialize(cfg => {
                 cfg.CreateMap<Correspondence, CorrespondanceViewModel>();
+                cfg.CreateMap<CorrespondanceViewModel, Correspondence>();
                 cfg.CreateMap<MedicalHistory, MedicalHistoryViewModel>();
                 cfg.CreateMap<ParticipantConsentById, LinkedInformedConsentViewModel>();
                 cfg.CreateMap<LinkVtgStaffStudyViewModel, LinkSubjectStudyInformedConsent>();
@@ -39,6 +40,8 @@ namespace VTGWebAPI
                 cfg.CreateMap<QuestionnairesByVisit, QuestionnaireByVisitViewModel>();
                 cfg.CreateMap<Practice, PracticesViewModel>();
                 cfg.CreateMap<Doctor, DoctorsViewModel>();
+                cfg.CreateMap<LinkSubjectDoctorPractice, LinkedSubjectDoctorPracticeViewModel>();
+                cfg.CreateMap<LinkedSubjectDoctorPracticeViewModel, LinkSubjectDoctorPractice>();
             });
 
           

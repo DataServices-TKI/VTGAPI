@@ -81,6 +81,7 @@ namespace VTGWebAPI.ViewModels
         public IEnumerable<CorrespondanceViewModel> Correspondance { get; set; }
         public IEnumerable<MedicalHistoryViewModel> MedicalHistory { get; set; }
         public IEnumerable<LinkedInformedConsentViewModel> InformedConsents { get; set; }
+        public IEnumerable<LinkedSubjectDoctorPracticeViewModel> LinkedSubjectDoctorPractices { get; set; }
 
     }
 }
