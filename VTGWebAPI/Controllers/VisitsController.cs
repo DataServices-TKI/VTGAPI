@@ -42,6 +42,43 @@ namespace VTGWebAPI.Controllers
             Visit visit = db.Visits.Find(id);
             var visitViewModel = Mapper.Map<Visit, VisitViewModel>(visit);
 
+            #region Vaccines
+
+                var vaccines = db.Vaccinations.Where(v => v.VisitId == visit.VisitId).ToList();
+                var vaccineVM = Mapper.Map<List<Vaccination>, IEnumerable<VaccineViewModel>>(vaccines);
+
+            visitViewModel.VaccineList = vaccineVM;
+
+            #endregion
+
+            #region Samples
+                var samples = db.Samples.Where(v => v.VisitId == visit.VisitId).ToList();
+                var samplesVM = Mapper.Map<List<Sample>, IEnumerable<SamplesViewModel>>(samples);
+                visitViewModel.SamplesList = samplesVM;
+            #endregion
+
+            #region TravelReimbursement
+            var travel = db.TravelReimbursements.Where(v => v.VisitId == visit.VisitId).ToList();
+            var travelVM = Mapper.Map<List<TravelReimbursement>, IEnumerable<TravelReimbursementViewModel>>(travel);
+            foreach (var t in travelVM)
+            {
+                if (t.ApprovedBy.HasValue)
+                {
+                    var staff = db.VtgStaffs.Find(t.ApprovedBy.Value);
+                    t.ApprovedByName = staff.Surname + ',' + staff.Firstname;
+                }
+              
+            }
+            visitViewModel.TravelReimbursementList = travelVM;
+            #endregion
+
+            #region Questionnaire
+            var questions = db.Questionnaires.Where(v => v.VisitId == visit.VisitId).ToList();
+            var questionsVM = Mapper.Map<List<Questionnaire>, IEnumerable<QuestionViewModel>>(questions);
+            visitViewModel.QuestionList = questionsVM;
+            #endregion
+
+
             return visitViewModel;
 
         }
@@ -145,6 +182,73 @@ namespace VTGWebAPI.Controllers
             return CreatedAtRoute("DefaultApi", new { id = visitVM.VisitId }, visitVM);
         }
 
+        [Route("api/Visits/{id}/Vaccines")]
+        public IHttpActionResult PostVisitVaccine(int id,VaccineViewModel vaccineVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            vaccineVM.Description = db.VaccinationTypes.Find(vaccineVM.TypeVaccinationId).Description;
+            var vaccine = Mapper.Map<VaccineViewModel,Vaccination>(vaccineVM);
+           
+            db.Vaccinations.Add(vaccine);
+            db.SaveChanges();
+
+            return Ok(vaccineVM);
+
+        }
+
+        [Route("api/Visits/{id}/Samples")]
+        public IHttpActionResult PostVisitSample(int id, SamplesViewModel sampleVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            sampleVM.Description = db.SampleTypes.Find(sampleVM.TypeSampleId).Description;
+            var sample = Mapper.Map<SamplesViewModel, Sample>(sampleVM);
+
+            db.Samples.Add(sample);
+            db.SaveChanges();
+
+
+            return Ok(sampleVM);
+
+        }
+
+        [Route("api/Visits/{id}/Questionnaires")]
+        public IHttpActionResult PostVisitQuestionnaires(int id, QuestionViewModel questionVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            questionVM.Description = db.QuestionnaireTypes.Find(questionVM.TypeQuestionnaireId).Description;
+            var question = Mapper.Map<QuestionViewModel, Questionnaire>(questionVM);
+
+            db.Questionnaires.Add(question);
+            db.SaveChanges();
+            return   Ok(questionVM);
+        }
+
+        [Route("api/Visits/{id}/TravelReimbursements")]
+        public IHttpActionResult PostVisitTravelReimbursements(int id,TravelReimbursementViewModel travelVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+           
+            var travel = Mapper.Map<TravelReimbursementViewModel, TravelReimbursement>(travelVM);
+
+            db.TravelReimbursements.Add(travel);
+            db.SaveChanges();
+
+            return Ok(travelVM);
+
+        }
+
         private DateTime? GetEarliestDate(DateTime? visitDate,int subjectStudyLinkId,int VisitScheduleId )
         {
 
@@ -177,6 +281,8 @@ namespace VTGWebAPI.Controllers
 
 
         }
+
+
         private DateTime? GetLatestDate(DateTime? visitDate, int? subjectStudyLinkId, int VisitScheduleId)
         {
             var scheduledVisit = db.VisitSchedules.Find(VisitScheduleId);

@@ -42,6 +42,17 @@ namespace VTGWebAPI
                 cfg.CreateMap<Doctor, DoctorsViewModel>();
                 cfg.CreateMap<LinkSubjectDoctorPractice, LinkedSubjectDoctorPracticeViewModel>();
                 cfg.CreateMap<LinkedSubjectDoctorPracticeViewModel, LinkSubjectDoctorPractice>();
+                cfg.CreateMap<Vaccination, VaccineViewModel>();
+                cfg.CreateMap<VaccineViewModel, Vaccination>();
+                cfg.CreateMap<Sample, SamplesViewModel>();
+                cfg.CreateMap<SamplesViewModel, Sample>();
+                cfg.CreateMap<TravelReimbursement, TravelReimbursementViewModel>();
+                cfg.CreateMap<TravelReimbursementViewModel, TravelReimbursement>();
+                cfg.CreateMap<Questionnaire, QuestionViewModel>();
+                cfg.CreateMap<QuestionViewModel, Questionnaire>();
+                cfg.CreateMap<VaccinationType, VaccineTypesViewModel>();
+                cfg.CreateMap<SampleType, SampleTypeViewModel>();
+                cfg.CreateMap<QuestionnaireType, QuestionnaireTypeViewModel>();
             });
 
           

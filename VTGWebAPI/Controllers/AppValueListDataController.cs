@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -10,6 +11,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using VTGWebAPI.App_Data;
+using VTGWebAPI.ViewModels;
 
 namespace VTGWebAPI.Controllers
 {
@@ -114,6 +116,33 @@ namespace VTGWebAPI.Controllers
 
             return Ok(appValueListData);
         }
+
+        
+          [Route("api/AppValueListData/Vaccines")]
+        public IEnumerable<VaccineTypesViewModel> GetVaccineTypes()
+        {
+            var vaccineTpes = db.VaccinationTypes.ToList();
+            var vaccineTypesVM = Mapper.Map<List<VaccinationType>, IEnumerable<VaccineTypesViewModel>>(vaccineTpes);
+            return vaccineTypesVM;
+
+        }
+        [Route("api/AppValueListData/Samples")]
+        public IEnumerable<SampleTypeViewModel>GetSampleTypes ()
+        {
+            var sampleTypes = db.SampleTypes.ToList();
+            var sampleTypesVM = Mapper.Map<List<SampleType>, IEnumerable<SampleTypeViewModel>>(sampleTypes);
+            return sampleTypesVM;
+
+        }
+        [Route("api/AppValueListData/Questionnaires")]
+        public IEnumerable<QuestionnaireTypeViewModel> GetQuestionnaireTypes()
+        {
+            var questionType = db.QuestionnaireTypes.ToList();
+            var questionTypeVM = Mapper.Map<List<QuestionnaireType>, IEnumerable<QuestionnaireTypeViewModel>>(questionType);
+            return questionTypeVM;
+
+        }
+
 
         protected override void Dispose(bool disposing)
         {
