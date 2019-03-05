@@ -57,9 +57,9 @@ namespace VTGWebAPI.Controllers
             user = mapper.GetuserViewModel(vtgStaff);
             return user;
         }
-              
+
         // PUT: api/VtgStaffs/5
-        [ResponseType(typeof(void))]
+        [Route("api/VtgStaffs/{id}")]
         public IHttpActionResult PutVtgStaff(int id, VtgStaff vtgStaff)
         {
             if (!ModelState.IsValid)

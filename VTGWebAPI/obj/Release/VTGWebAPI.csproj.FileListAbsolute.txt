@@ -14,6 +14,7 @@ C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\V
 C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\VTGWebAPI.dll
 C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\VTGWebAPI.pdb
 C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\Antlr3.Runtime.dll
+C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\AutoMapper.dll
 C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\EntityFramework.dll
 C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\EntityFramework.SqlServer.dll
 C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\Microsoft.AspNet.Identity.Core.dll
@@ -33,6 +34,7 @@ C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\M
 C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\Newtonsoft.Json.dll
 C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\Owin.dll
 C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\System.Net.Http.Formatting.dll
+C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\System.ValueTuple.dll
 C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\System.Web.Cors.dll
 C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\System.Web.Helpers.dll
 C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\System.Web.Http.Cors.dll
@@ -46,10 +48,13 @@ C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\S
 C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\System.Web.WebPages.dll
 C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\System.Web.WebPages.Razor.dll
 C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\WebGrease.dll
+C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\AutoMapper.pdb
+C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\AutoMapper.xml
 C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\EntityFramework.xml
 C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\EntityFramework.SqlServer.xml
 C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\System.Net.Http.Formatting.xml
+C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\System.ValueTuple.xml
 C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\System.Web.Http.xml
 C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\System.Web.Http.Cors.xml
 C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\Newtonsoft.Json.xml
@@ -77,8 +82,4 @@ C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\M
 C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\System.Web.Http.Owin.xml
 C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\obj\Release\VTGWebAPI.dll
 C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\obj\Release\VTGWebAPI.pdb
-C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\AutoMapper.dll
-C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\System.ValueTuple.dll
-C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\AutoMapper.pdb
-C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\AutoMapper.xml
-C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\System.ValueTuple.xml
+C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\obj\Release\VTGWebAPI.csprojResolveAssemblyReference.cache

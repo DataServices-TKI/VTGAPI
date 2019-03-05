@@ -67,7 +67,17 @@ namespace VTGWebAPI.Controllers
         {
             var participant = new ParticipantViewModel();
             var mapper = new ParticipantMapper();
-            var person = db.GetParticipantById(id).Where(s=>s.StudyId==studyId).FirstOrDefault();
+            var person = new ParticipantDetail();
+            if (studyId==0)
+            {
+                
+                person = db.GetParticipantById(id).FirstOrDefault();
+            }
+            else {
+                person = db.GetParticipantById(id).Where(s => s.StudyId == studyId).FirstOrDefault();
+
+            }
+           
             if (person != null)
             {
                 participant = mapper.GetParticipantViewModel(person);
@@ -78,68 +88,74 @@ namespace VTGWebAPI.Controllers
                     var participantList = GetPeople();
                     participant.HouseholdMembers = participantList.Where(p => p.HouseholdId == participant.HouseholdId).ToList();
                 }
-
-                #region StudyParticipation
-                var ic = db.GetParticipantConsentById(participant.PersonId).Where(s=>s.StudyId==participant.StudyId).ToArray();
-                var informedConsents = Mapper.Map< ParticipantConsentById[], IEnumerable<LinkedInformedConsentViewModel>>(ic);
-
-                foreach (var i in informedConsents)
+                if (studyId!=0)
                 {
-                    if (i.WrittenConsentBy.HasValue)
+
+                    #region StudyParticipation
+                    var ic = db.GetParticipantConsentById(participant.PersonId).Where(s => s.StudyId == participant.StudyId).ToArray();
+                    var informedConsents = Mapper.Map<ParticipantConsentById[], IEnumerable<LinkedInformedConsentViewModel>>(ic);
+
+                    foreach (var i in informedConsents)
                     {
-                        i.WrittenConsenByName = db.uspGetStaffFullNameById(i.WrittenConsentBy.Value).FirstOrDefault();
+                        if (i.WrittenConsentBy.HasValue)
+                        {
+                            i.WrittenConsenByName = db.uspGetStaffFullNameById(i.WrittenConsentBy.Value).FirstOrDefault();
+                        }
+                        if (i.VerbalConsentBy.HasValue)
+                        {
+                            i.VerbalConsentByName = db.uspGetStaffFullNameById(i.VerbalConsentBy.Value).FirstOrDefault();
+                        }
                     }
-                    if (i.VerbalConsentBy.HasValue)
-                    {
-                        i.VerbalConsentByName = db.uspGetStaffFullNameById(i.VerbalConsentBy.Value).FirstOrDefault();
-                    }
-                }
 
                     participant.InformedConsents = informedConsents.ToList();
-                
 
-                #endregion
-                //Corresponsdance 
-                #region Corresponsdance
-                var userCorrespondance = db.Correspondences.Where(c => c.StudyId == studyId && c.PersonId == id).ToArray();                
-               
-                 var correspondance = Mapper.Map<Correspondence[], IEnumerable<CorrespondanceViewModel>>(userCorrespondance);
-               
-               
+
+                    #endregion
+                    //Corresponsdance 
+                    #region Corresponsdance
+                    var userCorrespondance = db.Correspondences.Where(c => c.StudyId == studyId && c.PersonId == id).ToArray();
+
+                    var correspondance = Mapper.Map<Correspondence[], IEnumerable<CorrespondanceViewModel>>(userCorrespondance);
+
+
                     foreach (var c in correspondance)
                     {
                         if (c.VtgStaffId.HasValue)
                         {
                             c.VtgStaff = db.uspGetStaffFullNameById(c.VtgStaffId.Value).FirstOrDefault();
-                    }
+                        }
 
                         if (c.FollowupStaff1.HasValue)
                         {
-                        c.FollowupStaff = db.uspGetStaffFullNameById(c.FollowupStaff1.Value).FirstOrDefault();
+                            c.FollowupStaff = db.uspGetStaffFullNameById(c.FollowupStaff1.Value).FirstOrDefault();
                         }
 
                         if (c.FollowupStaff2.HasValue)
                         {
-                            c.FollowupStaff = c.FollowupStaff +',' + db.uspGetStaffFullNameById(c.FollowupStaff2.Value).FirstOrDefault(); 
+                            c.FollowupStaff = c.FollowupStaff + ',' + db.uspGetStaffFullNameById(c.FollowupStaff2.Value).FirstOrDefault();
                         }
                     }
                     participant.Correspondance = correspondance;
-                #endregion
+                    #endregion
 
-                #region Medical History
-                        var medHistory = db.MedicalHistories.Where(m => m.PersonId == id).ToArray();
+                    #region Medical History
+                    var medHistory = db.MedicalHistories.Where(m => m.PersonId == id).ToArray();
 
-                        var medicalHistory= Mapper.Map<MedicalHistory[], IEnumerable<MedicalHistoryViewModel>>(medHistory);
-                        foreach (var md in medicalHistory)
-                        {
-                  
+                    var medicalHistory = Mapper.Map<MedicalHistory[], IEnumerable<MedicalHistoryViewModel>>(medHistory);
+                    foreach (var md in medicalHistory)
+                    {
 
-                        }
-                        participant.MedicalHistory = medicalHistory;
-                #endregion
+
+                    }
+                    participant.MedicalHistory = medicalHistory;
+                    #endregion
+
+                }
+
+
                 #region Practices/Doctors
 
-                    var linkedDocPractice = db.LinkSubjectDoctorPractices.Where(d => d.PersonId == id).ToList();
+                var linkedDocPractice = db.LinkSubjectDoctorPractices.Where(d => d.PersonId == id).ToList();
                     var linkedDocPracticeVM = Mapper.Map<List<LinkSubjectDoctorPractice>,IEnumerable<LinkedSubjectDoctorPracticeViewModel>>(linkedDocPractice);
 
                 foreach(var link in linkedDocPracticeVM)

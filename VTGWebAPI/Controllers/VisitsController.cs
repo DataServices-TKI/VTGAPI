@@ -30,8 +30,13 @@ namespace VTGWebAPI.Controllers
         {
 
             var subjectStudyLink = db.LinkSubjectsStudies.Where(l => l.PersonId == personId && l.StudyId == studyId).FirstOrDefault();
-            var visits= db.Visits.Where(v=>v.SubjectStudyLinkId==subjectStudyLink.SubjectStudyLinkId).OrderBy(v=>v.VisitOrder).ToList();
-            var visitsVM = Mapper.Map<List<Visit>, IEnumerable<VisitViewModel>>(visits);
+            var visitsVM =new List<VisitViewModel>();
+            if (subjectStudyLink!=null)
+            {
+                var visits = db.Visits.Where(v => v.SubjectStudyLinkId == subjectStudyLink.SubjectStudyLinkId).OrderBy(v => v.VisitOrder).ToList();
+                 visitsVM = Mapper.Map<List<Visit>, List<VisitViewModel>>(visits);
+            }
+            
             return visitsVM;
         }
 
