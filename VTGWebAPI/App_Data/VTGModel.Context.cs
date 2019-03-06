@@ -85,18 +85,18 @@ namespace VTGWebAPI.App_Data
         public virtual DbSet<DatabaseSetting> DatabaseSettings { get; set; }
         public virtual DbSet<GetRecruitmentSource> GetRecruitmentSources { get; set; }
     
-        public virtual ObjectResult<ParticipantDetail> GetParticipantList()
+        public virtual ObjectResult<ParticipantById> GetParticipantList()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ParticipantDetail>("GetParticipantList");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ParticipantById>("GetParticipantList");
         }
     
-        public virtual ObjectResult<ParticipantDetail> GetParticipantById(Nullable<int> id)
+        public virtual ObjectResult<ParticipantById> GetParticipantById(Nullable<int> id)
         {
             var idParameter = id.HasValue ?
                 new ObjectParameter("id", id) :
                 new ObjectParameter("id", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ParticipantDetail>("GetParticipantById", idParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ParticipantById>("GetParticipantById", idParameter);
         }
     
         public virtual ObjectResult<Study> GetStudyList()

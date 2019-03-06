@@ -13,6 +13,8 @@ namespace VTGWebAPI
         public void Mapping()
         {
             Mapper.Initialize(cfg => {
+                cfg.CreateMap<ParticipantById, ParticipantDetail>();
+                cfg.CreateMap<ParticipantDetail,ParticipantById>();
                 cfg.CreateMap<Correspondence, CorrespondanceViewModel>();
                 cfg.CreateMap<CorrespondanceViewModel, Correspondence>();
                 cfg.CreateMap<MedicalHistory, MedicalHistoryViewModel>();

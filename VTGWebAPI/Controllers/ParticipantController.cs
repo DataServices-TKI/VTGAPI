@@ -46,7 +46,8 @@ namespace VTGWebAPI.Controllers
            var Id = Convert.ToInt32(studyId);
             var participants = new List<ParticipantViewModel>();
 
-            var participantList = from p in db.GetParticipantByStudyId(Id) select p;
+            var participantDetailList = from p in db.GetParticipantByStudyId(Id) select p;
+            var participantList = Mapper.Map<IEnumerable<ParticipantDetail>, IEnumerable<ParticipantById>>(participantDetailList);
 
             var mapper = new ParticipantMapper();
             foreach (var p in participantList)
@@ -67,7 +68,8 @@ namespace VTGWebAPI.Controllers
         {
             var participant = new ParticipantViewModel();
             var mapper = new ParticipantMapper();
-            var person = new ParticipantDetail();
+            var personDetail = new ParticipantDetail();
+            var person = new ParticipantById();
             if (studyId==0)
             {
                 
@@ -88,7 +90,7 @@ namespace VTGWebAPI.Controllers
                     var participantList = GetPeople();
                     participant.HouseholdMembers = participantList.Where(p => p.HouseholdId == participant.HouseholdId).ToList();
                 }
-                if (studyId!=0)
+                if (studyId != 0)
                 {
 
                     #region StudyParticipation
@@ -148,6 +150,34 @@ namespace VTGWebAPI.Controllers
 
                     }
                     participant.MedicalHistory = medicalHistory;
+                    #endregion
+
+                }
+                else {
+                    #region Corresponsdance
+                    var userCorrespondance = db.Correspondences.Where(c => c.StudyId == null && c.PersonId == id).ToArray();
+
+                    var correspondance = Mapper.Map<Correspondence[], IEnumerable<CorrespondanceViewModel>>(userCorrespondance);
+
+
+                    foreach (var c in correspondance)
+                    {
+                        if (c.VtgStaffId.HasValue)
+                        {
+                            c.VtgStaff = db.uspGetStaffFullNameById(c.VtgStaffId.Value).FirstOrDefault();
+                        }
+
+                        if (c.FollowupStaff1.HasValue)
+                        {
+                            c.FollowupStaff = db.uspGetStaffFullNameById(c.FollowupStaff1.Value).FirstOrDefault();
+                        }
+
+                        if (c.FollowupStaff2.HasValue)
+                        {
+                            c.FollowupStaff = c.FollowupStaff + ',' + db.uspGetStaffFullNameById(c.FollowupStaff2.Value).FirstOrDefault();
+                        }
+                    }
+                    participant.Correspondance = correspondance;
                     #endregion
 
                 }
@@ -211,15 +241,20 @@ namespace VTGWebAPI.Controllers
             }
             var mapper = new ParticipantMapper();
             var person = mapper.GetParticipantModel(participant);
-            var linkedStudy = db.LinkSubjectsStudies.Where(l => l.PersonId == participant.PersonId && l.StudyId == participant.StudyId).FirstOrDefault();
-            //Study Detail
-            linkedStudy.Status = participant.StudyParticipationStatus;
-            linkedStudy.OfficialSubjectStudyNum = participant.OfficialSubjectStudyNum;
-            linkedStudy.WithdrawnReason = participant.Reason;
-            linkedStudy.WithdrawnReasonOther = participant.ReasonOther;
-            linkedStudy.EffFrom = participant.EffectiveFrom;
-            linkedStudy.EffTo = participant.EffectiveTo;
-            linkedStudy.OfficialSubjectStudyNum = participant.OfficialSubjectStudyNum;
+            if (participant.StudyId != 0)
+            {
+                var linkedStudy = db.LinkSubjectsStudies.Where(l => l.PersonId == participant.PersonId && l.StudyId == participant.StudyId).FirstOrDefault();
+                //Study Detail
+                linkedStudy.Status = participant.StudyParticipationStatus;
+                linkedStudy.OfficialSubjectStudyNum = participant.OfficialSubjectStudyNum;
+                linkedStudy.WithdrawnReason = participant.Reason;
+                linkedStudy.WithdrawnReasonOther = participant.ReasonOther;
+                linkedStudy.EffFrom = participant.EffectiveFrom;
+                linkedStudy.EffTo = participant.EffectiveTo;
+                linkedStudy.OfficialSubjectStudyNum = participant.OfficialSubjectStudyNum;
+                db.Entry(linkedStudy).State = EntityState.Modified;
+
+            }
 
             if (participant.HouseholdId.HasValue)
             {
@@ -236,15 +271,14 @@ namespace VTGWebAPI.Controllers
             household.LastConfirmedWhen = participant.LastConfirmedWhen;
             household.AddresseeId = participant.HouseholdAddressee;
             household.ActiveAddress = participant.ActiveAddress?1:0;
-
-                db.Entry(household).State = EntityState.Modified;
+            db.Entry(household).State = EntityState.Modified;
 
             }
 
 
             db.Entry(person).State = EntityState.Modified;
         
-            db.Entry(linkedStudy).State = EntityState.Modified;
+          
 
             try
             {
@@ -298,15 +332,18 @@ namespace VTGWebAPI.Controllers
             db.People.Add(person);
             db.SaveChanges();
 
-            //Add in Linked Stuby Table
-            var linkedStudy = new LinkSubjectsStudy();
-            linkedStudy.PersonId = db.People.Max(x => x.PersonId);
-            linkedStudy.StudyId = participant.StudyId;
-            db.LinkSubjectsStudies.Add(linkedStudy);
+            if (participant.StudyId != 0)
+            {
+                //Add in Linked Stuby Table
+                var linkedStudy = new LinkSubjectsStudy();
+                linkedStudy.PersonId = db.People.Max(x => x.PersonId);
+                linkedStudy.StudyId = participant.StudyId;
+                db.LinkSubjectsStudies.Add(linkedStudy);
+                db.SaveChanges();
+            }
 
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = person.PersonId }, person);
+           
+            return Ok(participant);
         }
 
         [ResponseType(typeof(Person))]

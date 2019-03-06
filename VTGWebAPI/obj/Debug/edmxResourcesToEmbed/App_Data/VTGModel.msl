@@ -860,71 +860,6 @@
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="GetStudyList" FunctionName="VTGModel.Store.uspGetStudyList" />
     <FunctionImportMapping FunctionImportName="uspGetStaffFullNameById" FunctionName="VTGModel.Store.uspGetStaffFullNameById" />
-    <FunctionImportMapping FunctionImportName="GetParticipantById" FunctionName="VTGModel.Store.uspGetParticipantById">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="VTGModel.ParticipantDetail">
-          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
-          <ScalarProperty Name="VtgNumber" ColumnName="VtgNumber" />
-          <ScalarProperty Name="UMRN" ColumnName="UMRN" />
-          <ScalarProperty Name="DbConsentYesNo" ColumnName="DbConsentYesNo" />
-          <ScalarProperty Name="DbConsentType" ColumnName="DbConsentType" />
-          <ScalarProperty Name="DbConsentDateLastConfirmed" ColumnName="DbConsentDateLastConfirmed" />
-          <ScalarProperty Name="NewsletterConsentYesNo" ColumnName="NewsletterConsentYesNo" />
-          <ScalarProperty Name="NewsletterConsentDateLastConfirmed" ColumnName="NewsletterConsentDateLastConfirmed" />
-          <ScalarProperty Name="FutureVtgResearchConsentYesNo" ColumnName="FutureVtgResearchConsentYesNo" />
-          <ScalarProperty Name="FutureVtgResearchConsentDateLastConfirmed" ColumnName="FutureVtgResearchConsentDateLastConfirmed" />
-          <ScalarProperty Name="FutureThirdPartyResearchlConsentYesNo" ColumnName="FutureThirdPartyResearchlConsentYesNo" />
-          <ScalarProperty Name="FutureThirdPartyResearchConsentDateLastConfirmed" ColumnName="FutureThirdPartyResearchConsentDateLastConfirmed" />
-          <ScalarProperty Name="Title" ColumnName="Title" />
-          <ScalarProperty Name="Surname" ColumnName="Surname" />
-          <ScalarProperty Name="Firstname" ColumnName="Firstname" />
-          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-          <ScalarProperty Name="PreferredName" ColumnName="PreferredName" />
-          <ScalarProperty Name="Gender" ColumnName="Gender" />
-          <ScalarProperty Name="Dob" ColumnName="Dob" />
-          <ScalarProperty Name="Ethnicity" ColumnName="Ethnicity" />
-          <ScalarProperty Name="PhoneWork" ColumnName="PhoneWork" />
-          <ScalarProperty Name="PhoneMobile" ColumnName="PhoneMobile" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="PreferredContactWritten" ColumnName="PreferredContactWritten" />
-          <ScalarProperty Name="Nok1PersonId" ColumnName="Nok1PersonId" />
-          <ScalarProperty Name="Nok1Relationship" ColumnName="Nok1Relationship" />
-          <ScalarProperty Name="Nok2PersonId" ColumnName="Nok2PersonId" />
-          <ScalarProperty Name="Nok2Relationship" ColumnName="Nok2Relationship" />
-          <ScalarProperty Name="HouseholdId" ColumnName="HouseholdId" />
-          <ScalarProperty Name="RecruitmentSource" ColumnName="RecruitmentSource" />
-          <ScalarProperty Name="Comments" ColumnName="Comments" />
-          <ScalarProperty Name="PreferredContactVerbal" ColumnName="PreferredContactVerbal" />
-          <ScalarProperty Name="IsNok1ForKids" ColumnName="IsNok1ForKids" />
-          <ScalarProperty Name="IsNok2ForKids" ColumnName="IsNok2ForKids" />
-          <ScalarProperty Name="AgeInYrs" ColumnName="AgeInYrs" />
-          <ScalarProperty Name="AgeInYrMo" ColumnName="AgeInYrMo" />
-          <ScalarProperty Name="AddresseeId" ColumnName="AddresseeId" />
-          <ScalarProperty Name="NoK1Person" ColumnName="NoK1Person" />
-          <ScalarProperty Name="NoK2Person" ColumnName="NoK2Person" />
-          <ScalarProperty Name="AddressStreet" ColumnName="AddressStreet" />
-          <ScalarProperty Name="AddressSuburb" ColumnName="AddressSuburb" />
-          <ScalarProperty Name="AddressPostcode" ColumnName="AddressPostcode" />
-          <ScalarProperty Name="AddressState" ColumnName="AddressState" />
-          <ScalarProperty Name="ActiveAddress" ColumnName="ActiveAddress" />
-          <ScalarProperty Name="LastConfirmedWhen" ColumnName="LastConfirmedWhen" />
-          <ScalarProperty Name="LastConfirmedBy" ColumnName="LastConfirmedBy" />
-          <ScalarProperty Name="ConfirmedBy" ColumnName="ConfirmedBy" />
-          <ScalarProperty Name="PhoneHome" ColumnName="PhoneHome" />
-          <ScalarProperty Name="HouseholdAddressee" ColumnName="HouseholdAddressee" />
-          <ScalarProperty Name="StudyId" ColumnName="StudyId" />
-          <ScalarProperty Name="NicknameStudy" ColumnName="NicknameStudy" />
-          <ScalarProperty Name="SubjectStudyLinkId" ColumnName="SubjectStudyLinkId" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="OfficialSubjectStudyNum" ColumnName="OfficialSubjectStudyNum" />
-          <ScalarProperty Name="WithdrawnReason" ColumnName="WithdrawnReason" />
-          <ScalarProperty Name="WithdrawnReasonOther" ColumnName="WithdrawnReasonOther" />
-          <ScalarProperty Name="EffFrom" ColumnName="EffFrom" />
-          <ScalarProperty Name="EffTo" ColumnName="EffTo" />
-          <ScalarProperty Name="VisitStream" ColumnName="VisitStream" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="GetParticipantByStudyId" FunctionName="VTGModel.Store.uspGetParticipantByStudyId">
       <ResultMapping>
         <ComplexTypeMapping TypeName="VTGModel.ParticipantDetail">
@@ -992,7 +927,7 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="GetParticipantList" FunctionName="VTGModel.Store.uspGetParticipantList">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="VTGModel.ParticipantDetail">
+        <ComplexTypeMapping TypeName="VTGModel.ParticipantById">
           <ScalarProperty Name="PersonId" ColumnName="PersonId" />
           <ScalarProperty Name="VtgNumber" ColumnName="VtgNumber" />
           <ScalarProperty Name="UMRN" ColumnName="UMRN" />
@@ -1039,9 +974,9 @@
           <ScalarProperty Name="ActiveAddress" ColumnName="ActiveAddress" />
           <ScalarProperty Name="LastConfirmedWhen" ColumnName="LastConfirmedWhen" />
           <ScalarProperty Name="LastConfirmedBy" ColumnName="LastConfirmedBy" />
-          <ScalarProperty Name="ConfirmedBy" ColumnName="ConfirmedBy" />
           <ScalarProperty Name="PhoneHome" ColumnName="PhoneHome" />
           <ScalarProperty Name="HouseholdAddressee" ColumnName="HouseholdAddressee" />
+          <ScalarProperty Name="ConfirmedBy" ColumnName="ConfirmedBy" />
           <ScalarProperty Name="StudyId" ColumnName="StudyId" />
           <ScalarProperty Name="NicknameStudy" ColumnName="NicknameStudy" />
           <ScalarProperty Name="SubjectStudyLinkId" ColumnName="SubjectStudyLinkId" />
@@ -1137,6 +1072,71 @@
           <ScalarProperty Name="Samples" ColumnName="Samples" />
           <ScalarProperty Name="Travel" ColumnName="Travel" />
           <ScalarProperty Name="Questionnaire" ColumnName="Questionnaire" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetParticipantById" FunctionName="VTGModel.Store.uspGetParticipantById">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="VTGModel.ParticipantById">
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="VtgNumber" ColumnName="VtgNumber" />
+          <ScalarProperty Name="UMRN" ColumnName="UMRN" />
+          <ScalarProperty Name="DbConsentYesNo" ColumnName="DbConsentYesNo" />
+          <ScalarProperty Name="DbConsentType" ColumnName="DbConsentType" />
+          <ScalarProperty Name="DbConsentDateLastConfirmed" ColumnName="DbConsentDateLastConfirmed" />
+          <ScalarProperty Name="NewsletterConsentYesNo" ColumnName="NewsletterConsentYesNo" />
+          <ScalarProperty Name="NewsletterConsentDateLastConfirmed" ColumnName="NewsletterConsentDateLastConfirmed" />
+          <ScalarProperty Name="FutureVtgResearchConsentYesNo" ColumnName="FutureVtgResearchConsentYesNo" />
+          <ScalarProperty Name="FutureVtgResearchConsentDateLastConfirmed" ColumnName="FutureVtgResearchConsentDateLastConfirmed" />
+          <ScalarProperty Name="FutureThirdPartyResearchlConsentYesNo" ColumnName="FutureThirdPartyResearchlConsentYesNo" />
+          <ScalarProperty Name="FutureThirdPartyResearchConsentDateLastConfirmed" ColumnName="FutureThirdPartyResearchConsentDateLastConfirmed" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="PreferredName" ColumnName="PreferredName" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Dob" ColumnName="Dob" />
+          <ScalarProperty Name="Ethnicity" ColumnName="Ethnicity" />
+          <ScalarProperty Name="PhoneWork" ColumnName="PhoneWork" />
+          <ScalarProperty Name="PhoneMobile" ColumnName="PhoneMobile" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="PreferredContactWritten" ColumnName="PreferredContactWritten" />
+          <ScalarProperty Name="Nok1PersonId" ColumnName="Nok1PersonId" />
+          <ScalarProperty Name="Nok1Relationship" ColumnName="Nok1Relationship" />
+          <ScalarProperty Name="Nok2PersonId" ColumnName="Nok2PersonId" />
+          <ScalarProperty Name="Nok2Relationship" ColumnName="Nok2Relationship" />
+          <ScalarProperty Name="HouseholdId" ColumnName="HouseholdId" />
+          <ScalarProperty Name="RecruitmentSource" ColumnName="RecruitmentSource" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="PreferredContactVerbal" ColumnName="PreferredContactVerbal" />
+          <ScalarProperty Name="IsNok1ForKids" ColumnName="IsNok1ForKids" />
+          <ScalarProperty Name="IsNok2ForKids" ColumnName="IsNok2ForKids" />
+          <ScalarProperty Name="AgeInYrs" ColumnName="AgeInYrs" />
+          <ScalarProperty Name="AgeInYrMo" ColumnName="AgeInYrMo" />
+          <ScalarProperty Name="AddresseeId" ColumnName="AddresseeId" />
+          <ScalarProperty Name="NoK1Person" ColumnName="NoK1Person" />
+          <ScalarProperty Name="NoK2Person" ColumnName="NoK2Person" />
+          <ScalarProperty Name="AddressStreet" ColumnName="AddressStreet" />
+          <ScalarProperty Name="AddressSuburb" ColumnName="AddressSuburb" />
+          <ScalarProperty Name="AddressPostcode" ColumnName="AddressPostcode" />
+          <ScalarProperty Name="AddressState" ColumnName="AddressState" />
+          <ScalarProperty Name="ActiveAddress" ColumnName="ActiveAddress" />
+          <ScalarProperty Name="LastConfirmedWhen" ColumnName="LastConfirmedWhen" />
+          <ScalarProperty Name="LastConfirmedBy" ColumnName="LastConfirmedBy" />
+          <ScalarProperty Name="PhoneHome" ColumnName="PhoneHome" />
+          <ScalarProperty Name="HouseholdAddressee" ColumnName="HouseholdAddressee" />
+          <ScalarProperty Name="ConfirmedBy" ColumnName="ConfirmedBy" />
+          <ScalarProperty Name="StudyId" ColumnName="StudyId" />
+          <ScalarProperty Name="NicknameStudy" ColumnName="NicknameStudy" />
+          <ScalarProperty Name="SubjectStudyLinkId" ColumnName="SubjectStudyLinkId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="OfficialSubjectStudyNum" ColumnName="OfficialSubjectStudyNum" />
+          <ScalarProperty Name="WithdrawnReason" ColumnName="WithdrawnReason" />
+          <ScalarProperty Name="WithdrawnReasonOther" ColumnName="WithdrawnReasonOther" />
+          <ScalarProperty Name="EffFrom" ColumnName="EffFrom" />
+          <ScalarProperty Name="EffTo" ColumnName="EffTo" />
+          <ScalarProperty Name="VisitStream" ColumnName="VisitStream" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

@@ -195,6 +195,9 @@
     <Compile Include="App_Data\GetRecruitmentSource.cs">
       <DependentUpon>VTGModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="App_Data\ParticipantById.cs">
+      <DependentUpon>VTGModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Data\ParticipantConsentById.cs">
       <DependentUpon>VTGModel.tt</DependentUpon>
     </Compile>

@@ -1864,8 +1864,8 @@
       <End Role="VtgStaffRequirements" EntitySet="VtgStaffRequirements" />
     </AssociationSet>
     <EntitySet Name="GetRecruitmentSources" EntityType="VTGModel.GetRecruitmentSource" />
-    <FunctionImport Name="GetParticipantList" ReturnType="Collection(VTGModel.ParticipantDetail)" />
-    <FunctionImport Name="GetParticipantById" ReturnType="Collection(VTGModel.ParticipantDetail)">
+    <FunctionImport Name="GetParticipantList" ReturnType="Collection(VTGModel.ParticipantById)" />
+    <FunctionImport Name="GetParticipantById" ReturnType="Collection(VTGModel.ParticipantById)">
       <Parameter Name="id" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="GetStudyList" EntitySet="Studies" ReturnType="Collection(VTGModel.Study)" />
@@ -2050,5 +2050,66 @@
     <Property Type="Int32" Name="Samples" Nullable="true" />
     <Property Type="Int32" Name="Travel" Nullable="true" />
     <Property Type="Int32" Name="Questionnaire" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ParticipantById">
+    <Property Type="Int32" Name="PersonId" Nullable="false" />
+    <Property Type="Int32" Name="VtgNumber" Nullable="true" />
+    <Property Type="String" Name="UMRN" Nullable="true" MaxLength="10" />
+    <Property Type="Int32" Name="DbConsentYesNo" Nullable="true" />
+    <Property Type="String" Name="DbConsentType" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="DbConsentDateLastConfirmed" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="NewsletterConsentYesNo" Nullable="true" />
+    <Property Type="DateTime" Name="NewsletterConsentDateLastConfirmed" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="FutureVtgResearchConsentYesNo" Nullable="true" />
+    <Property Type="DateTime" Name="FutureVtgResearchConsentDateLastConfirmed" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="FutureThirdPartyResearchlConsentYesNo" Nullable="true" />
+    <Property Type="DateTime" Name="FutureThirdPartyResearchConsentDateLastConfirmed" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Title" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="Surname" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Firstname" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PreferredName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Gender" Nullable="true" MaxLength="6" />
+    <Property Type="DateTime" Name="Dob" Nullable="true" />
+    <Property Type="String" Name="Ethnicity" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PhoneWork" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="PhoneMobile" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="PreferredContactWritten" Nullable="true" MaxLength="15" />
+    <Property Type="Int32" Name="Nok1PersonId" Nullable="true" />
+    <Property Type="String" Name="Nok1Relationship" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Nok2PersonId" Nullable="true" />
+    <Property Type="String" Name="Nok2Relationship" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="HouseholdId" Nullable="true" />
+    <Property Type="String" Name="RecruitmentSource" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Comments" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="PreferredContactVerbal" Nullable="true" MaxLength="15" />
+    <Property Type="Int32" Name="IsNok1ForKids" Nullable="true" />
+    <Property Type="Int32" Name="IsNok2ForKids" Nullable="true" />
+    <Property Type="Int32" Name="AgeInYrs" Nullable="true" />
+    <Property Type="String" Name="AgeInYrMo" Nullable="true" MaxLength="10" />
+    <Property Type="Int32" Name="AddresseeId" Nullable="true" />
+    <Property Type="String" Name="NoK1Person" Nullable="true" MaxLength="103" />
+    <Property Type="String" Name="NoK2Person" Nullable="true" MaxLength="103" />
+    <Property Type="String" Name="AddressStreet" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="AddressSuburb" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="AddressPostcode" Nullable="true" MaxLength="4" />
+    <Property Type="String" Name="AddressState" Nullable="true" MaxLength="3" />
+    <Property Type="Int32" Name="ActiveAddress" Nullable="true" />
+    <Property Type="DateTime" Name="LastConfirmedWhen" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="LastConfirmedBy" Nullable="true" />
+    <Property Type="String" Name="PhoneHome" Nullable="true" MaxLength="15" />
+    <Property Type="Int32" Name="HouseholdAddressee" Nullable="true" />
+    <Property Type="String" Name="ConfirmedBy" Nullable="true" MaxLength="101" />
+    <Property Type="Int32" Name="StudyId" Nullable="true" />
+    <Property Type="String" Name="NicknameStudy" Nullable="true" MaxLength="255" />
+    <Property Type="Int32" Name="SubjectStudyLinkId" Nullable="true" />
+    <Property Type="String" Name="Status" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="OfficialSubjectStudyNum" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="WithdrawnReason" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="WithdrawnReasonOther" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="EffFrom" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="EffTo" Nullable="true" Precision="23" />
+    <Property Type="String" Name="VisitStream" Nullable="true" MaxLength="50" />
   </ComplexType>
 </Schema>

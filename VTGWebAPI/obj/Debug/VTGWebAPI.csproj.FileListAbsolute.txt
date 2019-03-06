@@ -80,6 +80,6 @@ C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\M
 C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\bin\System.Web.Http.Owin.xml
-C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\obj\Debug\VTGWebAPI.csprojResolveAssemblyReference.cache
 C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\obj\Debug\VTGWebAPI.dll
 C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\obj\Debug\VTGWebAPI.pdb
+C:\Users\rkhadka\Documents\Visual Studio 2015\Projects\VTGWebAPI\VTGWebAPI\obj\Debug\VTGWebAPI.csprojResolveAssemblyReference.cache

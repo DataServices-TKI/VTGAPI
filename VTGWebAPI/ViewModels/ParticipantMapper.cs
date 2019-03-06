@@ -10,7 +10,7 @@ namespace VTGWebAPI.ViewModels
     {
 
         //Change Model to ViewModel
-        public ParticipantViewModel GetParticipantViewModel(ParticipantDetail participantModel)
+        public ParticipantViewModel GetParticipantViewModel(ParticipantById participantModel)
         {
             var participantViewModel = new ParticipantViewModel();
 
@@ -68,7 +68,7 @@ namespace VTGWebAPI.ViewModels
             participantViewModel.HouseholdAddressee                                  = participantModel.HouseholdAddressee;
             //  participantViewModel.PhoneHome = participantModel.PhoneHome;
 
-            participantViewModel.SubjectStudyLinkId                                  =participantModel.SubjectStudyLinkId;
+            participantViewModel.SubjectStudyLinkId                                  =participantModel.SubjectStudyLinkId.HasValue? participantModel.SubjectStudyLinkId.Value:0;
             participantViewModel.StudyParticipationStatus                            = participantModel.Status;
             participantViewModel.OfficialSubjectStudyNum                             = participantModel.OfficialSubjectStudyNum;
           //  participantViewModel.VisitStream                                         = participantModel.VisitStream;
