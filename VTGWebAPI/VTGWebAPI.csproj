@@ -258,6 +258,7 @@
     <Compile Include="Controllers\DoctorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LinkDoctorPracticesController.cs" />
+    <Compile Include="Controllers\LinkSubjectsStudiesController.cs" />
     <Compile Include="Controllers\PracticesController.cs" />
     <Compile Include="Controllers\QuestionnairesController.cs" />
     <Compile Include="Controllers\SamplesController.cs" />

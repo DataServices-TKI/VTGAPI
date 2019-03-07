@@ -77,20 +77,24 @@ namespace VTGWebAPI.Controllers
         [Route("UserInfo")]
         public UserViewModel GetUserInfo()
         {
-           //   var fullname = User.Identity.Name;//for DEPLOYMENT      
-            var fullname = System.Security.Principal.WindowsIdentity.GetCurrent().Name;//For local debug         
+            var fullname = User.Identity.Name;//for DEPLOYMENT      
+           // var fullname = System.Security.Principal.WindowsIdentity.GetCurrent().Name;//For local debug         
 
             var nameArray = fullname.Split('\\');
             var username = nameArray[1].Trim().ToLower();
 
-            if (fullname != null && nameArray[0].Trim().ToLower() == "ichr")
+            if (fullname != null)
             {
                 //check if profile in DB
                 var user = db.VtgStaffs.Where(s => s.Username == username).FirstOrDefault();
                 var mapper = new UserMapper();
                 var userViewModel = mapper.GetuserViewModel(user);
+                if (userViewModel.CurrentStudy.HasValue && userViewModel.CurrentStudy.Value!=0)
+                {
+                    userViewModel.StudyNickName = db.Studies.Where(s => s.StudyId == userViewModel.CurrentStudy).FirstOrDefault().NicknameStudy;
+                }
 
-                userViewModel.StudyNickName = db.Studies.Where(s => s.StudyId == userViewModel.CurrentStudy).FirstOrDefault().NicknameStudy;
+               
                 if (user != null)
                 {
                     return userViewModel;
