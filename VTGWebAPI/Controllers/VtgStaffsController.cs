@@ -34,9 +34,18 @@ namespace VTGWebAPI.Controllers
         {
             var user = db.VtgStaffs.Where(s => s.Username == username & s.Password == password).FirstOrDefault();
             var mapper = new UserMapper();
-            var userViewModel = mapper.GetuserViewModel(user);
+            var userViewModel = new UserViewModel();
 
-            userViewModel.StudyNickName = db.Studies.Where(s => s.StudyId == userViewModel.CurrentStudy).FirstOrDefault().NicknameStudy;
+            if (user != null)
+            {
+                userViewModel = mapper.GetuserViewModel(user);
+            }
+          
+            if (userViewModel.CurrentStudy.HasValue && userViewModel.CurrentStudy.Value != 0)
+            {
+                userViewModel.StudyNickName = db.Studies.Where(s => s.StudyId == userViewModel.CurrentStudy).FirstOrDefault().NicknameStudy;
+            }
+          
             if (user != null)
                 {
                     return userViewModel;
