@@ -259,6 +259,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LinkDoctorPracticesController.cs" />
     <Compile Include="Controllers\LinkSubjectsStudiesController.cs" />
+    <Compile Include="Controllers\ParticipantConsentsController.cs" />
     <Compile Include="Controllers\PracticesController.cs" />
     <Compile Include="Controllers\QuestionnairesController.cs" />
     <Compile Include="Controllers\SamplesController.cs" />
@@ -279,6 +280,7 @@
     <Compile Include="ViewModels\LinkedSubjectDoctorPracticeViewModel.cs" />
     <Compile Include="ViewModels\LinkVtgStaffStudyViewModel.cs" />
     <Compile Include="ViewModels\MedicalHistoryViewModel.cs" />
+    <Compile Include="ViewModels\ParticipantConsentViewModel.cs" />
     <Compile Include="ViewModels\PracticesViewModel.cs" />
     <Compile Include="ViewModels\QuestionnaireByVisitViewModel.cs" />
     <Compile Include="ViewModels\QuestionnaireTypeViewModel.cs" />
