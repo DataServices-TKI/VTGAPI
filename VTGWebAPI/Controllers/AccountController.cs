@@ -19,7 +19,7 @@ using VTGWebAPI.Results;
 using VTGWebAPI.App_Data;
 using System.Linq;
 using VTGWebAPI.ViewModels;
-
+using Microsoft.Owin;
 
 namespace VTGWebAPI.Controllers
 {
@@ -73,19 +73,16 @@ namespace VTGWebAPI.Controllers
 
 
         // GET api/Account/UserInfo
-     //  [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]       
+     // [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]       
         [Route("UserInfo")]
         public UserViewModel GetUserInfo()
         {
-          //  var fullname = User.Identity.Name;//for DEPLOYMENT      
+           
            var fullname = System.Security.Principal.WindowsIdentity.GetCurrent().Name;//For local debug         
 
             var nameArray = fullname.Split('\\');
             var username = nameArray[1].Trim().ToLower();
-            var domain= nameArray[0].Trim().ToLower();
-
-            //if (fullname != null && domain == "ichr12")---FOR TEST
-           
+            var domain= nameArray[0].Trim().ToLower();     
 
             if (fullname != null)
             {
@@ -107,6 +104,7 @@ namespace VTGWebAPI.Controllers
                
                 if (user != null)
                 {
+                     
                     return userViewModel;
                 }
                 else

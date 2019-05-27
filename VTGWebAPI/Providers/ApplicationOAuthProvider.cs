@@ -10,6 +10,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using VTGWebAPI.Models;
+using VTGWebAPI.App_Data;
 
 namespace VTGWebAPI.Providers
 {
@@ -29,25 +30,64 @@ namespace VTGWebAPI.Providers
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
+        //    var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
 
-            ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
+        //    ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
 
-            if (user == null)
+        //    if (user == null)
+        //    {
+        //        context.SetError("invalid_grant", "The user name or password is incorrect.");
+        //        return;
+        //    }
+
+        //    ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
+        //       OAuthDefaults.AuthenticationType);
+        //    ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
+        //        CookieAuthenticationDefaults.AuthenticationType);
+
+        //    AuthenticationProperties properties = CreateProperties(user.UserName);
+        //    AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
+        //    context.Validated(ticket);
+        //    context.Request.Context.Authentication.SignIn(cookiesIdentity);
+
+            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
+
+            var identity = new ClaimsIdentity(context.Options.AuthenticationType);
+
+            using (var db = new VTGEntities())
             {
-                context.SetError("invalid_grant", "The user name or password is incorrect.");
+                if (db != null)
+                {
+                    var vtgUsers =  db.VtgStaffs.ToList();
+                    if (vtgUsers != null)
+                    {
+                        var user =  vtgUsers.Where(u => u.Username == context.UserName).FirstOrDefault().Username;
+                        if (!string.IsNullOrEmpty(user))
+                        {
+                            var props = new AuthenticationProperties(new Dictionary<string, string>
+                            {
+                                { "userDisplayName", context.UserName}
+                            });
+                            var ticket = new AuthenticationTicket(identity, props);
+                            context.Validated(ticket);
+                        }
+                        else
+                        {
+                            context.SetError("invalid_grant", "Provided username and password is incorrect");
+                            context.Rejected();
+                        }
+                    }
+               
+                else
+                {
+                    context.SetError("invalid_grant", "Provided username and password is incorrect");
+                    context.Rejected();
+                }
                 return;
+           
+
+                }
             }
-
-            ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
-               OAuthDefaults.AuthenticationType);
-            ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
-                CookieAuthenticationDefaults.AuthenticationType);
-
-            AuthenticationProperties properties = CreateProperties(user.UserName);
-            AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
-            context.Validated(ticket);
-            context.Request.Context.Authentication.SignIn(cookiesIdentity);
         }
 
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)
