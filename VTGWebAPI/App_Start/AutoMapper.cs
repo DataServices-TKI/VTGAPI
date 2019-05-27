@@ -55,6 +55,7 @@ namespace VTGWebAPI
                 cfg.CreateMap<VaccinationType, VaccineTypesViewModel>();
                 cfg.CreateMap<SampleType, SampleTypeViewModel>();
                 cfg.CreateMap<QuestionnaireType, QuestionnaireTypeViewModel>();
+                cfg.CreateMap<ParticipantConsent, ParticipantConsentViewModel>();
             });
 
           
