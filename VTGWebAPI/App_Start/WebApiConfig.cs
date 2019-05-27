@@ -15,15 +15,15 @@ namespace VTGWebAPI
         {
             // Web API configuration and services
             // Configure Web API to use only bearer token authentication.
-           // config.SuppressDefaultHostAuthentication();
+            //config.SuppressDefaultHostAuthentication();
            // config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 
             config.Formatters.Remove(config.Formatters.XmlFormatter);
 
-         // var cors = new EnableCorsAttribute("https://vtguat.telethonkids.org.au", "*", "*");
-            
-         var cors = new EnableCorsAttribute("http://localhost:4200", "*", "*");
-          //  var cors = new EnableCorsAttribute("https://dataservices-tki.github.io", "*", "*");
+            var cors = new EnableCorsAttribute("https://vtguat.telethonkids.org.au", "*", "*");
+            // var cors = new EnableCorsAttribute("https://vtg.telethonkids.org.au", "*", "*");
+
+           // var cors = new EnableCorsAttribute("http://localhost:4200", "*", "*");      
 
             config.EnableCors(cors);
 
