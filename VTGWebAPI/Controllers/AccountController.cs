@@ -20,6 +20,7 @@ using VTGWebAPI.App_Data;
 using System.Linq;
 using VTGWebAPI.ViewModels;
 using Microsoft.Owin;
+using System.Threading;
 
 namespace VTGWebAPI.Controllers
 {
@@ -61,61 +62,67 @@ namespace VTGWebAPI.Controllers
         [Route("GetADUser")]
         public UserInfoViewModel GetADUser()
         {
-            var user = User.Identity.Name;
+          
             ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
+            var fullname = HttpContext.Current.Request.LogonUserIdentity.Name;
+           
             return new UserInfoViewModel
             {
                 Email = System.Security.Principal.WindowsIdentity.GetCurrent().Name,
                 HasRegistered = externalLogin == null,
-                LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
+                LoginProvider = fullname
             };
+            
+           
         }
 
 
         // GET api/Account/UserInfo
-     // [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]       
+     // [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]         
         [Route("UserInfo")]
         public UserViewModel GetUserInfo()
         {
-           
-           var fullname = System.Security.Principal.WindowsIdentity.GetCurrent().Name;//For local debug         
+            var fullname = "";
 
-            var nameArray = fullname.Split('\\');
-            var username = nameArray[1].Trim().ToLower();
-            var domain= nameArray[0].Trim().ToLower();     
-
-            if (fullname != null)
+            try
             {
-                //check if profile in DB
-                var user = db.VtgStaffs.Where(s => s.Username == username).FirstOrDefault();
-                var mapper = new UserMapper();
-                var userViewModel = new UserViewModel();
+                 var identityUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;//if Windows Authentication
 
-                if (user!=null)
+                if (identityUser != null)
                 {
-                     userViewModel = mapper.GetuserViewModel(user);
-                }
-              
-                if (userViewModel.CurrentStudy.HasValue && userViewModel.CurrentStudy.Value!=0)
-                {
-                    userViewModel.StudyNickName = db.Studies.Where(s => s.StudyId == userViewModel.CurrentStudy).FirstOrDefault().NicknameStudy;
-                }
+                    fullname = identityUser;
+                    var nameArray = fullname.Split('\\');
+                    var username = nameArray[1].Trim().ToLower();
+                    var domain = nameArray[0].Trim().ToLower();
 
-               
-                if (user != null)
-                {
-                     
-                    return userViewModel;
+                    //check if profile in DB
+                    var user = db.VtgStaffs.Where(s => s.Username == username).FirstOrDefault();
+                    var mapper = new UserMapper();
+                    var userViewModel = new UserViewModel();
+
+                    if (user != null)
+                    {
+                        userViewModel = mapper.GetuserViewModel(user);
+
+                        if (userViewModel.CurrentStudy.HasValue && userViewModel.CurrentStudy.Value != 0)
+                        {
+                            userViewModel.StudyNickName = db.Studies.Where(s => s.StudyId == userViewModel.CurrentStudy).FirstOrDefault().NicknameStudy;
+                        }
+                        return userViewModel;
+                    }
+                    else
+                        return null;
                 }
                 else
+                {
                     return null;
-
+                }
             }
-            else
-            {
+            catch {
+
                 return null;
             }
-
+       
         }
 
         // POST api/Account/Logout
