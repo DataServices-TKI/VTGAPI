@@ -82,6 +82,10 @@ namespace VTGWebAPI.Controllers
         [ResponseType(typeof(ParticipantConsent))]
         public IHttpActionResult PostParticipantConsent(ParticipantConsent participantConsent)
         {
+            participantConsent.ProcessingStatusCode = 2;
+            participantConsent.DateConsented = DateTime.Now;
+            participantConsent.ModifiedDate = DateTime.Now;
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
