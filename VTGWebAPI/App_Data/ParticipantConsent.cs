@@ -11,23 +11,32 @@ namespace VTGWebAPI.App_Data
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class ParticipantConsent
     {
         public int RowId { get; set; }
         public Nullable<int> VtgNumber { get; set; }
         public Nullable<short> ProcessingStatusCode { get; set; }
+        [Required]
         public string FirstName { get; set; }
+        [Required]
         public string LastName { get; set; }
+        [Required]
         public Nullable<System.DateTime> DateOfBirth { get; set; }
         public string Street { get; set; }
         public string Suburb { get; set; }
         public string Postcode { get; set; }
         public string PhoneDesk { get; set; }
+        [Required]
         public string PhoneMobile { get; set; }
+        [Required]
         public string EmailAddress { get; set; }
+        [Required]
         public Nullable<bool> NewsletterConsentYesNo { get; set; }
+        [Required]
         public Nullable<bool> FutureVtgResearchConsentYesNo { get; set; }
+        [Required]
         public Nullable<bool> DbConsentYesNo { get; set; }
         public Nullable<System.DateTime> DateConsented { get; set; }
         public string FamilyMemberFirstName1 { get; set; }
