@@ -342,6 +342,18 @@ namespace VTGWebAPI.Controllers
                 db.SaveChanges();
             }
 
+            //Add household members
+            foreach (var member in participant.HouseholdMembers)
+            {
+                member.HouseholdId = participant.HouseholdId;
+                member.Gender = member.Gender == "M" ? "Male" : (member.Gender == "F" ? "Female" : "");
+                var familyMember=  mapper.GetParticipantModel(member);
+                db.People.Add(familyMember);
+                db.SaveChanges();
+            }
+           
+
+
            
             return Ok(participant);
         }

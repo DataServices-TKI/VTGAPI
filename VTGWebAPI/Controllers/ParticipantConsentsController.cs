@@ -21,11 +21,11 @@ namespace VTGWebAPI.Controllers
         // GET: api/ParticipantConsents
         public IEnumerable<ParticipantConsentViewModel> GetParticipantConsents()
         {
-           
-            var participantConsentList= db.ParticipantConsents.ToArray();
+
+            var participantConsentList = db.ParticipantConsents.ToArray();
             var participantConsentListVM = Mapper.Map<ParticipantConsent[], IEnumerable<ParticipantConsentViewModel>>(participantConsentList);
 
-            return participantConsentListVM.OrderBy(s=>s.ProcessingStatusCode);
+            return participantConsentListVM.OrderBy(s => s.ProcessingStatusCode);
         }
 
         // GET: api/ParticipantConsents/5
@@ -43,7 +43,7 @@ namespace VTGWebAPI.Controllers
 
         // PUT: api/ParticipantConsents/5
         //[ResponseType(typeof(void))]
-       // [Route("api/ParticipantConsents/{id}")]
+        // [Route("api/ParticipantConsents/{id}")]
         public IHttpActionResult PutParticipantConsent(int id, ParticipantConsent participantConsent)
         {
             if (!ModelState.IsValid)
@@ -61,7 +61,7 @@ namespace VTGWebAPI.Controllers
             try
             {
                 db.SaveChanges();
-                
+
             }
             catch (DbUpdateConcurrencyException)
             {
